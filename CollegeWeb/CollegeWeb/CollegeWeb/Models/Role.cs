@@ -10,9 +10,9 @@ namespace CollegeWeb.Models
     [Table("Role")]
     public class Role
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoleId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter your role.")]
         public string RoleName { get; set; }
     }
 }

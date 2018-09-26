@@ -10,9 +10,12 @@ namespace CollegeWeb.Models
     [Table("Subject")]
     public class Subject
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubjectId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter subject name.")]
         public string SubjectName { get; set; }
+        public ICollection<SubjectInCourse> SubjectInCourses { get; set; }
+        public ICollection<TeacherInSubject> TeacherInSubjects { get; set; }
+
     }
 }

@@ -17,18 +17,18 @@ namespace CollegeWeb.Models
         public string AddressLine { get; set; }
         [Display(Name ="Country")]
         [Required(ErrorMessage ="Please select your country")]
-        public string CountryId { get; set; }
-        [ForeignKey("CountryId")]
+        public int CountryId { get; set; }
+        //[ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
-             [Display(Name ="Country")]
+             [Display(Name ="State")]
              [Required(ErrorMessage ="Please enter your state")]
-        public string StateId { get; set; }
+        public int StateId { get; set; }
         [ForeignKey("StateId")]
-        public virtual State state { get; set; }
+        public virtual State State { get; set; }
         [Display(Name ="City")]
         [Required(ErrorMessage ="please enter your city")]
 
-        public string CityId { get; set; }
+        public int CityId { get; set; }
         [ForeignKey("CityId")]
         public virtual City City { get; set; }
         
@@ -38,10 +38,10 @@ namespace CollegeWeb.Models
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
-        public ICollection<Country> Countries { get; set; }
-        public ICollection<State> States { get; set; }
-        public ICollection<City> Cities { get; set; }
-        public ICollection<User> Users { get; set; }
+       
+      
+      
+       
 
     }
 }

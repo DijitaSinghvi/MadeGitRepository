@@ -9,9 +9,11 @@ namespace CollegeWeb.Models
 {
     [Table("Course")]
     public class Course
-    {[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    {[Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CourseId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter your course name.")]
         public string CourseName { get; set; }
+        public ICollection<SubjectInCourse> SubjectInCourses { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }
