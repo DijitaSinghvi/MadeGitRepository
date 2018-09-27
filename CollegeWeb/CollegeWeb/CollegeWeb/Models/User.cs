@@ -38,11 +38,14 @@ namespace CollegeWeb.Models
         public int CourseId { get; set; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
+        public int AddressId { get; set; }
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
         [Required(ErrorMessage ="Enter date created.")]
         public DateTime DateCreated { get; set; }
         [Required(ErrorMessage ="Enter date modified.")]
         public DateTime DateModified { get; set; }
-        public ICollection<Address> Addresses { get; set; }
+       
        
         
         public ICollection<TeacherInSubject> TeacherInSubjects { get; set; }

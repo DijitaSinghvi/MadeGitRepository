@@ -18,7 +18,7 @@ namespace CollegeWeb.Models
         [Display(Name ="Country")]
         [Required(ErrorMessage ="Please select your country")]
         public int CountryId { get; set; }
-        //[ForeignKey("CountryId")]
+        [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
              [Display(Name ="State")]
              [Required(ErrorMessage ="Please enter your state")]
@@ -35,13 +35,11 @@ namespace CollegeWeb.Models
         [Required(ErrorMessage ="please enter your pincode")]
         public int Pincode { get; set; }
         
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
-       
-      
-      
-       
+        public ICollection<User> Users { get; set; }
+
+
+
+
 
     }
 }

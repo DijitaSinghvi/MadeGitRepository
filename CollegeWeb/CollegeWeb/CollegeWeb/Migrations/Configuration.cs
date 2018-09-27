@@ -5,14 +5,14 @@ namespace CollegeWeb.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CollegeWeb.Models.CollegeContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<CollegeWeb.CollegeContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(CollegeWeb.Models.CollegeContext context)
+        protected override void Seed(CollegeWeb.CollegeContext context)
         {
             //  This method will be called after migrating to the latest version.
 

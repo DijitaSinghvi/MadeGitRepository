@@ -153,18 +153,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CollegeContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809261334380_CreateDatabase.cs" />
-    <Compile Include="Migrations\201809261334380_CreateDatabase.Designer.cs">
-      <DependentUpon>201809261334380_CreateDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201809271251010_MyMigration.cs" />
+    <Compile Include="Migrations\201809271251010_MyMigration.Designer.cs">
+      <DependentUpon>201809271251010_MyMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\City.cs" />
-    <Compile Include="Models\CollegeContext.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Role.cs" />
@@ -233,8 +233,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809261334380_CreateDatabase.resx">
-      <DependentUpon>201809261334380_CreateDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809271251010_MyMigration.resx">
+      <DependentUpon>201809271251010_MyMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

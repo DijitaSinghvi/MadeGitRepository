@@ -1,14 +1,15 @@
-﻿using System;
+﻿using CollegeWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace CollegeWeb.Models
+namespace CollegeWeb
 {
-    public class CollegeContext:DbContext
+    public class CollegeContext : DbContext
     {
-        public CollegeContext():base("CollegeWeb")
+        public CollegeContext() : base("CollegeWeb")
         {
 
 

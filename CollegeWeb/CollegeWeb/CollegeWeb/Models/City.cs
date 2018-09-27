@@ -16,7 +16,7 @@ namespace CollegeWeb.Models
         public string CityName { get; set; }
         
         public int StateId { get; set; }
-        //[ForeignKey("StateId")]
+        [ForeignKey("StateId")]
         public virtual State State { get; set; }
         
         public bool IsActive { get; set; }
