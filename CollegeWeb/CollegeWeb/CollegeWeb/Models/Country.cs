@@ -14,7 +14,7 @@ namespace CollegeWeb.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CountryId { get; set; }
         [Required(ErrorMessage ="Please enter your country")]
-        public int CountryName { get; set; }
+        public string CountryName { get; set; }
 
         public bool IsActive { get; set; }
         public ICollection<Address> Addresses { get; set; }

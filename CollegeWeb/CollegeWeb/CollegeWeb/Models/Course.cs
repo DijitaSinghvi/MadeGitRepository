@@ -10,6 +10,7 @@ namespace CollegeWeb.Models
     [Table("Course")]
     public class Course
     {[Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required(ErrorMessage = "Please enter your course name.")]
         public int CourseId { get; set; }
         [Required(ErrorMessage ="Please enter your course name.")]
         public string CourseName { get; set; }

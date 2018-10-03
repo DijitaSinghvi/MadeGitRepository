@@ -11,6 +11,7 @@ namespace CollegeWeb.Models
     public class Role
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required(ErrorMessage = "Please enter your role.")]
         public int RoleId { get; set; }
         [Required(ErrorMessage ="Please enter your role.")]
         public string RoleName { get; set; }

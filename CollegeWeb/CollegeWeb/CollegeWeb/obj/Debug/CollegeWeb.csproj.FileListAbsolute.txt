@@ -190,3 +190,4 @@ D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.pdb
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.MyMigration.resources
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csproj.GenerateResource.cache
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.changedatatype.resources

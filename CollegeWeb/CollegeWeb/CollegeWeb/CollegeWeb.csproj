@@ -163,6 +163,10 @@
     <Compile Include="Migrations\201809271251010_MyMigration.Designer.cs">
       <DependentUpon>201809271251010_MyMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810030647256_changedatatype.cs" />
+    <Compile Include="Migrations\201810030647256_changedatatype.Designer.cs">
+      <DependentUpon>201810030647256_changedatatype.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\City.cs" />
@@ -219,6 +223,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_CreateButtonPartial.cshtml" />
     <Content Include="Views\Shared\_BackToListButtonPartial.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -239,6 +244,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809271251010_MyMigration.resx">
       <DependentUpon>201809271251010_MyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810030647256_changedatatype.resx">
+      <DependentUpon>201810030647256_changedatatype.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
