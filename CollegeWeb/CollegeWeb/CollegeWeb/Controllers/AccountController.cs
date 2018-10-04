@@ -17,31 +17,29 @@ namespace CollegeWeb.Controllers
            
 
         // GET: Account
-        public ActionResult Register()
-        {
-            //List<Course> courseList = new List<Course>();
-            //IEnumerable<Role> roleList = new IEnumerable<Role>();
-            //List<SelectListItem> courseListNew = new List<SelectListItem>();
-            //List<SelectListItem> roleListNew = new List<SelectListItem>();
+            public ActionResult Register()
+        { 
             var courseList = db.Courses.Select(x => new SelectListItem
             {
                 Text = x.CourseName,
                 Value = x.CourseId.ToString()
-            }).ToList(); 
+            }).ToList();
+            SelectList courseOutput = new SelectList(courseList, "CourseId", "CourseName");
+
            
-            ViewBag.CourseShow = courseList;
-            //ViewBag.CourseShow = new SelectList(courseListNew, "CourseId", "CourseName");
-            //ViewBag.RoleShow = roleList;
+            ViewBag.CourseShow = courseOutput;
+         
+           
           
 
-            var roleList = db.Roles.Select(x => new SelectListItem
-            {
-                Text = x.RoleName,
-                Value = x.RoleId.ToString()
+            //var roleList = db.Roles.Select(x => new SelectListItem
+            //{
+            //    Text = x.RoleName,
+            //    Value = x.RoleId.ToString()
 
-            }).ToList();
-            ViewBag.RoleShow = roleList;
-             return View();
+            //}).ToList();
+            //ViewBag.RoleShow = roleList;
+             return View(new User());
         }
 
         [HttpPost]
@@ -57,10 +55,18 @@ namespace CollegeWeb.Controllers
                     db.Users.Add(user);
                     db.SaveChanges();
                 }
+
                 ModelState.Clear();
                 ViewBag.Message = user.FirstName + "" + user.LastName + "is successfully registered.";
             }
-            return View();
+            var courseList = db.Courses.Select(x => new SelectListItem
+            {
+                Text = x.CourseName,
+                Value = x.CourseId.ToString()
+            }).ToList();
+            SelectList courseOutput = new SelectList(courseList, "CourseId", "CourseName");
+            ViewBag.CourseShow = courseOutput;
+            return View(new User());
 
         }
     }
