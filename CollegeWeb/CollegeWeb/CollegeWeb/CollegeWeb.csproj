@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201810030647256_changedatatype.Designer.cs">
       <DependentUpon>201810030647256_changedatatype.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810051100332_changeinuser.cs" />
+    <Compile Include="Migrations\201810051100332_changeinuser.Designer.cs">
+      <DependentUpon>201810051100332_changeinuser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\City.cs" />
@@ -179,6 +183,7 @@
     <Compile Include="Models\TeacherInSubject.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserInRole.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810030647256_changedatatype.resx">
       <DependentUpon>201810030647256_changedatatype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810051100332_changeinuser.resx">
+      <DependentUpon>201810051100332_changeinuser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

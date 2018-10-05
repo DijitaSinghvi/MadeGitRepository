@@ -24,7 +24,7 @@ namespace CollegeWeb.Models
         public string Hobbies { get; set; }
         [Required(ErrorMessage ="Enter your email address.")][DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [Required(ErrorMessage ="Your email address is not verified.")]
+       // [Required(ErrorMessage ="Your email address is not verified.")]
         public string IsEmailVerified { get; set; }
         [Required(ErrorMessage ="Enter a password.")][DataType(DataType.Password)]
         public string Password { get; set; }
@@ -32,7 +32,7 @@ namespace CollegeWeb.Models
         public string ConfirmPassword { get; set; }
         
         
-        [Required(ErrorMessage="Your account is inactive." )]
+      //  [Required(ErrorMessage="Your account is inactive." )]
         public bool IsActive { get; set; }
         
         public int CourseId { get; set; }
@@ -45,10 +45,8 @@ namespace CollegeWeb.Models
         public DateTime DateCreated { get; set; }
         [Required(ErrorMessage ="Enter date modified.")]
         public DateTime DateModified { get; set; }
-       
-       
-        
         public ICollection<TeacherInSubject> TeacherInSubjects { get; set; }
+       
 
 
 

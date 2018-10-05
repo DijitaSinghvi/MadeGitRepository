@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CollegeWeb.Models;
 
+
 namespace CollegeWeb.Controllers
 {
     public class AccountController : Controller
@@ -12,62 +13,87 @@ namespace CollegeWeb.Controllers
         CollegeContext db = new CollegeContext();
         public ActionResult Index()
         {
-            return View(db.UserInRoles.ToList());
+            return View();
         }
-           
+
 
         // GET: Account
-            public ActionResult Register()
-        { 
+        public ActionResult Register()
+        {
             var courseList = db.Courses.Select(x => new SelectListItem
             {
                 Text = x.CourseName,
                 Value = x.CourseId.ToString()
             }).ToList();
-            SelectList courseOutput = new SelectList(courseList, "CourseId", "CourseName");
+            ViewBag.CourseShow = courseList;
 
-           
-            ViewBag.CourseShow = courseOutput;
-         
-           
-          
+            var roleList = db.Roles.Select(x => new SelectListItem
+            {
+                Text = x.RoleName,
+                Value = x.RoleId.ToString()
+            }).ToList();
 
-            //var roleList = db.Roles.Select(x => new SelectListItem
-            //{
-            //    Text = x.RoleName,
-            //    Value = x.RoleId.ToString()
+            ViewBag.RoleShow = roleList;
 
-            //}).ToList();
-            //ViewBag.RoleShow = roleList;
-             return View(new User());
+
+
+            return View();
         }
 
+
+
+
+
+
+
         [HttpPost]
-        public ActionResult Register(User user)
+        public ActionResult Register(ViewModel user)
         {
-           
+
             if (ModelState.IsValid)
             {
+                User objUser = new User
+                {
+                     UserId=user.UserId,
+                     FirstName=user.FirstName,
+                     LastName=user.LastName,
+                     Gender=user.Gender,
+                     DateOfBirth=user.DateOfBirth,
+                     Hobbies=user.Hobbies,
+                     Email=user.Email,
+                     IsEmailVerified=user.IsEmailVerified,
+                     Password=user.Password,
+                     ConfirmPassword=user.ConfirmPassword,
+                     IsActive=user.IsActive,
+                     CourseId=user.CourseId,
+                     AddressId=user.AddressId,
+                     DateCreated=DateTime.Now,
+                     DateModified= DateTime.Now
 
+
+                };
+                db.Users.Add(objUser);
+
+                UserInRole objUserInRole = new UserInRole
+                {
+                    RoleId = user.RoleId,
+                    UserId = objUser.UserId
+                };
+                db.UserInRoles.Add(objUserInRole);
                 using (CollegeContext db = new CollegeContext())
                 {
-                    
-                    db.Users.Add(user);
+
+
                     db.SaveChanges();
                 }
 
                 ModelState.Clear();
                 ViewBag.Message = user.FirstName + "" + user.LastName + "is successfully registered.";
             }
-            var courseList = db.Courses.Select(x => new SelectListItem
-            {
-                Text = x.CourseName,
-                Value = x.CourseId.ToString()
-            }).ToList();
-            SelectList courseOutput = new SelectList(courseList, "CourseId", "CourseName");
-            ViewBag.CourseShow = courseOutput;
+
             return View(new User());
 
+
         }
-    }
-}
+
+    }  }   
