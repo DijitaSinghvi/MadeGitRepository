@@ -16,84 +16,102 @@ namespace CollegeWeb.Controllers
             return View();
         }
 
-
+        //To show registration form to a new user.
         // GET: Account
         public ActionResult Register()
         {
-            var courseList = db.Courses.Select(x => new SelectListItem
+            ViewModel model = new ViewModel();
+            var courseList = db.Courses.Select(x => new CourseModel
             {
-                Text = x.CourseName,
-                Value = x.CourseId.ToString()
+                CourseName = x.CourseName,
+                CourseId = x.CourseId
             }).ToList();
-            ViewBag.CourseShow = courseList;
+            // ViewBag.CourseShow = courseList;
 
-            var roleList = db.Roles.Select(x => new SelectListItem
+            var roleList = db.Roles.Select(x => new RoleModel
             {
-                Text = x.RoleName,
-                Value = x.RoleId.ToString()
+                RoleName = x.RoleName,
+                RoleId = x.RoleId
             }).ToList();
 
-            ViewBag.RoleShow = roleList;
+            model.Roles = roleList;
+            model.Courses = courseList;
+            //ViewBag.RoleShow = roleList;
 
 
 
-            return View();
+
+
+            return View(model);
         }
 
-
-
-
-
-
-
+        //To post the values of the registration form to the database.
         [HttpPost]
-        public ActionResult Register(ViewModel user)
+        public ActionResult Register(ViewModel objViewModel)
         {
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                User objUser = new User
-                {
-                     UserId=user.UserId,
-                     FirstName=user.FirstName,
-                     LastName=user.LastName,
-                     Gender=user.Gender,
-                     DateOfBirth=user.DateOfBirth,
-                     Hobbies=user.Hobbies,
-                     Email=user.Email,
-                     IsEmailVerified=user.IsEmailVerified,
-                     Password=user.Password,
-                     ConfirmPassword=user.ConfirmPassword,
-                     IsActive=user.IsActive,
-                     CourseId=user.CourseId,
-                     AddressId=user.AddressId,
-                     DateCreated=DateTime.Now,
-                     DateModified= DateTime.Now
-
-
-                };
-                db.Users.Add(objUser);
-
-                UserInRole objUserInRole = new UserInRole
-                {
-                    RoleId = user.RoleId,
-                    UserId = objUser.UserId
-                };
-                db.UserInRoles.Add(objUserInRole);
-                using (CollegeContext db = new CollegeContext())
-                {
-
-
-                    db.SaveChanges();
-                }
-
-                ModelState.Clear();
-                ViewBag.Message = user.FirstName + "" + user.LastName + "is successfully registered.";
+                return View(objViewModel);
             }
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    //try to insert user details in registration form.
+                    User objUser = new User
+                    {
+                        UserId = objViewModel.UserId,
+                        FirstName = objViewModel.FirstName,
+                        LastName = objViewModel.LastName,
+                        Gender = objViewModel.Gender,
+                        DateOfBirth = objViewModel.DateOfBirth,
+                        Hobbies = objViewModel.Hobbies,
+                        Email = objViewModel.Email,
+                        IsEmailVerified = objViewModel.IsEmailVerified,
+                        Password = objViewModel.Password,
+                        ConfirmPassword = objViewModel.ConfirmPassword,
+                        IsActive = objViewModel.IsActive,
+                        CourseId = objViewModel.CourseId,
+                        AddressId = objViewModel.AddressId,
+                        DateCreated = DateTime.Now,
+                        DateModified = DateTime.Now
 
-            return View(new User());
+
+                    };
+                    db.Users.Add(objUser);
+                    db.SaveChanges();
+
+                    //RoleId for the respective UserId gets saved in database.
+                    UserInRole objUserInRole = new UserInRole
+                    {
+                        RoleId = objViewModel.RoleId,
+                        UserId = objUser.UserId
+                    };
+                    db.UserInRoles.Add(objUserInRole);
+                    db.SaveChanges();
+                    //Everything looks fine,so save the data permanently.
+                    transaction.Commit();
+                    ModelState.Clear();
+                    ViewBag.ResultMessage = objViewModel.FirstName + "" + objViewModel.LastName + "" + "is successfully registered.";
+
+                }
+                catch (Exception)
+                {
+                    //roll back all database operations, if anything goes wrong.
+                    transaction.Rollback();
+                    ViewBag.ResultMessage = "Error occurred in the registration process.Please register again.";
+                }
+            }
+                return View();
+        }
+
+
+
+               
+            }
 
 
         }
 
-    }  }   
+      

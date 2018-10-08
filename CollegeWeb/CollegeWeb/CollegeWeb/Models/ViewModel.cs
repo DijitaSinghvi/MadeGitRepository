@@ -20,7 +20,7 @@ namespace CollegeWeb.Models
         [Required(ErrorMessage = "Please enter your gender.")]
         public string Gender { get; set; }
 
-        [Display(Name = "DoBs")]
+        [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString =
                 "{0:yyyy-MM-dd}",
@@ -46,7 +46,7 @@ namespace CollegeWeb.Models
         //[Required(ErrorMessage = "Your account is inactive.")]
         public bool IsActive { get; set; }
 
-        public int CourseId { get; set; }
+       public int CourseId { get; set; }
        
         public int AddressId { get; set; }
        
@@ -58,5 +58,20 @@ namespace CollegeWeb.Models
         public int RoleId { get; set; }
       
         public string RoleName { get; set; }
+
+        public List<RoleModel> Roles { get; set; }
+        public List<CourseModel> Courses { get; set; }
+
+    }
+
+    public class RoleModel
+    {
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+    }
+    public class CourseModel
+    {
+        public int CourseId { get; set; }
+        public string CourseName { get; set; }
     }
 }
