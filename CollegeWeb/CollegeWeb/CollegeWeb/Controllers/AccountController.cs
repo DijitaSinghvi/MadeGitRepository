@@ -1,9 +1,8 @@
-﻿using System;
+﻿using CollegeWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using CollegeWeb.Models;
 
 
 namespace CollegeWeb.Controllers
@@ -46,6 +45,8 @@ namespace CollegeWeb.Controllers
             }).ToList();
             //seding countrie's data to ViewModel's property, Countries.
             model.Countries = countryList;
+
+
             //to get state dropdown from database.
             var stateList = db.States.Select(x => new StateModel
             {
@@ -53,9 +54,22 @@ namespace CollegeWeb.Controllers
                 StateName = x.StateName
             }
             ).ToList();
-            //send state's data to ViewModel's propert,States.
+            ////send state's data to ViewModel's property,States.
             model.States = stateList;
-             //return object of ViewModel in the view.
+
+
+            //to get city dropdown from database.
+            var cityList = db.Cities.Select(x => new CityModel
+            {
+                CityName = x.CityName,
+                CityId = x.CityId
+            }).ToList();
+
+            ////send cities data to ViewModel's property,Cities.
+            model.Cities = cityList;
+
+
+            //return object of ViewModel in the view.
             return View(model);
         }
 
@@ -135,9 +149,9 @@ namespace CollegeWeb.Controllers
             }
             return RedirectToAction( "Index","Account");
         }
-        public JsonResult getState(int id)
+        public JsonResult getState(int Id)
         {
-            var states = db.States.Where(x => x.CountryId == id).ToList();
+            var states = db.States.Where(x => x.CountryId == Id).ToList();
             List<SelectListItem> stateList = new List<SelectListItem>();
 
             stateList.Add(new SelectListItem { Text = "", Value = "0" });
@@ -148,12 +162,7 @@ namespace CollegeWeb.Controllers
                     stateList.Add(new SelectListItem { Text = x.StateName, Value = x.StateId.ToString() });
 
                 }
-
-
-
             }
-
-
             return Json(new SelectList(stateList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
 
