@@ -11,16 +11,19 @@ namespace CollegeWeb.Controllers
     {
         CollegeContext db=new CollegeContext();
         // GET: Login
+        //generate login form.
         public ActionResult Login()
         {
             return View();
         }
         [HttpPost]
+        //to post login form values.
         public ActionResult Login(ViewModel objViewModel)
         {
+            //to authenticate email and password from database.
             var temp = db.Users.Where(x=>x.Email==objViewModel.Email && x.Password==objViewModel.Password).Select(x=> x.UserId).FirstOrDefault();
             if(temp!= null)
-            {
+            {   //Redirect to homepage according to role of the user.
                 var getRole = db.UserInRoles.Where(x => x.UserId == temp).Select(x => x.RoleId).FirstOrDefault();
                 if (getRole == 1)
                 {

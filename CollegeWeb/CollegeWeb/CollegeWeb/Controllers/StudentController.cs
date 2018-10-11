@@ -9,6 +9,7 @@ namespace CollegeWeb.Controllers
     public class StudentController : Controller
     {
         // GET: Student
+        //to get Student homepage.
         public ActionResult HomePage()
         {
             return View();

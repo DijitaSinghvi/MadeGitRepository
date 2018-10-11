@@ -10,27 +10,12 @@ namespace CollegeWeb.Controllers
     {
         CollegeContext db = new CollegeContext();
         // GET: SuperAdmin
+        //to get SuperAdmin homepage. 
         public ActionResult HomePage()
         {
             return View();
         }
-        public ActionResult StudentIndex()
-        {
-            //var studentList = (from user in db.Users
-            //         join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-            //         orderby user.UserId
-            //         select new
-            //         {
-            //             .OrderID,
-            //             pd.ProductID,
-            //             pd.Name,
-            //             pd.UnitPrice,
-            //             od.Quantity,
-            //             od.Price,
-            //         }).ToList();
-            //return View(studentList);
-
-        }
+        
 
     }
 }

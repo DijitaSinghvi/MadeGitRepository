@@ -183,12 +183,12 @@ D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\Microsoft.AI.Dep
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\Microsoft.AI.WindowsServer.xml
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\Microsoft.AI.Web.xml
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csprojAssemblyReference.cache
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.MyMigration.resources
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.changedatatype.resources
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.changeinuser.resources
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csproj.GenerateResource.cache
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csproj.CoreCompileInputs.cache
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csproj.CopyComplete
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.pdb
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.MyMigration.resources
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csproj.GenerateResource.cache
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.changedatatype.resources
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.changeinuser.resources
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csprojAssemblyReference.cache

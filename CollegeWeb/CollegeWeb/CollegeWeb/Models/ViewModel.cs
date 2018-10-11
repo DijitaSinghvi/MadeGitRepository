@@ -65,6 +65,11 @@ namespace CollegeWeb.Models
         public int RoleId { get; set; }
       
         public string RoleName { get; set; }
+        public string CourseName  { get; set; }
+        public string CityName { get; set; }
+        public string StateName { get; set; }
+        public string CountryName { get; set; }
+
 
         public List<RoleModel> Roles { get; set; }
         public List<CourseModel> Courses { get; set; }
@@ -73,7 +78,7 @@ namespace CollegeWeb.Models
         public List<CityModel> Cities { get; set; }
 
     }
-
+    //to get role,course,country,state and city dropdown from database through model.
     public class RoleModel
     {
         public int RoleId { get; set; }

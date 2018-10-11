@@ -10,7 +10,8 @@ namespace CollegeWeb.Controllers
     public class AccountController : Controller
     {
         CollegeContext db = new CollegeContext();
-        public ActionResult Index()
+        //Thankyou page after successful registration.
+        public ActionResult Thankyou()
         {
             return View();
         }
@@ -21,14 +22,14 @@ namespace CollegeWeb.Controllers
         {
             //Creating an object of ViewModel.
             ViewModel model = new ViewModel();
-            //query to get the course dropdown from database.
+            // to get the course dropdown from database.
             var courseList = db.Courses.Select(x => new CourseModel
             {
                 CourseName = x.CourseName,
                 CourseId = x.CourseId
             }).ToList();
            
-            //query to get the role dropdown from database.
+            //to get the role dropdown from database.
             var roleList = db.Roles.Select(x => new RoleModel
             {
                 RoleName = x.RoleName,
@@ -54,7 +55,7 @@ namespace CollegeWeb.Controllers
                 StateName = x.StateName
             }
             ).ToList();
-            ////send state's data to ViewModel's property,States.
+            //send state's data to ViewModel's property,States.
             model.States = stateList;
 
 
@@ -85,7 +86,7 @@ namespace CollegeWeb.Controllers
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
-                {//Raw data sent to address table.
+                {// data sent to address table.
                     Address objAddress = new Address
                     {
                         AddressLine =objViewModel.AddressLine,
@@ -116,10 +117,8 @@ namespace CollegeWeb.Controllers
                         CourseId = objViewModel.CourseId,
                         // Adding addresId 
                         AddressId = objAddress.AddressId,
-
-                        DateCreated = DateTime.Now,
-                        //Done for testing purpose.
-                        DateModified = DateTime.Now
+                         DateCreated = DateTime.Now,
+                         DateModified = DateTime.Now
 
 
                     };
@@ -149,6 +148,7 @@ namespace CollegeWeb.Controllers
             }
             return RedirectToAction( "Index","Account");
         }
+        //get states according to selected country. 
         public JsonResult getState(int Id)
         {
             var states = db.States.Where(x => x.CountryId == Id).ToList();
@@ -165,7 +165,7 @@ namespace CollegeWeb.Controllers
             }
             return Json(new SelectList(stateList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
-
+        //get cities according to selected state.
         public JsonResult getCity(int id)
         {
             var cities = db.Cities.Where(x => x.StateId == id).ToList();
