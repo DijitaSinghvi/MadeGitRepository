@@ -10,71 +10,84 @@ namespace CollegeWeb.Controllers
     public class AccountController : Controller
     {
         CollegeContext db = new CollegeContext();
-        //Thankyou page after successful registration.
+        /// <summary>
+        /// Thankyou page after successful registration.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Thankyou()
         {
             return View();
         }
 
-        //To show registration form to a new user.
-        // GET: Account
+        /// <summary>
+        /// GET: Account
+        /// To show registration form to a new user.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Register()
         {
-            //Creating an object of ViewModel.
+
+            //Creating an object of ViewModel.            
             ViewModel model = new ViewModel();
-            // to get the course dropdown from database.
+
+            // To get the course dropdown from database.
             var courseList = db.Courses.Select(x => new CourseModel
             {
                 CourseName = x.CourseName,
                 CourseId = x.CourseId
             }).ToList();
            
-            //to get the role dropdown from database.
+            //To get the role dropdown from database.
             var roleList = db.Roles.Select(x => new RoleModel
             {
                 RoleName = x.RoleName,
                 RoleId = x.RoleId
             }).ToList();
-            //sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
+
+            //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
             model.Roles = roleList;
             model.Courses = courseList;
-            //to get country dropdown from database.
+
+            //To get country dropdown from database.
             var countryList = db.Countries.Select(x => new CountryModel
             {
                 CountryName = x.CountryName,
                 CountryId = x.CountryId
             }).ToList();
-            //seding countrie's data to ViewModel's property, Countries.
+
+            //Sending countrie's data to ViewModel's property, Countries.
             model.Countries = countryList;
 
-
-            //to get state dropdown from database.
+            //To get state dropdown from database.
             var stateList = db.States.Select(x => new StateModel
             {
                 StateId = x.StateId,
                 StateName = x.StateName
             }
             ).ToList();
-            //send state's data to ViewModel's property,States.
+
+            //Send state's data to ViewModel's property,States.
             model.States = stateList;
 
-
-            //to get city dropdown from database.
+            //To get city dropdown from database.
             var cityList = db.Cities.Select(x => new CityModel
             {
                 CityName = x.CityName,
                 CityId = x.CityId
             }).ToList();
 
-            ////send cities data to ViewModel's property,Cities.
+            //Send cities data to ViewModel's property,Cities.
             model.Cities = cityList;
 
-
-            //return object of ViewModel in the view.
+            //Return object of ViewModel in the view.
             return View(model);
         }
-
-        //To post the values of the registration form to the database.
+      
+        /// <summary>
+        /// To post the values of the registration form to the database.
+        /// </summary>
+        /// <param name="objViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Register(ViewModel objViewModel)
         {
@@ -86,21 +99,23 @@ namespace CollegeWeb.Controllers
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
-                {// data sent to address table.
+                {
+                    // Data sent to address table.
                     Address objAddress = new Address
                     {
                         AddressLine =objViewModel.AddressLine,
                         CityId = objViewModel.CityId,
                         CountryId =objViewModel.CountryId,
                         Pincode = objViewModel.Pincode,
-                        StateId = objViewModel.StateId,
-                        
+                        StateId = objViewModel.StateId,                       
                     };
                     db.Addresses.Add(objAddress);
                     db.SaveChanges();
+
                     //Raw data sent for IsEmailVerified property through ViewModel object.
                     objViewModel.IsEmailVerified = "Yes";
-                    //try to insert user details of registration form in User table of database.
+
+                    //Try to insert user details of registration form in User table of database.
                     User objUser = new User
                     {
                         UserId = objViewModel.UserId,
@@ -119,8 +134,6 @@ namespace CollegeWeb.Controllers
                         AddressId = objAddress.AddressId,
                          DateCreated = DateTime.Now,
                          DateModified = DateTime.Now
-
-
                     };
                     db.Users.Add(objUser);
                     db.SaveChanges();
@@ -133,6 +146,7 @@ namespace CollegeWeb.Controllers
                     };
                     db.UserInRoles.Add(objUserInRole);
                     db.SaveChanges();
+
                     //Everything looks fine,so save the data permanently.
                     transaction.Commit();
                     
@@ -141,14 +155,19 @@ namespace CollegeWeb.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //roll back all database operations, if anything goes wrong.
+                    //Roll back all database operations, if anything goes wrong.
                     transaction.Rollback();
                     ViewBag.ResultMessage = "Error occurred in the registration process.Please register again.";
                 }
             }
             return RedirectToAction( "Index","Account");
         }
-        //get states according to selected country. 
+
+        /// <summary>
+        /// Get states according to selected country. 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public JsonResult getState(int Id)
         {
             var states = db.States.Where(x => x.CountryId == Id).ToList();
@@ -165,7 +184,12 @@ namespace CollegeWeb.Controllers
             }
             return Json(new SelectList(stateList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
-        //get cities according to selected state.
+        
+        /// <summary>
+        /// Get cities according to selected state.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public JsonResult getCity(int id)
         {
             var cities = db.Cities.Where(x => x.StateId == id).ToList();
@@ -180,11 +204,6 @@ namespace CollegeWeb.Controllers
             }
             return Json(new SelectList(cityList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
-
-
-
-    }
-
-    
+    }    
 }
 

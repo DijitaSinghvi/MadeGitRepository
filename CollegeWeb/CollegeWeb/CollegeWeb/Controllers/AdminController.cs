@@ -8,18 +8,26 @@ using System.Web.Mvc;
 namespace CollegeWeb.Controllers
 {
     public class AdminController : Controller
-    { //Showing homepage to admin.
+    { 
         CollegeContext db = new CollegeContext();
-        // GET: Admin
-        public ActionResult HomePage()
+
+        /// <summary>
+        /// GET: Admin
+        /// Showing homepage to admin.
+        /// </summary>
+        /// <returns></returns>
+         public ActionResult HomePage()
         {
             return View();
         }
-        //Admin can manage student list.
-        //get list of students from database.
-        public ActionResult ViewStudents()
+
+        /// <summary>
+        /// Admin can manage student list.      
+        /// </summary>
+        /// <returns></returns>
+       public ActionResult ViewStudents()
         {
-           
+            //Get list of students from database.
             var studentList = (from
                                user in db.Users 
                                join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
@@ -48,65 +56,77 @@ namespace CollegeWeb.Controllers
                                   
                              return View(studentList);
         }
-        [HttpGet]
-        //Add new student record in website.
+
+        /// <summary>
+        /// Add new student record in website.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]       
         public ActionResult AddStudent()
         {
             //Creating an object of ViewModel.
             ViewModel model = new ViewModel();
-            //query to get the course dropdown from database.
+
+            //Query to get the course dropdown from database.
             var courseList = db.Courses.Select(x => new CourseModel
             {
                 CourseName = x.CourseName,
                 CourseId = x.CourseId
             }).ToList();
 
-            //query to get the role dropdown from database.
+            //Query to get the role dropdown from database.
             var roleList = db.Roles.Select(x => new RoleModel
             {
                 RoleName = x.RoleName,
                 RoleId = x.RoleId
             }).ToList();
-            //sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
+
+            //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
             model.Roles = roleList;
             model.Courses = courseList;
-            //to get country dropdown from database.
+
+            //To get country dropdown from database.
             var countryList = db.Countries.Select(x => new CountryModel
             {
                 CountryName = x.CountryName,
                 CountryId = x.CountryId
             }).ToList();
-            //seding countrie's data to ViewModel's property, Countries.
+
+            //Sending countrie's data to ViewModel's property, Countries.
             model.Countries = countryList;
 
-
-            //to get state dropdown from database.
+          //To get state dropdown from database.
             var stateList = db.States.Select(x => new StateModel
             {
                 StateId = x.StateId,
                 StateName = x.StateName
             }
             ).ToList();
-            ////send state's data to ViewModel's property,States.
+
+            //Send state's data to ViewModel's property,States.
             model.States = stateList;
 
 
-            //to get city dropdown from database.
+            //To get city dropdown from database.
             var cityList = db.Cities.Select(x => new CityModel
             {
                 CityName = x.CityName,
                 CityId = x.CityId
             }).ToList();
 
-            ////send cities data to ViewModel's property,Cities.
+            //Send cities data to ViewModel's property,Cities.
             model.Cities = cityList;
 
-
-            //return object of ViewModel in the view.
+           //Return object of ViewModel in the view.
             return View(model);
 
         }
-        //to post form details to database.
+
+        /// <summary>
+        ///To post form details to database. 
+        /// </summary>
+        /// <param name="objViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AddStudent(ViewModel objViewModel)
         {
@@ -117,7 +137,8 @@ namespace CollegeWeb.Controllers
             using (var transaction = db.Database.BeginTransaction())
             {
                 try
-                {//Raw data sent to address table.
+                {   
+                    //Raw data sent to address table.
                     Address objAddress = new Address
                     {
                         AddressLine = objViewModel.AddressLine,
@@ -129,10 +150,12 @@ namespace CollegeWeb.Controllers
                     };
                     db.Addresses.Add(objAddress);
                     db.SaveChanges();
-                    //Raw data sent for IsEmailVerified property through ViewModel object.
+
+                    // Raw data sent for IsEmailVerified property through ViewModel object.
                     objViewModel.IsEmailVerified = "Yes";
                     objViewModel.IsActive = true;
-                    //try to insert user details of registration form in User table of database.
+
+                    // Try to insert user details of registration form in User table of database.
                     User objUser = new User
                     {
                         UserId = objViewModel.UserId,
@@ -147,6 +170,7 @@ namespace CollegeWeb.Controllers
                         ConfirmPassword = objViewModel.ConfirmPassword,
                         IsActive = objViewModel.IsActive,
                         CourseId = objViewModel.CourseId,
+
                         // Adding addresId 
                         AddressId = objAddress.AddressId,
                         DateCreated = DateTime.Now,
@@ -163,6 +187,7 @@ namespace CollegeWeb.Controllers
                     };
                     db.UserInRoles.Add(objUserInRole);
                     db.SaveChanges();
+
                     //Everything looks fine,so save the data permanently.
                     transaction.Commit();
 
@@ -171,14 +196,19 @@ namespace CollegeWeb.Controllers
                 }
                 catch (Exception ex)
                 {
-                    //roll back all database operations, if anything goes wrong.
+                    //Roll back all database operations, if anything goes wrong.
                     transaction.Rollback();
                     ViewBag.ResultMessage = "Error occurred in the registration process.Please register again.";
                 }
             }
             return RedirectToAction("Index", "Account");
         }
-        //get states according to selected country.
+
+        /// <summary>
+        /// Get states according to selected country.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public JsonResult getState(int Id)
         {
             var states = db.States.Where(x => x.CountryId == Id).ToList();
@@ -195,7 +225,12 @@ namespace CollegeWeb.Controllers
             }
             return Json(new SelectList(stateList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
-        //get cities according to selected state.
+
+        /// <summary>
+        /// Get cities according to selected state.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public JsonResult getCity(int id)
         {
             var cities = db.Cities.Where(x => x.StateId == id).ToList();
@@ -210,17 +245,21 @@ namespace CollegeWeb.Controllers
             }
             return Json(new SelectList(cityList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
-        //To edit student record.
+
+       /// <summary>
+        ///   To edit student record.
+        /// </summary>
+        /// <returns></returns>
         //public ActionResult EditStudent()
         //{
-            
-        //}
-            
 
-        
+        //}
+
+
+
 
     }
 
 
-    
+
 }

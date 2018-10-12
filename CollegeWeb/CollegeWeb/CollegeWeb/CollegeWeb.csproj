@@ -158,6 +158,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\SubjectInCourse.cs" />
@@ -241,6 +243,7 @@
     <Content Include="Views\Student\HomePage.cshtml" />
     <Content Include="Views\Admin\ViewStudents.cshtml" />
     <Content Include="Views\Admin\AddStudent.cshtml" />
+    <Content Include="Views\Search\SearchPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
