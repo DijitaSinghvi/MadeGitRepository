@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -246,13 +247,40 @@ namespace CollegeWeb.Controllers
             return Json(new SelectList(cityList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
 
-       /// <summary>
+        /// <summary>
         ///   To edit student record.
         /// </summary>
         /// <returns></returns>
-        //public ActionResult EditStudent()
+        //public ActionResult EditStudent(int? id)
         //{
 
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
+        ///// <summary>
+        ///// Save updates in database.
+        ///// </summary>
+        //[HttpPost]
+        //public ActionResult EditStudent()
+        //{
+        //    public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,Email,Username,Password,ConfirmPassword,Role,Course")] UserAccount userAccount)
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            db.Entry(userAccount).State = System.Data.Entity.EntityState.Modified;
+        //            db.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //        return View(userAccount);
+        //    }
         //}
 
 

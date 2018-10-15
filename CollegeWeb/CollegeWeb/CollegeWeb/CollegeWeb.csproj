@@ -243,7 +243,9 @@
     <Content Include="Views\Student\HomePage.cshtml" />
     <Content Include="Views\Admin\ViewStudents.cshtml" />
     <Content Include="Views\Admin\AddStudent.cshtml" />
-    <Content Include="Views\Search\SearchPage.cshtml" />
+    <Content Include="Views\Search\GetFilters.cshtml" />
+    <Content Include="Views\Shared\_SearchResultPartial.cshtml" />
+    <Content Include="Views\Admin\EditStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
