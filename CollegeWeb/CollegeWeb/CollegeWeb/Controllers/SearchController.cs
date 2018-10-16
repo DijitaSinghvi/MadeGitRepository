@@ -58,60 +58,82 @@ namespace CollegeWeb.Controllers
             }).ToList();
             //send role list to Roles property of model.
             model.Roles = roleList;
+           // Show list of all records from database.
+            var showList = (from user in db.Users
+                            join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
+                            select new ShowList
+                            {
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                Gender = user.Gender,
+                                DateOfBirth = user.DateOfBirth,
+                                Hobbies = user.Hobbies,
+                                Email = user.Email,
+                                IsEmailVerified = user.IsEmailVerified,
+                                IsActive = user.IsActive,
+                                CourseName = user.Course.CourseName,
+                                AddressLine = user.Address.AddressLine,
+                                CountryName = user.Address.Country.CountryName,
+                                StateName = user.Address.State.StateName,
+                                CityName = user.Address.City.CityName,
+                                Pincode = user.Address.Pincode,
+                                DateCreated = user.DateCreated,
+                                DateModified = user.DateModified,
+                                RoleName = userInRole.Role.RoleName
+
+                            }).ToList();
+            model.ShowLists = showList;
+
+
+            ////to compare filters' data in database.
+            //var searchList = (from
+            //                    user in db.Users
+            //                  join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
+            //                  where user.FirstName == model.FirstName
+            //                  //&&
+            //                  //user.LastName == objSearchModel.LastName &&
+            //                  //user.Gender == objSearchModel.Gender &&
+            //                  //user.DateOfBirth == objSearchModel.DateOfBirth &&
+            //                  //user.Hobbies == objSearchModel.Hobbies &&
+            //                  //user.Email == objSearchModel.Email &&
+            //                  //user.IsEmailVerified == objSearchModel.IsEmailVerified &&
+            //                  //user.IsActive == objSearchModel.IsActive &&
+            //                  //user.Course.CourseName == objSearchModel.CourseName &&
+            //                  //user.Address.AddressLine == objSearchModel.AddressLine &&
+            //                  //user.Address.Country.CountryName == objSearchModel.CountryName &&
+            //                  //user.Address.State.StateName == objSearchModel.StateName &&
+            //                  //user.Address.City.CityName == objSearchModel.CityName &&
+            //                  //user.Address.Pincode == objSearchModel.Pincode &&
+            //                  //user.DateCreated == objSearchModel.DateCreated &&
+            //                  //user.DateModified == objSearchModel.DateModified &&
+            //                  //userInRole.Role.RoleName == objSearchModel.RoleName
+            //                  select new ShowList
+            //                  {
+            //                      FirstName = user.FirstName,
+            //                      LastName = user.LastName,
+            //                      Gender = user.Gender,
+            //                      DateOfBirth = user.DateOfBirth,
+            //                      Hobbies = user.Hobbies,
+            //                      Email = user.Email,
+            //                      IsEmailVerified = user.IsEmailVerified,
+            //                      IsActive = user.IsActive,
+            //                      CourseName = user.Course.CourseName,
+            //                      AddressLine = user.Address.AddressLine,
+            //                      CountryName = user.Address.Country.CountryName,
+            //                      StateName = user.Address.State.StateName,
+            //                      CityName = user.Address.City.CityName,
+            //                      Pincode = user.Address.Pincode,
+            //                      DateCreated = user.DateCreated,
+            //                      DateModified = user.DateModified,
+            //                      RoleName = userInRole.Role.RoleName
+            //                  }).ToList();
+
+            //model.ShowLists = searchList;
             return View(model);
         }
-        /// <summary>
-        ///get the details of the user according to the filters.
-        /// </summary>
-        [HttpPost]
 
-        public ActionResult GetFilters(SearchModel objSearchModel)
-        {
-            //to compare filters' data in database.
-            var searchList = (from
-                                user in db.Users
-                               join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-                               where user.FirstName == objSearchModel.FirstName &&
-                               user.LastName == objSearchModel.LastName &&
-                               user.Gender == objSearchModel.Gender &&
-                               user.DateOfBirth == objSearchModel.DateOfBirth &&
-                               user.Hobbies == objSearchModel.Hobbies &&
-                               user.Email == objSearchModel.Email &&
-                               user.IsEmailVerified == objSearchModel.IsEmailVerified &&
-                               user.IsActive == objSearchModel.IsActive &&
-                               user.Course.CourseName == objSearchModel.CourseName &&
-                               user.Address.AddressLine == objSearchModel.AddressLine &&
-                               user.Address.Country.CountryName == objSearchModel.CountryName &&
-                               user.Address.State.StateName == objSearchModel.StateName &&
-                               user.Address.City.CityName == objSearchModel.CityName &&
-                               user.Address.Pincode == objSearchModel.Pincode &&
-                               user.DateCreated == objSearchModel.DateCreated &&
-                               user.DateModified == objSearchModel.DateModified &&
-                               userInRole.Role.RoleName == objSearchModel.RoleName
-                               select new SearchModel
-                               {
-                                   FirstName = user.FirstName,
-                                   LastName = user.LastName,
-                                   Gender = user.Gender,
-                                   DateOfBirth = user.DateOfBirth,
-                                   Hobbies = user.Hobbies,
-                                   Email = user.Email,
-                                   IsEmailVerified = user.IsEmailVerified,
-                                   IsActive = user.IsActive,
-                                   CourseName = user.Course.CourseName,
-                                   AddressLine = user.Address.AddressLine,
-                                   CountryName = user.Address.Country.CountryName,
-                                   StateName = user.Address.State.StateName,
-                                   CityName = user.Address.City.CityName,
-                                   Pincode = user.Address.Pincode,
-                                   DateCreated = user.DateCreated,
-                                   DateModified = user.DateModified,
-                                   RoleName = userInRole.Role.RoleName
-                               }).ToList();
-            
-                     return View();
 
-        }
+
         //public ActionResult SearchResult(SearchModel objSearchModel)
         //{
         //    var searchList = (from

@@ -1,6 +1,15 @@
-﻿@model CollegeWeb.Models.SearchModel
+﻿@model IEnumerable<CollegeWeb.Models.ViewModel>
+@{
+    ViewBag.Title = "ViewTeachers";
+}
 
-<h2>Search Result</h2>
+<h2>ViewTeachers</h2>
+@*<a type="button" class="btn btn-primary btn" href="@Url.Action("AddStudent","Admin")"
+
+    <span>Add New Teacher</span>
+</a>*@
+
+
 <table class="table">
     <tr>
         <th>
@@ -24,6 +33,10 @@
         <th>
             @Html.DisplayNameFor(model => model.IsEmailVerified)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
@@ -54,13 +67,10 @@
             @Html.DisplayNameFor(model => model.Pincode)
         </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.RoleName)
-        </th>
-
+        <th></th>
     </tr>
-    @foreach (var item in Model.ShowLists)
-        
+
+    @foreach (var item in Model)
     {
         <tr>
             <td>
@@ -84,7 +94,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsEmailVerified)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
@@ -112,6 +124,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Pincode)
             </td>
+            @*<td>
+                @Html.ActionLink("Edit", "EditTeacher", new { id = item.UserId }) |
+
+                @Html.ActionLink("Delete", "DeleteTeacher", new { id = item.UserId })
+            </td>*@
         </tr>
     }
 
