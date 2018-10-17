@@ -35,7 +35,7 @@ namespace CollegeWeb.Controllers
                                where userInRole.RoleId == 4
                                orderby user.UserId
                                select new ViewModel
-                               {
+                               {    UserId=user.UserId,
                                  FirstName=  user.FirstName,
                                  LastName = user.LastName,
                                    Gender=user.Gender,
@@ -197,6 +197,7 @@ namespace CollegeWeb.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Console.Write(ex.Message);
                     //Roll back all database operations, if anything goes wrong.
                     transaction.Rollback();
                     ViewBag.ResultMessage = "Error occurred in the registration process.Please register again.";
@@ -253,98 +254,152 @@ namespace CollegeWeb.Controllers
         /// <returns></returns>
         public ActionResult EditStudent(int? id)
         {
-            var editRecord=
-                from user in db.Users             
-             where user.UserId == id
-           
-             select new ViewModel
-             {
-                 FirstName = user.FirstName,
-                 LastName = user.LastName,
-                 Gender = user.Gender,
-                 DateOfBirth = user.DateOfBirth,
-                 Hobbies = user.Hobbies,
-                 Email = user.Email,
-                 IsEmailVerified = user.IsEmailVerified,
-                 Password = user.Password,
-                 IsActive = user.IsActive,
-                 DateCreated = user.DateCreated,
-                 DateModified = user.DateModified,
-                 CourseName = user.Course.CourseName,
-                 AddressLine = user.Address.AddressLine,
-                 CityName = user.Address.City.CityName,
-                 StateName = user.Address.State.StateName,
-                 CountryName = user.Address.Country.CountryName,
-                 Pincode = user.Address.Pincode
-             };
-            return View(editRecord);
+            try
+            {
+               ViewModel model = new ViewModel();
+                //Query to get the course dropdown from database.
+                var courseList = db.Courses.Select(x => new CourseModel
+                {
+                    CourseName = x.CourseName,
+                    CourseId = x.CourseId
+                }).ToList();
+
+                //Query to get the role dropdown from database.
+                var roleList = db.Roles.Select(x => new RoleModel
+                {
+                    RoleName = x.RoleName,
+                    RoleId = x.RoleId
+                }).ToList();
+
+                //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
+                model.Roles = roleList;
+                model.Courses = courseList;
+
+                //To get country dropdown from database.
+                var countryList = db.Countries.Select(x => new CountryModel
+                {
+                    CountryName = x.CountryName,
+                    CountryId = x.CountryId
+                }).ToList();
+
+                //Sending countrie's data to ViewModel's property, Countries.
+                model.Countries = countryList;
+
+                //To get state dropdown from database.
+                var stateList = db.States.Select(x => new StateModel
+                {
+                    StateId = x.StateId,
+                    StateName = x.StateName
+                }
+                ).ToList();
+
+                //Send state's data to ViewModel's property,States.
+                model.States = stateList;
+
+
+                //To get city dropdown from database.
+                var cityList = db.Cities.Select(x => new CityModel
+                {
+                    CityName = x.CityName,
+                    CityId = x.CityId
+                }).ToList();
+
+                //Send cities data to ViewModel's property,Cities.
+                model.Cities = cityList;
+
+
+
+                var editRecord = (from user in db.Users
+                                  where user.UserId == id
+
+                                  select new ViewModel
+                                  {
+                                      UserId = user.UserId,
+                                      FirstName = user.FirstName,
+                                      LastName = user.LastName,
+                                      Gender = user.Gender,
+                                      DateOfBirth = user.DateOfBirth,
+                                      Hobbies = user.Hobbies,
+                                      Email = user.Email,
+                                      IsEmailVerified = user.IsEmailVerified,
+                                      Password = user.Password,
+                                      IsActive = user.IsActive,
+                                      DateCreated = user.DateCreated,
+                                      DateModified = user.DateModified,
+                                      CourseName = user.Course.CourseName,
+                                      AddressLine = user.Address.AddressLine,
+                                      CityName = user.Address.City.CityName,
+                                      StateName = user.Address.State.StateName,
+                                      CountryName = user.Address.Country.CountryName,
+                                      Pincode = user.Address.Pincode,
+                                      AddressId=user.AddressId,
+                                      CityId=user.Address.CityId,
+                                      CountryId=user.Address.CountryId,
+                                      CourseId=user.CourseId
+
+                                  }).FirstOrDefault();
+
+
+                return View(editRecord);
+            }
+            catch (Exception er)
+            {
+                Console.Write(er.Message);
+                return View();
+            }
+            
 
         }
 
         /// <summary>
         /// Save updates in database.
         /// </summary>
-        //[HttpPost]
-        //public ActionResult EditStudent(ViewModel objViewModel)
-        //{
-        //    //Updating address in address table.
-        
-
-        //    db.Addresses.Add(objAddress);
-        //    db.SaveChanges();
-
-        //    //Adding updates to User table.
-           
-
-        //    db.Users.Add(objUser);
-        //    db.SaveChanges();
-        //    return View(objViewModel);
-        //}
+        [HttpPost]
+        public ActionResult EditStudent(ViewModel objViewModel)
+        {
+            try
+            {
+                //Updating address in address table.            
+                db.Entry(objViewModel).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return View(objViewModel);
+            }
+            catch(Exception er)
+            {
+                Console.Write(er.Message);
+                return View();
+            }
+        }
 
         /// <summary>
         /// Get record to be deleted from database and pass to ViewModel. 
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult DeleteStudent(int? id)
+        /// <returns></returns> 
+        public ActionResult DeleteStudent(int id)
         {
-            //var deleteRecord = from
-            //                   user in db.Users
-            //                   where user.UserId == id
-            //                   select new ViewModel
-            //                   {
-            //                       FirstName = user.FirstName,
-            //                       LastName = user.LastName,
-            //                       Gender = user.Gender,
-            //                       DateOfBirth = user.DateOfBirth,
-            //                       Hobbies = user.Hobbies,
-            //                       Email = user.Email,
-            //                       IsEmailVerified = user.IsEmailVerified,
-            //                       Password = user.Password,
-            //                       IsActive = user.IsActive,
-            //                       DateCreated = user.DateCreated,
-            //                       DateModified = user.DateModified,
-            //                       CourseName = user.Course.CourseName,
-            //                       AddressLine = user.Address.AddressLine,
-            //                       CityName = user.Address.City.CityName,
-            //                       StateName = user.Address.State.StateName,
-            //                       CountryName = user.Address.Country.CountryName,
-            //                       Pincode = user.Address.Pincode
-            //                   };
-            //   User objUser = new User;
-            var deleteRecord = (from
-                               user in db.Users
-                                where user.UserId == id
-                                select user).FirstOrDefault();
-
-            if (deleteRecord != null)
+            try
             {
-                db.Users.Remove(deleteRecord);
-                db.SaveChanges();
+
+                var deleteRecord = (from
+                                    user in db.Users
+                                    where user.UserId == id
+                                    select user).FirstOrDefault();
+
+                if (deleteRecord != null)
+                {
+                    db.Users.Remove(deleteRecord);
+                    db.SaveChanges();
+                }
+
+
+                return RedirectToAction("ViewStudents", "Admin");
             }
-
-
-            return View();
+            catch(Exception er)
+            {
+                Console.Write(er.Message);
+                return View();
+            }
                     
        }
         public ActionResult ViewTeachers()

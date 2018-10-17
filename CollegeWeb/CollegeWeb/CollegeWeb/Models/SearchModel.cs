@@ -97,7 +97,7 @@ namespace CollegeWeb.Models
         public string Gender { get; set; }
 
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
 
 
@@ -121,9 +121,9 @@ namespace CollegeWeb.Models
 
 
 
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
 
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
 
         public int? RoleId { get; set; }
 

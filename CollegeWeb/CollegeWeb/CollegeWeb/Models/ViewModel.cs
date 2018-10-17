@@ -76,6 +76,7 @@ namespace CollegeWeb.Models
         public List<CountryModel> Countries { get; set; }
         public List<StateModel> States { get; set; }
         public List<CityModel> Cities { get; set; }
+        //public
 
     }
     //to get role,course,country,state and city dropdown from database through model.
