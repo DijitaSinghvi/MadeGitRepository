@@ -252,11 +252,12 @@ namespace CollegeWeb.Controllers
         ///   To edit student record, get details of the student from database. 
         /// </summary>
         /// <returns></returns>
+        /// 
         public ActionResult EditStudent(int? id)
         {
             try
             {
-               ViewModel model = new ViewModel();
+               //ViewModel model = new ViewModel();
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
@@ -272,8 +273,8 @@ namespace CollegeWeb.Controllers
                 }).ToList();
 
                 //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
-                model.Roles = roleList;
-                model.Courses = courseList;
+               // model.Roles = roleList;
+                //model.Courses = courseList;
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -283,7 +284,7 @@ namespace CollegeWeb.Controllers
                 }).ToList();
 
                 //Sending countrie's data to ViewModel's property, Countries.
-                model.Countries = countryList;
+                //model.Countries = countryList;
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -294,7 +295,7 @@ namespace CollegeWeb.Controllers
                 ).ToList();
 
                 //Send state's data to ViewModel's property,States.
-                model.States = stateList;
+                //model.States = stateList;
 
 
                 //To get city dropdown from database.
@@ -305,11 +306,11 @@ namespace CollegeWeb.Controllers
                 }).ToList();
 
                 //Send cities data to ViewModel's property,Cities.
-                model.Cities = cityList;
+                //model.Cities = cityList;
 
 
 
-                var editRecord = (from user in db.Users
+                var model = (from user in db.Users
                                   where user.UserId == id
 
                                   select new ViewModel
@@ -334,13 +335,20 @@ namespace CollegeWeb.Controllers
                                       Pincode = user.Address.Pincode,
                                       AddressId=user.AddressId,
                                       CityId=user.Address.CityId,
+                                      StateId=user.Address.StateId,
                                       CountryId=user.Address.CountryId,
-                                      CourseId=user.CourseId
+                                      CourseId=user.CourseId,
+                                      ConfirmPassword=user.ConfirmPassword
 
                                   }).FirstOrDefault();
 
+                model.Countries = countryList;
+                model.States = stateList;
+                model.Cities = cityList;
+                model.Courses = courseList;
+                model.Roles = roleList;
 
-                return View(editRecord);
+                return View(model);
             }
             catch (Exception er)
             {
@@ -359,20 +367,54 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //Updating address in address table.            
-                db.Entry(objViewModel).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return View(objViewModel);
+                //Raw data sent to address table.
+
+                var userRecord = (from user in db.Users
+                                  where user.UserId == objViewModel.UserId
+                                  select user).FirstOrDefault();
+                if (userRecord != null)
+                {
+                    userRecord.DateCreated = DateTime.Now;
+                    userRecord.DateModified = DateTime.Now;
+                    userRecord.UserId = objViewModel.UserId;
+                    userRecord.FirstName = objViewModel.FirstName;
+                    userRecord.LastName = objViewModel.LastName;
+                    userRecord.Gender = objViewModel.Gender;
+                    userRecord.DateOfBirth = objViewModel.DateOfBirth;
+                    userRecord.Hobbies = objViewModel.Hobbies;
+                    userRecord.Email = objViewModel.Email;
+                    userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
+                    userRecord.Password = objViewModel.Password;
+                    userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
+                    userRecord.IsActive = objViewModel.IsActive;
+                    userRecord.CourseId = objViewModel.CourseId;
+                    userRecord.Address.AddressLine = objViewModel.AddressLine;
+                    userRecord.Address.CityId = objViewModel.CityId;
+                    userRecord.Address.CountryId = objViewModel.CountryId;
+                    userRecord.Address.Pincode = objViewModel.Pincode;
+                    userRecord.Address.StateId = objViewModel.StateId;
+                    userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
+                    userRecord.IsActive = objViewModel.IsActive;
+                    userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
+
+
+                    db.SaveChanges();
+                   
+
+                }
+                return RedirectToAction("ViewStudents");
             }
-            catch(Exception er)
+
+            catch (Exception er)
             {
                 Console.Write(er.Message);
                 return View();
             }
+           
         }
-
+                           
         /// <summary>
-        /// Get record to be deleted from database and pass to ViewModel. 
+        /// Delete a student record from database.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns> 
@@ -381,17 +423,31 @@ namespace CollegeWeb.Controllers
             try
             {
 
+                //Delete selected record from database.
                 var deleteRecord = (from
                                     user in db.Users
                                     where user.UserId == id
                                     select user).FirstOrDefault();
-
-                if (deleteRecord != null)
+                //Get userInRole record from database.
+                var userInRoleRecord = (from
+                                        userInRole in db.UserInRoles
+                                        where userInRole.UserId == deleteRecord.UserId
+                                        select userInRole).FirstOrDefault();
+                //Delete UserInRole record from table.
+                if(userInRoleRecord!=null)
+                {
+                    db.UserInRoles.Remove(userInRoleRecord);
+                    db.SaveChanges();
+                }
+               
+                
+                //Delete user record from table.
+                if(deleteRecord!=null)
                 {
                     db.Users.Remove(deleteRecord);
                     db.SaveChanges();
                 }
-
+                
 
                 return RedirectToAction("ViewStudents", "Admin");
             }
