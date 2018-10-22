@@ -1,18 +1,92 @@
 ﻿@model CollegeWeb.Models.ViewModel
 @{
-    ViewBag.Title = "EditStudent";
+    ViewBag.Title = "EditTeacher";
 }
 
-<h2>EditStudent</h2>
+<h2>EditTeacher</h2>
 
+
+
+@*Jquery code for dropdown calling
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            jQuery("#ddlStateData").empty();
+            $("#ddlCity").empty();
+
+            var id = $("#ddlCountry").val();
+                $.ajax({
+                    type: 'Post',
+                    url: '@Url.Action("getState")',
+                    dataType: 'json',
+                    data: { Id: id },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+                            $("#ddlStateData").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+
+        });
+
+            $("#ddlCountry").change(function () {
+
+                jQuery("#ddlStateData").empty();
+                var id = $("#ddlCountry").val();
+                $.ajax({
+                    type: 'Post',
+                    url: '@Url.Action("getState")',
+                    dataType: 'json',
+                    data: { Id: id },
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+                            $("#ddlStateData").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+                return false;
+            });
+
+              $("#ddlStateData").change(function () {
+                    $("#ddlCity").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getcity")',
+                        dataType: 'json',
+                        data: { id: $("#ddlStateData").val() },
+                        success: function (city) {
+
+                            $.each(city, function (i, city) {
+                                $("#ddlCity").append('<option value="'
+                                    + city.Value + '">'
+                                    + city.Text + '</option>');
+                            });
+                        },
+                        error: function (ex) {
+                            alert('Failed.' + ex);
+                        }
+                    });
+                    return false;
+                });
+          //  });
+    </script>*@
 
 
 @using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-{ 
-
-
-
+    <div class="form-horizontal">
 
         <h4>Edit Form</h4>
         <hr />
@@ -149,58 +223,52 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-6">
-                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-sm-6">
-                    @Html.CheckBoxFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
 
 
 
+                @Html.DropDownListFor(model => model.CourseId, Model.Courses.Select(item => new SelectListItem
+           {
+               Value = item.CourseId.ToString(),
+               Text = item.CourseName.ToString()
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-
-
-
-                    @Html.DropDownListFor(model => model.CourseId, Model.Courses.Select(item => new SelectListItem
-               {
-                   Value = item.CourseId.ToString(),
-                   Text = item.CourseName.ToString()
-
-               }))
+           }))
 
 
 
-                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
 
 
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Edit" class="btn btn-success" />
-                </div>
             </div>
         </div>
 
+
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Edit" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
 }
 
+<div>
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ViewStudents","Admin")">
+        <span class="glyphicon glyphicon-list"></span>
+        <span>Back To List</span>
+    </a>
+</div>
 
-        <div>
-            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ViewStudents","Admin")">
-                <span class="glyphicon glyphicon-list"></span>
-                <span>Back To List</span>
-            </a>
-        </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
 

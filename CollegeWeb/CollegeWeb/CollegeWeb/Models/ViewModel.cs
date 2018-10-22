@@ -69,6 +69,8 @@ namespace CollegeWeb.Models
         public string CityName { get; set; }
         public string StateName { get; set; }
         public string CountryName { get; set; }
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
 
 
         public List<RoleModel> Roles { get; set; }

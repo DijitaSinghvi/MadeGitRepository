@@ -1,18 +1,11 @@
 ﻿@model IEnumerable<CollegeWeb.Models.ViewModel>
 @{
-    ViewBag.Title = "ViewTeachers";
+    ViewBag.Title = "ViewUserAndRoles";
 }
 
-<h2>ViewTeachers</h2>
-<a type="button" class="btn btn-primary btn" href="@Url.Action("AddTeacher","Admin")"
-
-    <span>Add New Teacher</span>
-</a>
-
-
+<h2>View User And Roles</h2>
 <table class="table">
     <tr>
-      
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -20,6 +13,10 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+
+        @*<th>
             @Html.DisplayNameFor(model => model.Gender)
         </th>
         <th>
@@ -48,7 +45,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DateModified)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
 
         <th>
             @Html.DisplayNameFor(model => model.AddressLine)
@@ -64,7 +63,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Pincode)
-        </th>
+        </th>*@
 
         <th></th>
     </tr>
@@ -72,7 +71,6 @@
     @foreach (var item in Model)
     {
     <tr>
-        @Html.HiddenFor(modelItem => item.UserId)
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>
@@ -80,6 +78,9 @@
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.RoleName)
+        </td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Gender)
         </td>
         <td>
@@ -106,7 +107,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.DateModified)
         </td>
-
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.AddressLine)
         </td>
@@ -121,11 +124,11 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Pincode)
-        </td>
+        </td>*@
         <td>
-            @Html.ActionLink("Edit", "EditTeacher", new { id = item.UserId }) |
+            @Html.ActionLink("Assign Other Role", "AssignRole", new { id = item.UserId }) 
 
-            @Html.ActionLink("Delete", "DeleteTeacher", new { id = item.UserId })
+        
         </td>
     </tr>
     }
