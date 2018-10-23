@@ -40,7 +40,7 @@ namespace CollegeWeb.Controllers
                 }
                 else if(getRole == 4)
                 {
-                    return RedirectToAction("HomePage", "Student");
+                    return RedirectToAction("StudentHomePage", "Student", new { id = temp });
                 }
             }
             else

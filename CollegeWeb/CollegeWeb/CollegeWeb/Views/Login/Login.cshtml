@@ -1,6 +1,6 @@
 ﻿@model CollegeWeb.Models.ViewModel
 @{
-    
+
 
     ViewBag.Title = "Login";
 }
@@ -19,7 +19,7 @@
     <h4>Registration Form</h4>
     <hr />
 
-
+     @Html.HiddenFor(model => model.UserId)
     <div class="form-group">
         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

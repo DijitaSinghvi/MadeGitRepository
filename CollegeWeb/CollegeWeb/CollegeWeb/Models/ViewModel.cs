@@ -78,6 +78,7 @@ namespace CollegeWeb.Models
         public List<CountryModel> Countries { get; set; }
         public List<StateModel> States { get; set; }
         public List<CityModel> Cities { get; set; }
+        public List<SubjectModel> Subjects { get; set; }
         //public
 
     }
@@ -107,5 +108,10 @@ namespace CollegeWeb.Models
         public int CityId { get; set; }
         public string CityName { get; set; }
     }
-    
+    public class SubjectModel
+    {
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
+    }
+
 }
