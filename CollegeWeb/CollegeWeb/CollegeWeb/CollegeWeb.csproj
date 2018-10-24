@@ -239,7 +239,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\SuperAdmin\HomePage.cshtml" />
     <Content Include="Views\Admin\HomePage.cshtml" />
-    <Content Include="Views\Teacher\HomePage.cshtml" />
+    <Content Include="Views\Teacher\TeacherHomePage.cshtml" />
     <Content Include="Views\Admin\ViewStudents.cshtml" />
     <Content Include="Views\Admin\AddStudent.cshtml" />
     <Content Include="Views\Search\GetFilters.cshtml" />
@@ -263,8 +263,10 @@
     <Content Include="Views\Admin\AssignTeacherToSubject.cshtml" />
     <Content Include="Views\Admin\AddCourse.cshtml" />
     <Content Include="Views\Student\StudentHomePage.cshtml" />
-    <Content Include="Views\Student\ViewStudentDetails.cshtml" />
     <Content Include="Views\Student\EditStudentDetails.cshtml" />
+    <Content Include="Views\Student\CourseDetails.cshtml" />
+    <Content Include="Views\Teacher\ViewStudentProfile.cshtml" />
+    <Content Include="Views\Teacher\ShowStudentsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

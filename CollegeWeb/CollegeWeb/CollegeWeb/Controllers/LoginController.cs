@@ -36,7 +36,7 @@ namespace CollegeWeb.Controllers
                 }
                 else if(getRole == 3)
                 {
-                    return RedirectToAction("HomePage", "Teacher");
+                    return RedirectToAction("TeacherHomePage", "Teacher", new { id = temp });
                 }
                 else if(getRole == 4)
                 {

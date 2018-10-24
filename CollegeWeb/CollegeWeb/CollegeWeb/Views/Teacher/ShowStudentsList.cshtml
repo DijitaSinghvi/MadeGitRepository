@@ -1,9 +1,13 @@
 ﻿@model IEnumerable<CollegeWeb.Models.ViewModel>
 @{
-    ViewBag.Title = "ViewSubjectAndTeacher";
+    ViewBag.Title = "ShowStudentsList";
 }
 
-<h2>View Subject And Teacher</h2>
+<h2>View Students List</h2>
+
+
+
+
 <table class="table">
     <tr>
         <th>
@@ -13,13 +17,16 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SubjectName)
         </th>
 
-    </tr>
 
-        
-   
+      
+        <th></th>
+    </tr>
 
     @foreach (var item in Model)
     {
@@ -31,12 +38,14 @@
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.SubjectName)
         </td>
-
-
+      
         <td>
-            @Html.ActionLink("Assign Subject To Teacher", "AssignTeacherToSubject", new { id = item.UserId })
+            @Html.ActionLink("View Student Profile", "ViewStudentProfile", new { id = item.UserId })
 
 
         </td>
@@ -45,12 +54,11 @@
 
 </table>
 <div>
-    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("HomePage","Admin")">
-        <span class="glyphicon glyphicon-list"></span>
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("TeacherHomePage","Teacher")">
+     
         <span>Back To Home Page</span>
     </a>
 </div>
-
 
 
 

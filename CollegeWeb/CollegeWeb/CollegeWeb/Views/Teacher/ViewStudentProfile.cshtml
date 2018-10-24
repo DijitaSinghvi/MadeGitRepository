@@ -1,12 +1,15 @@
-﻿@model CollegeWeb.Models.ViewModel
+﻿
+@model CollegeWeb.Models.ViewModel
 @{
-    ViewBag.Title = "ViewStudentDetails";
+    ViewBag.Title = "ViewStudentProfile";
 }
 
-<h2>ViewStudentDetails</h2>
-@using (Html.BeginForm())
+<h2>ViewStudentProfile</h2>
 
-{
+
+
+
+
 
     @Html.HiddenFor(model => model.UserId)
     @Html.HiddenFor(model => model.AddressId)
@@ -164,13 +167,9 @@
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-md-3">
-
-            <input type="submit" value="Edit" class="btn btn-success" />
-
-        </div>
-        <div class="col-md-9">
-            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("StudentHomePage","Student",new { id = Model.UserId })">
+        
+        <div class="col-md-12">
+            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("TeacherHomePage","Teacher",new { id = Model.UserId })">
                 <span class="glyphicon glyphicon-list"></span>
                 <span>Back To Home Page</span>
             </a>
@@ -184,5 +183,7 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-}
+
+
+
 

@@ -191,4 +191,3 @@ D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csproj.CopyComplete
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.pdb
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csprojAssemblyReference.cache

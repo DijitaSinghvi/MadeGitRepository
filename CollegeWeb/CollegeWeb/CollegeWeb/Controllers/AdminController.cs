@@ -1452,46 +1452,33 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //Raw data sent to address table.
+                
 
-                //UserInRole objUserInRole = new UserInRole();
+               //Updating User table.
 
-                var userRecord = (from user in db.Users
-                                  join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-                                  where user.UserId == objViewModel.UserId
-                                  select user
-                                  ).FirstOrDefault();
-
-                if (userRecord != null)
-                {
-                    userRecord.FirstName = objViewModel.FirstName;
-
-                    var UserRecord = (from User in db.Users
-                                         where User.UserId == objViewModel.UserId
-                                         select User
+                    var userRecord = (from user in db.Users
+                                         where user.UserId == objViewModel.UserId
+                                         select user
                              ).FirstOrDefault();
 
-                    UserRecord.DateCreated = DateTime.Now;
-                    UserRecord.DateModified = DateTime.Now;
-                    UserRecord.UserId = objViewModel.UserId;
-                    UserRecord.FirstName = objViewModel.FirstName;
-                    UserRecord.LastName = objViewModel.LastName;
-                    UserRecord.Gender = objViewModel.Gender;
-                    UserRecord.DateOfBirth = objViewModel.DateOfBirth;
-                    UserRecord.Hobbies = objViewModel.Hobbies;
-                    UserRecord.Email = objViewModel.Email;
-                    UserRecord.IsEmailVerified = objViewModel.IsEmailVerified;
-                    UserRecord.Password = objViewModel.Password;
-                    UserRecord.ConfirmPassword = objViewModel.ConfirmPassword;
-                    UserRecord.IsActive = objViewModel.IsActive;
-                    UserRecord.CourseId = objViewModel.CourseId;
-                  
+                   userRecord.DateCreated = DateTime.Now;
+                   userRecord.DateModified = DateTime.Now;
+                   userRecord.UserId = objViewModel.UserId;
+                   userRecord.FirstName = objViewModel.FirstName;
+                   userRecord.LastName = objViewModel.LastName;
+                   userRecord.Gender = objViewModel.Gender;
+                   userRecord.DateOfBirth = objViewModel.DateOfBirth;
+                   userRecord.Hobbies = objViewModel.Hobbies;
+                   userRecord.Email = objViewModel.Email;
+                   userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
+                   userRecord.Password = objViewModel.Password;
+                   userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
+                   userRecord.IsActive = objViewModel.IsActive;
+                   userRecord.CourseId = objViewModel.CourseId;
+                   
 
-
-
-
-
-                    var addressRecord = (from address in db.Addresses
+                //Update Address table.
+                   var addressRecord = (from address in db.Addresses
                                          where address.AddressId == objViewModel.AddressId
                                          select address
                                  ).FirstOrDefault();
@@ -1502,25 +1489,19 @@ namespace CollegeWeb.Controllers
                     addressRecord.Pincode = objViewModel.Pincode;
                     addressRecord.StateId = objViewModel.StateId;
 
-
-                    UserInRole objUserRole = new UserInRole
-                    {
-                        RoleId = objViewModel.RoleId,
-                        UserId = objViewModel.UserId,
-
-                    };
-
-                    Role role = new Role()
-                    {
-                        RoleId = objViewModel.RoleId,
-                        RoleName = objViewModel.RoleName
-                    };
+                //Update UserInRole Table.
+                var userInRoleRecord = (from userInRole in db.UserInRoles
+                                        where userInRole.UserId == objViewModel.UserId
+                                        select userInRole
+                                      ).FirstOrDefault();
 
 
+                userInRoleRecord.RoleId = objViewModel.RoleId;
+                userInRoleRecord.UserId = objViewModel.UserId;
+
+                 //Save updates in database.        
                     db.SaveChanges();
-
-
-                }
+                
                 return RedirectToAction("ViewUserAndRoles");
             }
 
@@ -1707,85 +1688,66 @@ namespace CollegeWeb.Controllers
             try
             {
 
-                User objUser = new User();
-                UserInRole objUserInRole = new UserInRole();
-                TeacherInSubject objTeacherInSubject = new TeacherInSubject();
+                //Updating User table.
 
-                var userRecord = from user in db.Users
-                                 join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-                                 join teacherInSubject in db.TeacherInSubjects on user.UserId equals teacherInSubject.UserId
-                                 where objUser.UserId == objViewModel.UserId
-                                 select new
-                                 {
-                                     objUser.UserId,
-                                     objUser.FirstName,
-                                     objUser.LastName,
-                                     objUser.Gender,
-                                     objUser.DateOfBirth,
-                                     objUser.Hobbies,
-                                     objUser.Email,
-                                     objUser.IsEmailVerified,
-                                     objUser.Password,
-                                     objUser.IsActive,
-                                     objUser.DateCreated,
-                                     objUser.DateModified,
-                                     objUser.Course.CourseName,
-                                     objUser.Address.AddressLine,
-                                     objUser.Address.City.CityName,
-                                     objUser.Address.State.StateName,
-                                     objUser.Address.Country.CountryName,
-                                     objUser.Address.Pincode,
-                                     objUser.AddressId,
-                                     objUser.Address.CityId,
-                                     objUser.Address.StateId,
-                                     objUser.Address.CountryId,
-                                     objUser.CourseId,
-                                     objUser.ConfirmPassword,
-                                     objUserInRole.RoleId,
-                                     objUserInRole.Role.RoleName,
-                                     objTeacherInSubject.SubjectId,
-                                     objTeacherInSubject.Subject.SubjectName
+                var userRecord = (from user in db.Users
+                                  where user.UserId == objViewModel.UserId
+                                  select user
+                         ).FirstOrDefault();
+
+                userRecord.DateCreated = DateTime.Now;
+                userRecord.DateModified = DateTime.Now;
+                userRecord.UserId = objViewModel.UserId;
+                userRecord.FirstName = objViewModel.FirstName;
+                userRecord.LastName = objViewModel.LastName;
+                userRecord.Gender = objViewModel.Gender;
+                userRecord.DateOfBirth = objViewModel.DateOfBirth;
+                userRecord.Hobbies = objViewModel.Hobbies;
+                userRecord.Email = objViewModel.Email;
+                userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
+                userRecord.Password = objViewModel.Password;
+                userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
+                userRecord.IsActive = objViewModel.IsActive;
+                userRecord.CourseId = objViewModel.CourseId;
 
 
+                //Update Address table.
+                var addressRecord = (from address in db.Addresses
+                                     where address.AddressId == objViewModel.AddressId
+                                     select address
+                              ).FirstOrDefault();
 
-                                 };
-                if (userRecord != null)
-                {
+                addressRecord.AddressLine = objViewModel.AddressLine;
+                addressRecord.CityId = objViewModel.CityId;
+                addressRecord.CountryId = objViewModel.CountryId;
+                addressRecord.Pincode = objViewModel.Pincode;
+                addressRecord.StateId = objViewModel.StateId;
 
-                    objUser.DateCreated = DateTime.Now;
-                    objUser.DateModified = DateTime.Now;
-                    objUser.UserId = objViewModel.UserId;
-                    objUser.FirstName = objViewModel.FirstName;
-                    objUser.LastName = objViewModel.LastName;
-                    objUser.Gender = objViewModel.Gender;
-                    objUser.DateOfBirth = objViewModel.DateOfBirth;
-                    objUser.Hobbies = objViewModel.Hobbies;
-                    objUser.Email = objViewModel.Email;
-                    objUser.IsEmailVerified = objViewModel.IsEmailVerified;
-                    objUser.Password = objViewModel.Password;
-                    objUser.ConfirmPassword = objViewModel.ConfirmPassword;
-                    objUser.IsActive = objViewModel.IsActive;
-                    objUser.CourseId = objViewModel.CourseId;
-                    objUser.Address.AddressLine = objViewModel.AddressLine;
-                    objUser.Address.CityId = objViewModel.CityId;
-                    objUser.Address.CountryId = objViewModel.CountryId;
-                    objUser.Address.Pincode = objViewModel.Pincode;
-                    objUser.Address.StateId = objViewModel.StateId;
-                    objUser.IsEmailVerified = objViewModel.IsEmailVerified;
-                    objUser.IsActive = objViewModel.IsActive;
-                    objUser.ConfirmPassword = objViewModel.ConfirmPassword;
-                    objUserInRole.RoleId = objViewModel.RoleId;
-                    objUserInRole.Role.RoleName = objViewModel.RoleName;
-                    objTeacherInSubject.SubjectId = objViewModel.SubjectId;
-                    objTeacherInSubject.Subject.SubjectName = objViewModel.SubjectName;
-
-                    db.SaveChanges();
+                //Update UserInRole Table.
+                var userInRoleRecord = (from userInRole in db.UserInRoles
+                                        where userInRole.UserId == objViewModel.UserId
+                                        select userInRole
+                                      ).FirstOrDefault();
 
 
+                userInRoleRecord.RoleId = objViewModel.RoleId;
+                userInRoleRecord.UserId = objViewModel.UserId;
 
-                }
+                //Update TeacherInSubject Table.
+                var teacherInSubjectRecord = (from teacherInSubject in db.TeacherInSubjects
+                                              where teacherInSubject.UserId == objViewModel.UserId
+                                              select teacherInSubject
+                                    ).FirstOrDefault();
+                teacherInSubjectRecord.SubjectId = objViewModel.SubjectId;
+                teacherInSubjectRecord.UserId = objViewModel.UserId;
+
+
+                //Save updates in database.
+                db.SaveChanges();
                 return RedirectToAction("ViewSubjectAndTeacher");
+
             }
+
 
             catch (Exception er)
             {

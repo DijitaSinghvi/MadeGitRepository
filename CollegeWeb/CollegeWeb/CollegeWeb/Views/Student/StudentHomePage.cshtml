@@ -3,50 +3,65 @@
 @{
     ViewBag.Title = "StudentHomePage";
 }
-
+Model
 
 
 
 <h2>Welcome to HomePage of Student</h2>
 
-@Html.HiddenFor(model => model.UserId)
-@Html.HiddenFor(model => model.AddressId)
-@Html.HiddenFor(model => model.ConfirmPassword)
-@Html.HiddenFor(model => model.Gender)
-@Html.HiddenFor(model => model.DateOfBirth)
-@Html.HiddenFor(model => model.Hobbies)
-@Html.HiddenFor(model => model.Email)
-@Html.HiddenFor(model => model.Password)
-@Html.HiddenFor(model => model.AddressLine)
-@Html.HiddenFor(model => model.CountryId)
-@Html.HiddenFor(model => model.CountryName)
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-@Html.HiddenFor(model => model.StateId)
-@Html.HiddenFor(model => model.StateName)
+    @Html.HiddenFor(model => model.UserId)
+    @*@Html.HiddenFor(model => model.AddressId)
+        @Html.HiddenFor(model => model.ConfirmPassword)
+        @Html.HiddenFor(model => model.Gender)
+        @Html.HiddenFor(model => model.DateOfBirth)
+        @Html.HiddenFor(model => model.Hobbies)
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.Password)
+        @Html.HiddenFor(model => model.AddressLine)
+        @Html.HiddenFor(model => model.CountryId)
+        @Html.HiddenFor(model => model.CountryName)
 
-@Html.HiddenFor(model => model.CityId)
-@Html.HiddenFor(model => model.CityName)
+        @Html.HiddenFor(model => model.StateId)
+        @Html.HiddenFor(model => model.StateName)
 
-@Html.HiddenFor(model => model.Pincode)
-@Html.HiddenFor(model => model.CourseId)
-@Html.HiddenFor(model => model.CourseName)
+        @Html.HiddenFor(model => model.CityId)
+        @Html.HiddenFor(model => model.CityName)
 
-@Html.HiddenFor(model => model.RoleId)
-@Html.HiddenFor(model => model.RoleName)
-@Html.HiddenFor(model => model.FirstName)
-@Html.HiddenFor(model => model.LastName)
-@Html.HiddenFor(model => model.SubjectId)
-@Html.HiddenFor(model => model.SubjectName)
+        @Html.HiddenFor(model => model.Pincode)
+        @Html.HiddenFor(model => model.CourseId)
+        @Html.HiddenFor(model => model.CourseName)
 
-
-
+        @Html.HiddenFor(model => model.RoleId)
+        @Html.HiddenFor(model => model.RoleName)
+        @Html.HiddenFor(model => model.FirstName)
+        @Html.HiddenFor(model => model.LastName)*@
 
 
-<a type="button" class="btn btn-primary btn" href="@Url.Action("ViewStudentDetails","Student")"
+}
+
+
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("EditStudentDetails", "Student", new { id = Model.UserId })"
 
     <span>View Your Profile</span>
-</a>
+    </a>
+</div>
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("CourseDetails", "Student", new { id = Model.UserId })"
 
+    <span>View Your Course Details</span>
+</a>
+</div>
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("GetFilters", "Search")"
+
+    <span>Search user's details</span>
+</a>
+</div>
 
 
 

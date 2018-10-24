@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CollegeWeb.Models.ViewModel>
+@{
+    ViewBag.Title = "CourseDetails";
+}
+
+<h2>CourseDetails</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+
+    </tr>
+    }
+
+</table>
+<div>
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("StudentHomePage","Student")">
+        
+        <span>Back To Home Page</span>
+    </a>
+</div>
+
+
+

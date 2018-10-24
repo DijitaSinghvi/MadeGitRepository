@@ -23,7 +23,7 @@ namespace CollegeWeb.Controllers
                 var studentDetails = (from
                                   user in db.Users
                                       join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-                                      join teacherInSubject in db.TeacherInSubjects on user.UserId equals teacherInSubject.UserId
+
                                       where user.UserId == id
 
                                       select new ViewModel
@@ -36,8 +36,7 @@ namespace CollegeWeb.Controllers
                                           CourseId = user.CourseId,
                                           RoleId = userInRole.RoleId,
                                           RoleName = userInRole.Role.RoleName,
-                                          SubjectId = teacherInSubject.SubjectId,
-                                          SubjectName = teacherInSubject.Subject.SubjectName,
+
 
                                           FirstName = user.FirstName,
                                           LastName = user.LastName,
@@ -72,7 +71,7 @@ namespace CollegeWeb.Controllers
         /// Student view his profile.
         /// </summary>
         /// <returns></returns>
-        public ActionResult ViewStudentDetails(ViewModel objViewModel)
+        public ActionResult EditStudentDetails(int? id)
         {
             try
             {
@@ -125,8 +124,8 @@ namespace CollegeWeb.Controllers
                 var studentDetails = (from
                                  user in db.Users
                                       join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-                                      join teacherInSubject in db.TeacherInSubjects on user.UserId equals teacherInSubject.UserId
-                                      where user.UserId == objViewModel.UserId
+                                     
+                                      where user.UserId ==id
 
                                       select new ViewModel
                                       {
@@ -139,8 +138,7 @@ namespace CollegeWeb.Controllers
                                           CourseId = user.CourseId,
                                           RoleId = userInRole.RoleId,
                                           RoleName = userInRole.Role.RoleName,
-                                          SubjectId = teacherInSubject.SubjectId,
-                                          SubjectName = teacherInSubject.Subject.SubjectName,
+                                          
 
                                           FirstName = user.FirstName,
                                           LastName = user.LastName,
@@ -150,6 +148,7 @@ namespace CollegeWeb.Controllers
                                           Email = user.Email,
                                           IsEmailVerified = user.IsEmailVerified,
                                           Password = user.Password,
+                                          ConfirmPassword = user.ConfirmPassword,
                                           IsActive = user.IsActive,
                                           DateCreated = user.DateCreated,
                                           DateModified = user.DateModified,
@@ -178,117 +177,113 @@ namespace CollegeWeb.Controllers
                 return View();
             }
         }
-        public ActionResult EditStudentDetails(int? id)
-        {
-            try
-            {
-                //ViewModel model = new ViewModel();
-                //Query to get the course dropdown from database.
-                var courseList = db.Courses.Select(x => new CourseModel
-                {
-                    CourseName = x.CourseName,
-                    CourseId = x.CourseId
-                }).ToList();
+        //public ActionResult EditStudentDetails(int? id)
+        //{
+        //    try
+        //    {
+        //        var courseList = db.Courses.Select(x => new CourseModel
+        //        {
+        //            CourseName = x.CourseName,
+        //            CourseId = x.CourseId
+        //        }).ToList();
 
-                //Query to get the role dropdown from database.
-                var roleList = db.Roles.Select(x => new RoleModel
-                {
-                    RoleName = x.RoleName,
-                    RoleId = x.RoleId
-                }).ToList();
+        //        //Query to get the role dropdown from database.
+        //        var roleList = db.Roles.Select(x => new RoleModel
+        //        {
+        //            RoleName = x.RoleName,
+        //            RoleId = x.RoleId
+        //        }).ToList();
 
-                //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
-                // model.Roles = roleList;
-                //model.Courses = courseList;
+        //        //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
+        //        // model.Roles = roleList;
+        //        //model.Courses = courseList;
 
-                //To get country dropdown from database.
-                var countryList = db.Countries.Select(x => new CountryModel
-                {
-                    CountryName = x.CountryName,
-                    CountryId = x.CountryId
-                }).ToList();
+        //        //To get country dropdown from database.
+        //        var countryList = db.Countries.Select(x => new CountryModel
+        //        {
+        //            CountryName = x.CountryName,
+        //            CountryId = x.CountryId
+        //        }).ToList();
 
-                //Sending countrie's data to ViewModel's property, Countries.
-                //model.Countries = countryList;
+        //        //Sending countrie's data to ViewModel's property, Countries.
+        //        //model.Countries = countryList;
 
-                //To get state dropdown from database.
-                var stateList = db.States.Select(x => new StateModel
-                {
-                    StateId = x.StateId,
-                    StateName = x.StateName
-                }
-                ).ToList();
+        //        //To get state dropdown from database.
+        //        var stateList = db.States.Select(x => new StateModel
+        //        {
+        //            StateId = x.StateId,
+        //            StateName = x.StateName
+        //        }
+        //        ).ToList();
 
-                //Send state's data to ViewModel's property,States.
-                //model.States = stateList;
+        //        //Send state's data to ViewModel's property,States.
+        //        //model.States = stateList;
 
 
-                //To get city dropdown from database.
-                var cityList = db.Cities.Select(x => new CityModel
-                {
-                    CityName = x.CityName,
-                    CityId = x.CityId
-                }).ToList();
+        //        //To get city dropdown from database.
+        //        var cityList = db.Cities.Select(x => new CityModel
+        //        {
+        //            CityName = x.CityName,
+        //            CityId = x.CityId
+        //        }).ToList();
 
-                //Send cities data to ViewModel's property,Cities.
-                //model.Cities = cityList;
+        //        var studentDetails = (from
+        //                         user in db.Users
+        //                              join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
 
+        //                              where user.UserId == id
 
+        //                              select new ViewModel
+        //                              {
 
-                var model = (from user in db.Users
-                             join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-                             join teacherInSubject in db.TeacherInSubjects on user.UserId equals teacherInSubject.UserId
-                             where user.UserId == id
-
-                             select new ViewModel
-                             {
-                                 UserId = user.UserId,
-                                 CountryId = user.Address.CountryId,
-                                 AddressId = user.AddressId,
-                                 StateId = user.Address.StateId,
-                                 CityId = user.Address.CityId,
-                                 CourseId = user.CourseId,
-                                 RoleId = userInRole.RoleId,
-                                 RoleName = userInRole.Role.RoleName,
-                                 SubjectId = teacherInSubject.SubjectId,
-                                 SubjectName = teacherInSubject.Subject.SubjectName,
-
-                                 FirstName = user.FirstName,
-                                 LastName = user.LastName,
-                                 Gender = user.Gender,
-                                 DateOfBirth = user.DateOfBirth,
-                                 Hobbies = user.Hobbies,
-                                 Email = user.Email,
-                                 IsEmailVerified = user.IsEmailVerified,
-                                 Password = user.Password,
-                                 IsActive = user.IsActive,
-                                 DateCreated = user.DateCreated,
-                                 DateModified = user.DateModified,
-                                 CourseName = user.Course.CourseName,
-                                 AddressLine = user.Address.AddressLine,
-                                 CityName = user.Address.City.CityName,
-                                 StateName = user.Address.State.StateName,
-                                 CountryName = user.Address.Country.CountryName,
-                                 Pincode = user.Address.Pincode
-
-                             }).FirstOrDefault();
-
-                model.Countries = countryList;
-                model.States = stateList;
-                model.Cities = cityList;
-                model.Courses = courseList;
-                model.Roles = roleList;
-
-                return View(model);
-            }
-            catch (Exception er)
-            {
-                Console.Write(er.Message);
-                return View();
-            }
+        //                                  UserId = user.UserId,
+        //                                  CountryId = user.Address.CountryId,
+        //                                  AddressId = user.AddressId,
+        //                                  StateId = user.Address.StateId,
+        //                                  CityId = user.Address.CityId,
+        //                                  CourseId = user.CourseId,
+        //                                  RoleId = userInRole.RoleId,
+        //                                  RoleName = userInRole.Role.RoleName,
 
 
-        }
+        //                                  FirstName = user.FirstName,
+        //                                  LastName = user.LastName,
+        //                                  Gender = user.Gender,
+        //                                  DateOfBirth = user.DateOfBirth,
+        //                                  Hobbies = user.Hobbies,
+        //                                  Email = user.Email,
+        //                                  IsEmailVerified = user.IsEmailVerified,
+        //                                  Password = user.Password,
+        //                                  IsActive = user.IsActive,
+        //                                  DateCreated = user.DateCreated,
+        //                                  DateModified = user.DateModified,
+        //                                  CourseName = user.Course.CourseName,
+        //                                  AddressLine = user.Address.AddressLine,
+        //                                  CityName = user.Address.City.CityName,
+        //                                  StateName = user.Address.State.StateName,
+        //                                  CountryName = user.Address.Country.CountryName,
+        //                                  Pincode = user.Address.Pincode
+
+        //                              }).FirstOrDefault();
+
+        //        studentDetails.Countries = countryList;
+        //        studentDetails.States = stateList;
+        //        studentDetails.Cities = cityList;
+        //        studentDetails.Courses = courseList;
+        //        studentDetails.Roles = roleList;
+
+        //        return View(studentDetails);
+
+
+        //    }
+        //    catch (Exception er)
+        //    {
+        //        Console.Write(er.Message);
+        //        return View();
+        //    }
+
+
+        //}
 
         /// <summary>
         /// Save updates in database.
@@ -298,12 +293,13 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //Raw data sent to address table.
+                //Update User table.
 
                 var userRecord = (from user in db.Users
                                   where user.UserId == objViewModel.UserId
                                   select user).FirstOrDefault();
                 if (userRecord != null)
+
                 {
                     userRecord.DateCreated = DateTime.Now;
                     userRecord.DateModified = DateTime.Now;
@@ -319,21 +315,41 @@ namespace CollegeWeb.Controllers
                     userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
                     userRecord.IsActive = objViewModel.IsActive;
                     userRecord.CourseId = objViewModel.CourseId;
-                    userRecord.Address.AddressLine = objViewModel.AddressLine;
-                    userRecord.Address.CityId = objViewModel.CityId;
-                    userRecord.Address.CountryId = objViewModel.CountryId;
-                    userRecord.Address.Pincode = objViewModel.Pincode;
-                    userRecord.Address.StateId = objViewModel.StateId;
-
-
-                  
-
-
-                    db.SaveChanges();
-
-
                 }
-                return RedirectToAction("ViewStudentDetails");
+
+                //Update Address table.
+                var addressRecord = (from address in db.Addresses
+                                     where address.AddressId == objViewModel.AddressId
+                                     select address
+                              ).FirstOrDefault();
+                if (addressRecord != null)
+                {
+
+                    addressRecord.AddressLine = objViewModel.AddressLine;
+                    addressRecord.CityId = objViewModel.CityId;
+                    addressRecord.CountryId = objViewModel.CountryId;
+                    addressRecord.Pincode = objViewModel.Pincode;
+                    addressRecord.StateId = objViewModel.StateId;
+                }
+
+                //Update UserInRole Table.
+                var userInRoleRecord = (from userInRole in db.UserInRoles
+                                        where userInRole.UserId == objViewModel.UserId
+                                        select userInRole
+                                      ).FirstOrDefault();
+
+                if (userInRoleRecord != null)
+                {
+                    userInRoleRecord.RoleId = objViewModel.RoleId;
+                    userInRoleRecord.UserId = objViewModel.UserId;
+                }
+
+                //Save to database.
+                db.SaveChanges();
+                
+
+
+                return RedirectToAction("StudentHomePage", new { id = objViewModel.UserId });
             }
 
             catch (Exception er)
@@ -343,11 +359,40 @@ namespace CollegeWeb.Controllers
             }
 
         }
+        public ActionResult CourseDetails(int? id)
+        {
+            try
+            {
+//                select* from
+//                     [dbo].[user] join subjectInCourse on[dbo].[user].CourseId = subjectInCourse.CourseId
+//                  join subject on subjectInCourse.SubjectId = subject.SubjectId
+//                  join teacherInSubject on subjectInCourse.SubjectId = teacherInSubject.SubjectId
+//                  where[dbo].[user].UserId=38 
+                var courseDetails =
+                    (from
+                     user in db.Users
+                     join subjectInCourse in db.SubjectInCourses on user.CourseId equals subjectInCourse.CourseId
+                     join subject in db.Subjects on subjectInCourse.SubjectId equals subject.SubjectId
+                     join teacherInSubject in db.TeacherInSubjects on subjectInCourse.SubjectId equals teacherInSubject.SubjectId
+                     where user.UserId==id 
+                     select new ViewModel
+                     {
+                         UserId = user.UserId,
+                         SubjectId = teacherInSubject.SubjectId,
+                         SubjectName = subject.SubjectName,
+                         FirstName = teacherInSubject.User.FirstName,
+                         LastName = teacherInSubject.User.LastName,
+                         CourseId = user.CourseId,
+                         CourseName = user.Course.CourseName
 
-
-
-
-
-
+                     }).ToList();
+                return View(courseDetails);
+            }
+            catch (Exception er)
+            {
+                Console.Write(er.Message);
+                return View();
+            }
+        }
     }
 }
