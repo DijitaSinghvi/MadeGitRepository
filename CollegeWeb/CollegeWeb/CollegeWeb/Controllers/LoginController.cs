@@ -11,13 +11,22 @@ namespace CollegeWeb.Controllers
     {
         CollegeContext db=new CollegeContext();
         // GET: Login
-        //generate login form.
+     /// <summary>
+     /// Generate login form.
+     /// </summary>
+     /// <returns></returns>
         public ActionResult Login()
         {
             return View();
         }
+
+        /// <summary>
+        /// Post login form.
+        /// </summary>
+        /// <param name="objViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
-        //to post login form values.
+        
         public ActionResult Login(ViewModel objViewModel)
         {
             //to authenticate email and password from database.
@@ -27,12 +36,12 @@ namespace CollegeWeb.Controllers
                 var getRole = db.UserInRoles.Where(x => x.UserId == temp).Select(x => x.RoleId).FirstOrDefault();
                 if (getRole == 1)
                 {
-                    return RedirectToAction("HomePage", "SuperAdmin");
+                    return RedirectToAction("HomePage", "SuperAdmin", new { id = temp });
                 }
 
                 else if(getRole == 2)
                 {
-                    return RedirectToAction("HomePage", "Admin");
+                    return RedirectToAction("HomePage", "Admin", new { id = temp });
                 }
                 else if(getRole == 3)
                 {

@@ -125,16 +125,12 @@
         <td>
             @Html.ActionLink("Edit", "EditTeacher", new { id = item.UserId }) |
 
-            @Html.ActionLink("Delete", "DeleteTeacher", new { id = item.UserId })
+            @Html.ActionLink("Delete", "DeleteTeacher", new { id = item.UserId }) |
+            @Html.ActionLink("Back To HomePage", "HomePage", new { id = item.UserId })
         </td>
     </tr>
     }
 
 </table>
-<div>
-    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("HomePage","Admin")">
-        <span class="glyphicon glyphicon-list"></span>
-        <span>Back To Home Page</span>
-    </a>
-</div>
+
 

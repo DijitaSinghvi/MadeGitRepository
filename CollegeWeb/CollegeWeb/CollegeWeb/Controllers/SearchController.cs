@@ -10,6 +10,7 @@ namespace CollegeWeb.Controllers
     public class SearchController : Controller
     {
         CollegeContext db = new CollegeContext();
+
         /// <summary>
         /// Get the filters section on the search page.
         /// </summary>
@@ -71,7 +72,7 @@ namespace CollegeWeb.Controllers
                                   where user.Hobbies == model.Hobbies || string.IsNullOrEmpty(model.Hobbies)
                                   where user.Email == model.Email || string.IsNullOrEmpty(model.Email)
                                   where user.IsEmailVerified == model.IsEmailVerified || string.IsNullOrEmpty(model.IsEmailVerified)
-                                  where user.IsActive == model.IsActive
+                                  where user.IsActive == model.IsActive || model.IsActive==false
                                   where user.Course.CourseName == model.CourseName || string.IsNullOrEmpty(model.CourseName)
                                   where user.Address.AddressLine == model.AddressLine || string.IsNullOrEmpty(model.AddressLine)
                                   where user.Address.Country.CountryName == model.CountryName || string.IsNullOrEmpty(model.CountryName)
@@ -101,6 +102,7 @@ namespace CollegeWeb.Controllers
                                       DateModified = user.DateModified,
                                       RoleName = userInRole.Role.RoleName
                                   }).ToList();
+
 
                 model.ShowLists = searchList;
 

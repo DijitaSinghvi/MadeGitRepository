@@ -4,29 +4,47 @@
 }
 
 <h2>Welcome to HomePage of Admin</h2>
-<a type="button" class="btn btn-primary btn" href="@Url.Action("ViewStudents","Admin")"
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("ViewStudents","Admin")"
 
     <span>Manage students list</span>
 </a>
-<a type="button" class="btn btn-primary btn" href="@Url.Action(" ViewCourses","Admin")"
+    </div>
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("ViewTeachers","Admin")"
+
+    <span>Manage teachers list</span>
+</a>
+</div>
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("ViewCourses","Admin")"
 
     <span>Manage courses</span>
 </a>
-<a type="button" class="btn btn-primary btn" href="@Url.Action(" ViewSubjects","Admin")"
+    </div>
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("ViewSubjects","Admin")"
 
     <span>Manage subjects</span>
 </a>
+    </div>
+<div class=" form-group row col=md-12">
 
-<a type="button" class="btn btn-primary btn" href="@Url.Action("GetFilters","Search")"
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("GetFilters","Search")"
 
     <span>Search user's details</span>
 </a>
-<a type="button" class="btn btn-primary btn" href="@Url.Action("ViewUserAndRoles","Admin")"
+    </div>
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("ViewUserAndRoles","Admin")"
 
     <span>Assign other roles to users</span>
 </a>
-<a type="button" class="btn btn-primary btn" href="@Url.Action("ViewSubjectAndTeacher","Admin")"
+    </div>
+<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("ViewSubjectAndTeacher","Admin")"
 
     <span>Assign other subjects to teachers</span>
 </a>
+    </div>
 

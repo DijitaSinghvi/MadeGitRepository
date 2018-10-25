@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "DeleteTeacher";
+}
+
+<h2>DeleteTeacher</h2>
+<h3>Are you sure you want to delete ?</h3>
+<div>
+
+
+
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "ViewTeachers")
+        </div>
+    }
+</div>
+
+
+
+
+

@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<CollegeWeb.Models.ViewModel>
+@{
+    ViewBag.Title = "ViewSubjectAndTeacher";
+}
+
+<h2>View Subject And Teacher</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </th>
+
+    </tr>
+
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Assign Subject To Teacher", "AssignTeacherToSubject", new { id = item.UserId }) |
+                @Html.ActionLink("Back To HomePage", "HomePage", new { id = item.UserId })
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+

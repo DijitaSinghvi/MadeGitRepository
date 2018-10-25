@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CollegeWeb.Models.ViewModel>
+﻿@model IEnumerable<CollegeWeb.Models.ViewModel> 
 @{
     ViewBag.Title = "ShowStudentsList";
 }
@@ -19,46 +19,47 @@
         <th>
             @Html.DisplayNameFor(model => model.CourseName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.SubjectName)
-        </th>
+        </th>*@
 
 
-      
+
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubjectName)
-        </td>
-      
-        <td>
-            @Html.ActionLink("View Student Profile", "ViewStudentProfile", new { id = item.UserId })
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>*@
+
+            <td>
+                @Html.ActionLink("View Student Profile", "ViewStudentProfile", new { id = item.UserId })
 
 
-        </td>
-    </tr>
+
+            </td>
+        </tr>
     }
 
 </table>
-<div>
-    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("TeacherHomePage","Teacher")">
-     
-        <span>Back To Home Page</span>
-    </a>
-</div>
+@*<div class=" form-group row col=md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("TeacherHomePage","Teacher",new { id =  })"
+
+    <span>Search user's details</span>
+</a>
+</div>*@
 
 
 

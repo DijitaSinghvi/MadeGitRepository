@@ -1,24 +1,12 @@
-﻿
+﻿@model CollegeWeb.Models.ViewModel
 @{
-    ViewBag.Title = "AssignRole";
+    ViewBag.Title = "AssignTeacherToSubject";
 }
 
-<h2>Assign Other Role</h2>
-@model CollegeWeb.Models.ViewModel
-
-
-
-
-
-
+<h2>AssignTeacherToSubject</h2>
 @using (Html.BeginForm())
+
 {
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-
-    <h4>Assign Role</h4>
-    <hr />
 
     @Html.HiddenFor(model => model.UserId)
     @Html.HiddenFor(model => model.AddressId)
@@ -34,9 +22,8 @@
     @Html.HiddenFor(model => model.CityId)
     @Html.HiddenFor(model => model.Pincode)
     @Html.HiddenFor(model => model.CourseId)
-    @Html.HiddenFor(model => model.IsEmailVerified)
+    @Html.HiddenFor(model => model.RoleId)
     @Html.HiddenFor(model => model.RoleName)
-
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -55,44 +42,37 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.SubjectId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
-            @Html.DropDownListFor(model => model.RoleId,Model.Roles.Select(item => new SelectListItem
+            @Html.DropDownListFor(model => model.SubjectId,Model.Subjects.Select(item => new SelectListItem
        {
-           Value = item.RoleId.ToString(),
-           Text = item.RoleName.ToString()
+           Value = item.SubjectId.ToString(),
+           Text = item.SubjectName.ToString()
 
        }))
-            @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
-  
-
-
-
-
-
-
-    <div class="form-group">
+    <div class="form-group col-md-12">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Assign" class="btn btn-success" />
         </div>
     </div>
-</div>
-}
 
-<div>
-    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ViewUserAndRoles","Admin")">
-        <span class="glyphicon glyphicon-list"></span>
-        <span>Back To List</span>
-    </a>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+    <div class="col-md-12">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ViewSubjectAndTeacher","SuperAdmin")">
+            <span class="glyphicon glyphicon-list"></span>
+            <span>Back To List</span>
+        </a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
 }
 
 

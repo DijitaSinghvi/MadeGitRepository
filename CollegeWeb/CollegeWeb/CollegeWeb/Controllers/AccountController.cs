@@ -160,7 +160,7 @@ namespace CollegeWeb.Controllers
                     ViewBag.ResultMessage = "Error occurred in the registration process.Please register again.";
                 }
             }
-            return RedirectToAction( "Index","Account");
+            return RedirectToAction( "Login","Login");
         }
 
         /// <summary>

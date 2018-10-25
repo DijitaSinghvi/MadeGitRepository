@@ -1,4 +1,5 @@
-﻿@model CollegeWeb.Models.ViewModel
+﻿
+@model CollegeWeb.Models.ViewModel
 @{
     ViewBag.Title = "EditStudent";
 }
@@ -20,8 +21,21 @@
     @Html.HiddenFor(model => model.UserId)
     @Html.HiddenFor(model => model.AddressId)
     @Html.HiddenFor(model => model.ConfirmPassword)
+    @Html.HiddenFor(model => model.CityName)
+    @Html.HiddenFor(model => model.CountryName)
+    @Html.HiddenFor(model => model.StateName)
+    @Html.HiddenFor(model => model.CourseName)
+    @Html.HiddenFor(model => model.DateCreated)
+    @Html.HiddenFor(model => model.DateModified)
+    @Html.HiddenFor(model => model.IsEmailVerified)
+    @Html.HiddenFor(model => model.Password)
+    @Html.HiddenFor(model => model.RoleId)
+    @Html.HiddenFor(model => model.RoleName)
 
 
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -93,26 +107,6 @@
         </div>
     </div>
 
-
-
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-
-
-
-
-
     @*get country dropdown*@
     <div class="form-group row">
         <div class="col-md-2">
@@ -124,7 +118,7 @@
            Value = item.CountryId.ToString(),
            Text = item.CountryName.ToString()
 
-       }))
+       })/*, new { @class = "control-label col-md-2", @Id = "ddlCountry" }*/)
             @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
 
 
@@ -142,7 +136,7 @@
            Value = item.StateId.ToString(),
            Text = item.StateName.ToString()
 
-       }))
+       })/*, new { @class = "control-label col-md-2", @id = "ddlStateData" }*/)
             @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
 
 
@@ -159,12 +153,13 @@
            Value = item.CityId.ToString(),
            Text = item.CityName.ToString()
 
-       }))
+       })/*, new { @class = "control-label col-md-2", @id = "ddlCity" }*/)
             @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
 
 
         </div>
     </div>
+
     <div class="form-group row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.Pincode, "Pincode", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -186,12 +181,11 @@
     </div>
 
 
-
     <div class="form-group row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 pull-right">
 
 
 
@@ -210,19 +204,18 @@
         </div>
     </div>
 
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Edit" class="btn btn-success" />
         </div>
     </div>
 
-  
+
 }
 
 
 <div>
-    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ViewStudents","Admin")">
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ViewStudents","SuperAdmin")">
         <span class="glyphicon glyphicon-list"></span>
         <span>Back To List</span>
     </a>
@@ -231,4 +224,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
 

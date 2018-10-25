@@ -1,0 +1,103 @@
+﻿
+
+@{
+    ViewBag.Title = "AssignRole";
+}
+
+<h2>Assign Other Role</h2>
+@model CollegeWeb.Models.ViewModel
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <h4>Assign Role</h4>
+        <hr />
+
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.AddressId)
+        @Html.HiddenFor(model => model.ConfirmPassword)
+        @Html.HiddenFor(model => model.Gender)
+        @Html.HiddenFor(model => model.DateOfBirth)
+        @Html.HiddenFor(model => model.Hobbies)
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.Password)
+        @Html.HiddenFor(model => model.AddressLine)
+        @Html.HiddenFor(model => model.CountryId)
+        @Html.HiddenFor(model => model.StateId)
+        @Html.HiddenFor(model => model.CityId)
+        @Html.HiddenFor(model => model.Pincode)
+        @Html.HiddenFor(model => model.CourseId)
+        @Html.HiddenFor(model => model.IsEmailVerified)
+        @Html.HiddenFor(model => model.RoleName)
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model.RoleId,Model.Roles.Select(item => new SelectListItem
+           {
+               Value = item.RoleId.ToString(),
+               Text = item.RoleName.ToString()
+
+           }))
+                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Assign" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ViewUserAndRoles","SuperAdmin")">
+        <span class="glyphicon glyphicon-list"></span>
+        <span>Back To List</span>
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+

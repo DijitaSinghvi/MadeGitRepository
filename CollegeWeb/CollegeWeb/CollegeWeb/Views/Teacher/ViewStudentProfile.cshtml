@@ -39,7 +39,7 @@
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -49,7 +49,7 @@
             @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -70,7 +70,7 @@
             @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -80,7 +80,7 @@
             @Html.LabelFor(model => model.Hobbies, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-left right">
-            @Html.EditorFor(model => model.Hobbies, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.Hobbies, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Hobbies, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -90,7 +90,7 @@
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -100,7 +100,7 @@
             @Html.LabelFor(model => model.AddressLine, "Address", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.TextAreaFor(model => model.AddressLine, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.AddressLine, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.AddressLine, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -111,7 +111,7 @@
             @Html.LabelFor(model => model.CountryName, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -122,7 +122,7 @@
             @Html.LabelFor(model => model.StateName, "State", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -132,7 +132,7 @@
             @Html.LabelFor(model => model.CityName, "City", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -142,7 +142,7 @@
             @Html.LabelFor(model => model.Pincode, "Pincode", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -162,19 +162,11 @@
             @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group row">
-        
-        <div class="col-md-12">
-            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("TeacherHomePage","Teacher",new { id = Model.UserId })">
-                <span class="glyphicon glyphicon-list"></span>
-                <span>Back To Home Page</span>
-            </a>
-        </div>
-    </div>
+    
 
 
 

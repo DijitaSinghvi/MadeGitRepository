@@ -156,7 +156,6 @@
     <Compile Include="CollegeContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -267,6 +266,26 @@
     <Content Include="Views\Student\CourseDetails.cshtml" />
     <Content Include="Views\Teacher\ViewStudentProfile.cshtml" />
     <Content Include="Views\Teacher\ShowStudentsList.cshtml" />
+    <Content Include="Views\SuperAdmin\ViewStudents.cshtml" />
+    <Content Include="Views\SuperAdmin\AddStudent.cshtml" />
+    <Content Include="Views\SuperAdmin\EditStudent.cshtml" />
+    <Content Include="Views\SuperAdmin\DeleteStudent.cshtml" />
+    <Content Include="Views\SuperAdmin\ViewTeachers.cshtml" />
+    <Content Include="Views\SuperAdmin\AddTeacher.cshtml" />
+    <Content Include="Views\SuperAdmin\EditTeacher.cshtml" />
+    <Content Include="Views\SuperAdmin\DeleteTeacher.cshtml" />
+    <Content Include="Views\SuperAdmin\ViewSubjects.cshtml" />
+    <Content Include="Views\SuperAdmin\AddSubject.cshtml" />
+    <Content Include="Views\SuperAdmin\EditSubject.cshtml" />
+    <Content Include="Views\SuperAdmin\DeleteSubject.cshtml" />
+    <Content Include="Views\SuperAdmin\ViewCourses.cshtml" />
+    <Content Include="Views\SuperAdmin\AddCourse.cshtml" />
+    <Content Include="Views\SuperAdmin\EditCourse.cshtml" />
+    <Content Include="Views\SuperAdmin\DeleteCourse.cshtml" />
+    <Content Include="Views\SuperAdmin\ViewUserAndRoles.cshtml" />
+    <Content Include="Views\SuperAdmin\AssignRole.cshtml" />
+    <Content Include="Views\SuperAdmin\ViewSubjectAndTeacher.cshtml" />
+    <Content Include="Views\SuperAdmin\AssignTeacherToSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,7 +17,7 @@ namespace CollegeWeb.Controllers
         /// Showing homepage to admin.
         /// </summary>
         /// <returns></returns>
-        public ActionResult HomePage()
+        public ActionResult HomePage(int? id)
         {
             return View();
         }
@@ -524,7 +524,7 @@ namespace CollegeWeb.Controllers
             return View(TeacherList);
         }
         /// <summary>
-        /// Add new student record in website.
+        /// Add new teacher record in website.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -1101,7 +1101,7 @@ namespace CollegeWeb.Controllers
 
         }
         /// <summary>
-        /// View list of Subjects.
+        /// View list of Courses.
         /// </summary>
         /// <returns></returns>
         public ActionResult ViewCourses()
@@ -1170,7 +1170,7 @@ namespace CollegeWeb.Controllers
 
         }
         /// <summary>
-        ///   To edit subject record, get names of the subject from database. 
+        ///   To edit course record, get names of the subject from database. 
         /// </summary>
         /// <returns></returns>
         /// 
@@ -1235,7 +1235,7 @@ namespace CollegeWeb.Controllers
 
         }
         /// <summary>
-        /// Delete subject record.
+        /// Delete course record.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1261,6 +1261,11 @@ namespace CollegeWeb.Controllers
             }
             return View(model);
         }
+        /// <summary>
+        /// To delete record.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteCourse(int id)
@@ -1348,15 +1353,12 @@ namespace CollegeWeb.Controllers
                 }).ToList();
 
                 //Query to get the role dropdown from database.
-                var roleList = db.Roles.Select(x => new RoleModel
+                var roleList = db.Roles.Where(x =>x.RoleId==3 || x.RoleId==4).Select(x=> new RoleModel
                 {
                     RoleName = x.RoleName,
                     RoleId = x.RoleId
                 }).ToList();
 
-                //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
-                // model.Roles = roleList;
-                //model.Courses = courseList;
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -1365,8 +1367,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-                //Sending countrie's data to ViewModel's property, Countries.
-                //model.Countries = countryList;
+              
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -1376,8 +1377,7 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-                //Send state's data to ViewModel's property,States.
-                //model.States = stateList;
+               
 
 
                 //To get city dropdown from database.
@@ -1387,8 +1387,7 @@ namespace CollegeWeb.Controllers
                     CityId = x.CityId
                 }).ToList();
 
-                //Send cities data to ViewModel's property,Cities.
-                //model.Cities = cityList;
+              
 
 
                 var model = (from user in db.Users
@@ -1584,10 +1583,7 @@ namespace CollegeWeb.Controllers
                     RoleId = x.RoleId
                 }).ToList();
 
-                //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
-                // model.Roles = roleList;
-                //model.Courses = courseList;
-
+             
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
                 {
@@ -1595,8 +1591,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-                //Sending countrie's data to ViewModel's property, Countries.
-                //model.Countries = countryList;
+                
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -1606,8 +1601,7 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-                //Send state's data to ViewModel's property,States.
-                //model.States = stateList;
+              
 
 
                 //To get city dropdown from database.
@@ -1617,9 +1611,7 @@ namespace CollegeWeb.Controllers
                     CityId = x.CityId
                 }).ToList();
 
-                //Send cities data to ViewModel's property,Cities.
-                //model.Cities = cityList;
-
+           
 
                 var model = (from user in db.Users
                              where user.UserId == id
