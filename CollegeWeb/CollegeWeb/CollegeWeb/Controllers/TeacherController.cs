@@ -19,6 +19,7 @@ namespace CollegeWeb.Controllers
         
         public ActionResult TeacherHomePage(int? id)
         {
+
            try{ var teacherDetails = (from
                                   user in db.Users
                                   join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
@@ -69,7 +70,8 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                ViewModel model = new ViewModel();
+                ViewBag.SendId = id;
+                TempData["TeacherId"] = id;
                 var innerQuery =
 
                          (from user in db.Users
@@ -107,6 +109,7 @@ public ActionResult ViewStudentProfile(int? id)
         {
             try
             {
+                ViewBag.Data= TempData["TeacherId"];
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
                     CourseName = x.CourseName,
@@ -205,6 +208,184 @@ public ActionResult ViewStudentProfile(int? id)
                 Console.Write(er.Message);
                 return View();
             }
+        }
+
+        /// <summary>
+        /// Teacher view his profile.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditTeacherDetails(int? id)
+        {
+            try
+            {
+                var courseList = db.Courses.Select(x => new CourseModel
+                {
+                    CourseName = x.CourseName,
+                    CourseId = x.CourseId
+                }).ToList();
+
+                //Query to get the role dropdown from database.
+                var roleList = db.Roles.Select(x => new RoleModel
+                {
+                    RoleName = x.RoleName,
+                    RoleId = x.RoleId
+                }).ToList();
+
+                //To get country dropdown from database.
+                var countryList = db.Countries.Select(x => new CountryModel
+                {
+                    CountryName = x.CountryName,
+                    CountryId = x.CountryId
+                }).ToList();
+
+
+                //To get state dropdown from database.
+                var stateList = db.States.Select(x => new StateModel
+                {
+                    StateId = x.StateId,
+                    StateName = x.StateName
+                }
+                ).ToList();
+
+
+                //To get city dropdown from database.
+                var cityList = db.Cities.Select(x => new CityModel
+                {
+                    CityName = x.CityName,
+                    CityId = x.CityId
+                }).ToList();
+
+                var teacherDetails = (from
+                                 user in db.Users
+                                      join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
+
+                                      where user.UserId == id
+
+                                      select new ViewModel
+                                      {
+
+                                          UserId = user.UserId,
+                                          CountryId = user.Address.CountryId,
+                                          AddressId = user.AddressId,
+                                          StateId = user.Address.StateId,
+                                          CityId = user.Address.CityId,
+                                          CourseId = user.CourseId,
+                                          RoleId = userInRole.RoleId,
+                                          RoleName = userInRole.Role.RoleName,
+
+
+                                          FirstName = user.FirstName,
+                                          LastName = user.LastName,
+                                          Gender = user.Gender,
+                                          DateOfBirth = user.DateOfBirth,
+                                          Hobbies = user.Hobbies,
+                                          Email = user.Email,
+                                          IsEmailVerified = user.IsEmailVerified,
+                                          Password = user.Password,
+                                          ConfirmPassword = user.ConfirmPassword,
+                                          IsActive = user.IsActive,
+                                          DateCreated = user.DateCreated,
+                                          DateModified = user.DateModified,
+                                          CourseName = user.Course.CourseName,
+                                          AddressLine = user.Address.AddressLine,
+                                          CityName = user.Address.City.CityName,
+                                          StateName = user.Address.State.StateName,
+                                          CountryName = user.Address.Country.CountryName,
+                                          Pincode = user.Address.Pincode
+
+                                      }).FirstOrDefault();
+
+                teacherDetails.Countries = countryList;
+                teacherDetails.States = stateList;
+                teacherDetails.Cities = cityList;
+                teacherDetails.Courses = courseList;
+                teacherDetails.Roles = roleList;
+
+                return View(teacherDetails);
+
+
+            }
+            catch (Exception er)
+            {
+                Console.Write(er.Message);
+                return View();
+            }
+        }
+
+
+        /// <summary>
+        /// Save updates in database.
+        /// </summary>
+        [HttpPost]
+        public ActionResult EditTeacherDetails(ViewModel objViewModel)
+        {
+            try
+            {
+                //Update User table.
+
+                var userRecord = (from user in db.Users
+                                  where user.UserId == objViewModel.UserId
+                                  select user).FirstOrDefault();
+                if (userRecord != null)
+
+                {
+                    userRecord.DateCreated = DateTime.Now;
+                    userRecord.DateModified = DateTime.Now;
+                    userRecord.UserId = objViewModel.UserId;
+                    userRecord.FirstName = objViewModel.FirstName;
+                    userRecord.LastName = objViewModel.LastName;
+                    userRecord.Gender = objViewModel.Gender;
+                    userRecord.DateOfBirth = objViewModel.DateOfBirth;
+                    userRecord.Hobbies = objViewModel.Hobbies;
+                    userRecord.Email = objViewModel.Email;
+                    userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
+                    userRecord.Password = objViewModel.Password;
+                    userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
+                    userRecord.IsActive = objViewModel.IsActive;
+                    userRecord.CourseId = objViewModel.CourseId;
+                }
+
+                //Update Address table.
+                var addressRecord = (from address in db.Addresses
+                                     where address.AddressId == objViewModel.AddressId
+                                     select address
+                              ).FirstOrDefault();
+                if (addressRecord != null)
+                {
+
+                    addressRecord.AddressLine = objViewModel.AddressLine;
+                    addressRecord.CityId = objViewModel.CityId;
+                    addressRecord.CountryId = objViewModel.CountryId;
+                    addressRecord.Pincode = objViewModel.Pincode;
+                    addressRecord.StateId = objViewModel.StateId;
+                }
+
+                //Update UserInRole Table.
+                var userInRoleRecord = (from userInRole in db.UserInRoles
+                                        where userInRole.UserId == objViewModel.UserId
+                                        select userInRole
+                                      ).FirstOrDefault();
+
+                if (userInRoleRecord != null)
+                {
+                    userInRoleRecord.RoleId = objViewModel.RoleId;
+                    userInRoleRecord.UserId = objViewModel.UserId;
+                }
+
+                //Save to database.
+                db.SaveChanges();
+
+
+
+                return RedirectToAction("TeacherHomePage", new { id = objViewModel.UserId });
+            }
+
+            catch (Exception er)
+            {
+                Console.Write(er.Message);
+                return View();
+            }
+
         }
     }
 }

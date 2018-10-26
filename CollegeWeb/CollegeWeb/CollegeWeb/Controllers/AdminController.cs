@@ -19,6 +19,7 @@ namespace CollegeWeb.Controllers
         /// <returns></returns>
         public ActionResult HomePage(int? id)
         {
+            Session["AdminId"] = id;
             return View();
         }
 
@@ -28,6 +29,7 @@ namespace CollegeWeb.Controllers
         /// <returns></returns>
         public ActionResult ViewStudents()
         {
+            
             //Get list of students from database.
             var studentList = (from
                                user in db.Users
@@ -258,7 +260,7 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //ViewModel model = new ViewModel();
+              
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
@@ -273,9 +275,7 @@ namespace CollegeWeb.Controllers
                     RoleId = x.RoleId
                 }).ToList();
 
-                //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
-                // model.Roles = roleList;
-                //model.Courses = courseList;
+              
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -284,8 +284,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-                //Sending countrie's data to ViewModel's property, Countries.
-                //model.Countries = countryList;
+           
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -295,9 +294,7 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-                //Send state's data to ViewModel's property,States.
-                //model.States = stateList;
-
+             
 
                 //To get city dropdown from database.
                 var cityList = db.Cities.Select(x => new CityModel
@@ -306,8 +303,7 @@ namespace CollegeWeb.Controllers
                     CityId = x.CityId
                 }).ToList();
 
-                //Send cities data to ViewModel's property,Cities.
-                //model.Cities = cityList;
+          
 
 
 
@@ -492,6 +488,7 @@ namespace CollegeWeb.Controllers
         /// <returns></returns>
         public ActionResult ViewTeachers()
         {
+           
             //Get list of students from database.
             var TeacherList = (from
                                user in db.Users
@@ -680,7 +677,7 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //ViewModel model = new ViewModel();
+              
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
@@ -695,9 +692,7 @@ namespace CollegeWeb.Controllers
                     RoleId = x.RoleId
                 }).ToList();
 
-                //Sending data from roleList and courseList to Roles and Courses properties of ViewModel.  
-                // model.Roles = roleList;
-                //model.Courses = courseList;
+             
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -706,8 +701,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-                //Sending countrie's data to ViewModel's property, Countries.
-                //model.Countries = countryList;
+            
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -717,8 +711,6 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-                //Send state's data to ViewModel's property,States.
-                //model.States = stateList;
 
 
                 //To get city dropdown from database.
@@ -728,9 +720,7 @@ namespace CollegeWeb.Controllers
                     CityId = x.CityId
                 }).ToList();
 
-                //Send cities data to ViewModel's property,Cities.
-                //model.Cities = cityList;
-
+               
 
 
                 var model = (from user in db.Users
@@ -935,8 +925,7 @@ namespace CollegeWeb.Controllers
         [HttpGet]
         public ActionResult AddSubject()
         {
-            //Creating an object of ViewModel.
-
+            
 
             //Return object of ViewModel in the view.
             return View();
@@ -1306,7 +1295,7 @@ namespace CollegeWeb.Controllers
             var studentList = (from
                                user in db.Users
                                join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
-
+                               where userInRole.RoleId==2||userInRole.RoleId==3||userInRole.RoleId==4
                                orderby user.UserId
                                select new ViewModel
                                {
@@ -1344,7 +1333,6 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //ViewModel model = new ViewModel();
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
@@ -1563,7 +1551,7 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //ViewModel model = new ViewModel();
+               
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {

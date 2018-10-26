@@ -286,6 +286,8 @@
     <Content Include="Views\SuperAdmin\AssignRole.cshtml" />
     <Content Include="Views\SuperAdmin\ViewSubjectAndTeacher.cshtml" />
     <Content Include="Views\SuperAdmin\AssignTeacherToSubject.cshtml" />
+    <Content Include="Views\Teacher\EditTeacherDetails.cshtml" />
+    <Content Include="Views\Login\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

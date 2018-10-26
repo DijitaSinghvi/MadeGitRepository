@@ -127,14 +127,20 @@
             <td>
                 @Html.ActionLink("Edit", "EditStudent", new { id = item.UserId }) |
 
-                @Html.ActionLink("Delete", "DeleteStudent", new { id = item.UserId }) |
-                @Html.ActionLink("Back to HomePage", "HomePage", new { id = item.UserId })
+                @Html.ActionLink("Delete", "DeleteStudent", new { id = item.UserId }) 
 
             </td>
         </tr>
     }
 
 </table>
+<div class=" form-group row col-md-12 text-right">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","SuperAdmin",new { id =Session["SuperAdminId"] })"
+
+    <span>Back To HomePage</span>
+</a>
+</div>
+
 
 
 

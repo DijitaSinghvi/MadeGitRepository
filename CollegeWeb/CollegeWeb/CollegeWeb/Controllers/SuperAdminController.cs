@@ -19,6 +19,7 @@ namespace CollegeWeb.Controllers
        /// <returns></returns>
         public ActionResult HomePage(int? id)
         {
+            Session["SuperAdminId"] = id;
             return View();
         }
 
@@ -258,7 +259,6 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //ViewModel model = new ViewModel();
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
@@ -669,7 +669,6 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //ViewModel model = new ViewModel();
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
@@ -1547,7 +1546,6 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-                //ViewModel model = new ViewModel();
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {

@@ -37,8 +37,7 @@
 
 
             <td>
-                @Html.ActionLink("Assign Subject To Teacher", "AssignTeacherToSubject", new { id = item.UserId }) |
-                @Html.ActionLink("Back To HomePage", "HomePage", new { id = item.UserId })
+                @Html.ActionLink("Assign Subject To Teacher", "AssignTeacherToSubject", new { id = item.UserId })
 
 
             </td>
@@ -46,6 +45,13 @@
     }
 
 </table>
+<div class=" form-group row col-md-12 text-right">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","SuperAdmin",new { id =Session["SuperAdminId"] })"
+
+    <span>Back To HomePage</span>
+</a>
+</div>
+
 
 
 

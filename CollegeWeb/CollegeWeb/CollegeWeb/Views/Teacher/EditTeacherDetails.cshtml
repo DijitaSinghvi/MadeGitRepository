@@ -1,9 +1,9 @@
 ﻿@model CollegeWeb.Models.ViewModel
 @{
-    ViewBag.Title = "ViewStudentDetails";
+    ViewBag.Title = "EditTeacherDetails";
 }
 
-<h2>ViewStudentDetails</h2>
+<h2>EditTeacherDetails</h2>
 @using (Html.BeginForm())
 
 {
@@ -162,7 +162,7 @@
 
         </div>
         <div class="col-md-9">
-            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("StudentHomePage","Student",new { id = Model.UserId })">
+            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("TeacherHomePage","Teacher",new { id = Model.UserId })">
                 <span class="glyphicon glyphicon-list"></span>
                 <span>Back To Home Page</span>
             </a>
@@ -177,4 +177,7 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
+
+
 

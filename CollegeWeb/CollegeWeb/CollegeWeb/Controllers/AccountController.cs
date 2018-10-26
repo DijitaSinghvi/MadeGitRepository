@@ -204,6 +204,8 @@ namespace CollegeWeb.Controllers
             }
             return Json(new SelectList(cityList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
+
+      
     }    
 }
 

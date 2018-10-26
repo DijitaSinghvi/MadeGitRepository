@@ -15,9 +15,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CourseName)
         </th>
-        @*<th>
-                @Html.HiddenFor(model => model.CourseId)
-            </th>*@
+
 
     </tr>
 
@@ -34,13 +32,19 @@
             <td>
                 @Html.ActionLink("Edit", "EditCourse", new { id = item.CourseId }) |
 
-                @Html.ActionLink("Delete", "DeleteCourse", new { id = item.CourseId }) |
-                @Html.ActionLink("Back To HomePage", "HomePage", new { id = item.UserId })
+                @Html.ActionLink("Delete", "DeleteCourse", new { id = item.CourseId })
             </td>
         </tr>
     }
 
 </table>
+<div class=" form-group row col-md-12 text-right">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","SuperAdmin",new { id =Session["SuperAdminId"] })"
+
+    <span>Back To HomePage</span>
+</a>
+</div>
+
 
 
 

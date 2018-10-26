@@ -255,7 +255,7 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-
+                ViewBag.SendId = id;
                 var courseDetails =
                     (from
                      user in db.Users
@@ -274,6 +274,7 @@ namespace CollegeWeb.Controllers
                          CourseName = user.Course.CourseName
 
                      }).ToList();
+            
                 return View(courseDetails);
             }
             catch (Exception er)

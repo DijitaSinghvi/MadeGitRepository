@@ -3,17 +3,26 @@
     ViewBag.Title = "CourseDetails";
 }
 
-<h2>CourseDetails</h2>
+<h2>List of Subjects and teachers of your Course  </h2> 
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.SubjectName)
+
+            @Html.DisplayNameFor(model => model.CourseName)
+
         </th>
         <th>
+
+            @Html.DisplayNameFor(model => model.SubjectName)
+
+        </th>
+        <th>
+            @Html.Label("Teacher")
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
+            @Html.Label("Teacher")
             @Html.DisplayNameFor(model => model.LastName)
         </th>
 
@@ -23,6 +32,9 @@
     {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.SubjectName)
         </td>
         <td>
@@ -31,11 +43,16 @@
         <td>
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
-      
+
     </tr>
     }
 
 </table>
 
+<div class=" form-group row col-md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("StudentHomePage","Student",new { id =ViewBag.SendId })"
 
+    <span>Back To HomePage</span>
+</a>
+</div>
 
