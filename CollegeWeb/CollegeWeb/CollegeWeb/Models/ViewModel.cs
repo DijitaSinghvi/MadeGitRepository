@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CollegeWeb.Models
 {
@@ -32,6 +33,7 @@ namespace CollegeWeb.Models
         public string Hobbies { get; set; }
         [Required(ErrorMessage = "Enter your email address.")]
         [DataType(DataType.EmailAddress)]
+        [Remote("CheckUserName", "Account", ErrorMessage = "Email Already in use")]
         public string Email { get; set; }
       //  [Required(ErrorMessage = "Your email address is not verified.")]
         public string IsEmailVerified { get; set; }
@@ -79,7 +81,7 @@ namespace CollegeWeb.Models
         public List<StateModel> States { get; set; }
         public List<CityModel> Cities { get; set; }
         public List<SubjectModel> Subjects { get; set; }
-        //public
+       // public IEnumerable<SelectListItem> Values { get; set; }
 
     }
     //to get role,course,country,state and city dropdown from database through model.

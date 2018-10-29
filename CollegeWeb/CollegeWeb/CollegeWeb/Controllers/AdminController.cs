@@ -19,21 +19,29 @@ namespace CollegeWeb.Controllers
         /// <returns></returns>
         public ActionResult HomePage(int? id)
         {
+            //ViewModel model = new ViewModel();
+            //var roleList = db.Roles.Where(x => x.RoleId == 3 || x.RoleId == 4).Select(x => new RoleModel
+            //{
+            //    RoleName = x.RoleName,
+            //    RoleId = x.RoleId
+            //}).ToList();
+            //model.Roles = roleList;
             Session["AdminId"] = id;
-            return View();
+           return View();
         }
 
         /// <summary>
-        /// Admin can manage student list.      
+        /// Admin can manage student list.
         /// </summary>
         /// <returns></returns>
         public ActionResult ViewStudents()
         {
-            
-            //Get list of students from database.
+
+            // Get list of students from database.
             var studentList = (from
                                user in db.Users
                                join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
+
                                where userInRole.RoleId == 4
                                orderby user.UserId
                                select new ViewModel
@@ -60,6 +68,48 @@ namespace CollegeWeb.Controllers
 
             return View(studentList);
         }
+        //[HttpPost]
+        //public ActionResult HomePage(ViewModel objViewModel)
+        //{
+        //    //     Get selected list of users from database.
+
+        //    var userList = (from
+        //                       user in db.Users
+        //                    join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
+
+        //                    where userInRole.RoleId  == objViewModel.RoleId || string.IsNullOrEmpty(objViewModel.RoleId.ToString())
+        //                    orderby user.UserId
+        //                    select new ViewModel
+        //                    {
+        //                        UserId = user.UserId,
+        //                        FirstName = user.FirstName,
+        //                        LastName = user.LastName,
+        //                        Gender = user.Gender,
+        //                        DateOfBirth = user.DateOfBirth,
+        //                        Hobbies = user.Hobbies,
+        //                        Email = user.Email,
+        //                        IsEmailVerified = user.IsEmailVerified,
+        //                        Password = user.Password,
+        //                        IsActive = user.IsActive,
+        //                        DateCreated = user.DateCreated,
+        //                        DateModified = user.DateModified,
+        //                        CourseName = user.Course.CourseName,
+        //                        AddressLine = user.Address.AddressLine,
+        //                        CityName = user.Address.City.CityName,
+        //                        StateName = user.Address.State.StateName,
+        //                        CountryName = user.Address.Country.CountryName,
+        //                        Pincode = user.Address.Pincode
+        //                    }).ToList();
+
+        //    return  View(userList);
+
+        //}
+       
+
+
+
+       
+
 
         /// <summary>
         /// Add new student record in website.
@@ -1262,20 +1312,62 @@ namespace CollegeWeb.Controllers
             try
             {
 
-
-                //Delete selected record from database.
-                var deleteRecord = (from
-                                    course in db.Courses
+                var courseRecord = (from
+                                   course in db.Courses
                                     where course.CourseId == id
                                     select course).FirstOrDefault();
 
+                //var subjectInCourse= (from
+                //                    subjectInCourse in db.SubjectInCourses
+                //                      where subjectInCourse.CourseId == courseRecord.CourseId
+                //                      select subjectInCourse).FirstOrDefault();
+                var userRecord = (from
+                               user in db.Users
+                                  where user.CourseId == courseRecord.CourseId
+                                  select user).FirstOrDefault();
+               
 
-                if (deleteRecord != null)
+                var userInRoleRecord = (from
+                                    userInRole in db.UserInRoles
+                                        where userInRole.UserId == userRecord.UserId
+                                        select userInRole).FirstOrDefault();
+                var teacherInSubjectRecord =
+                               (from
+                              teacherInSubject in db.TeacherInSubjects
+                                where teacherInSubject.UserId == userRecord.UserId
+                                select teacherInSubject).FirstOrDefault();
+
+                if (teacherInSubjectRecord != null)
                 {
-                    db.Courses.Remove(deleteRecord);
+                    db.TeacherInSubjects.Remove(teacherInSubjectRecord);
                     db.SaveChanges();
                 }
+
+
+
+                if (userInRoleRecord != null)
+                {
+                    db.UserInRoles.Remove(userInRoleRecord);
+                    db.SaveChanges();
+                }
+              
+
+
+                if (userRecord != null)
+                {
+                    db.Users.Remove(userRecord);
+                    db.SaveChanges();
+                }
+                if (courseRecord != null)
+                {
+                    db.Courses.Remove(courseRecord);
+                    db.SaveChanges();
+                }
+            
+              
                 return RedirectToAction("ViewCourses", "Admin");
+
+
             }
             catch (Exception er)
             {

@@ -288,6 +288,7 @@
     <Content Include="Views\SuperAdmin\AssignTeacherToSubject.cshtml" />
     <Content Include="Views\Teacher\EditTeacherDetails.cshtml" />
     <Content Include="Views\Login\Logout.cshtml" />
+    <Content Include="Views\Shared\_FilteredUserListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

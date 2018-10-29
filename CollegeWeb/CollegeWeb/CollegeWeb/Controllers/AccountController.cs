@@ -205,7 +205,18 @@ namespace CollegeWeb.Controllers
             return Json(new SelectList(cityList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
 
-      
+        public JsonResult CheckUserName(string Email)
+        {
+            CollegeContext db = new CollegeContext();
+            var result = true;
+            var user = db.Users.Where(x => x.Email == Email).FirstOrDefault();
+
+            if (user != null)
+                result = false;
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }    
 }
 

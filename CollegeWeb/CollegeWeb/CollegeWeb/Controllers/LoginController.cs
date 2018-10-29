@@ -30,40 +30,48 @@ namespace CollegeWeb.Controllers
         public ActionResult Login(ViewModel objViewModel)
         {
             //to authenticate email and password from database.
-            var temp = db.Users.Where(x=>x.Email==objViewModel.Email && x.Password==objViewModel.Password).FirstOrDefault();
-            if(temp!= null)
+            try
             {
-                Session["UserID"] = temp.UserId.ToString();
-                Session["Email"] = temp.Email.ToString();
-
-
-
-                //Redirect to homepage according to role of the user.
-
-                var getRole = db.UserInRoles.Where(x => x.UserId == temp.UserId).Select(x => x.RoleId).FirstOrDefault();
-                if (getRole == 1)
+                var temp = db.Users.Where(x => x.Email == objViewModel.Email && x.Password == objViewModel.Password).FirstOrDefault();
+                if (temp != null)
                 {
-                    return RedirectToAction("HomePage", "SuperAdmin", new { id = temp.UserId });
-                }
+                    Session["UserID"] = temp.UserId.ToString();
+                    Session["Email"] = temp.Email.ToString();
 
-                else if(getRole == 2)
-                {
-                    return RedirectToAction("HomePage", "Admin", new { id = temp.UserId });
+
+
+                    //Redirect to homepage according to role of the user.
+
+                    var getRole = db.UserInRoles.Where(x => x.UserId == temp.UserId).Select(x => x.RoleId).FirstOrDefault();
+                    if (getRole == 1)
+                    {
+                        return RedirectToAction("HomePage", "SuperAdmin", new { id = temp.UserId });
+                    }
+
+                    else if (getRole == 2)
+                    {
+                        return RedirectToAction("HomePage", "Admin", new { id = temp.UserId });
+                    }
+                    else if (getRole == 3)
+                    {
+                        return RedirectToAction("TeacherHomePage", "Teacher", new { id = temp.UserId });
+                    }
+                    else if (getRole == 4)
+                    {
+                        return RedirectToAction("StudentHomePage", "Student", new { id = temp.UserId });
+                    }
                 }
-                else if(getRole == 3)
+                else
                 {
-                    return RedirectToAction("TeacherHomePage", "Teacher", new { id = temp.UserId });
+                    ModelState.AddModelError("", "Email or password is wrong.");
                 }
-                else if(getRole == 4)
-                {
-                    return RedirectToAction("StudentHomePage", "Student", new { id = temp.UserId });
-                }
+                return View(objViewModel);
             }
-            else
+            catch(Exception er)
             {
-                ModelState.AddModelError("", "Email or password is wrong.");
+                Console.Write(er.Message);
+                return View();
             }
-            return View(objViewModel);
         }
        public ActionResult Logout()
         {
