@@ -114,11 +114,12 @@ namespace CollegeWeb.Controllers
 
                     //Raw data sent for IsEmailVerified property through ViewModel object.
                     objViewModel.IsEmailVerified = "Yes";
+                   // objViewModel.IsActive =;
 
                     //Try to insert user details of registration form in User table of database.
                     User objUser = new User
                     {
-                        UserId = objViewModel.UserId,
+                       // UserId = objViewModel.UserId,
                         FirstName = objViewModel.FirstName,
                         LastName = objViewModel.LastName,
                         Gender = objViewModel.Gender,

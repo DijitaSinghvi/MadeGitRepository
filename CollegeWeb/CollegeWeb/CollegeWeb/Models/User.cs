@@ -35,7 +35,7 @@ namespace CollegeWeb.Models
       //  [Required(ErrorMessage="Your account is inactive." )]
         public bool IsActive { get; set; }
         
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
         public int AddressId { get; set; }

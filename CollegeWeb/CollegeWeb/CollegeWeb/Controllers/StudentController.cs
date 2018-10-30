@@ -119,7 +119,7 @@ namespace CollegeWeb.Controllers
                                      
                                       where user.UserId ==id
 
-                                      select new ViewModel
+                                      select new EditViewModel
                                       {
 
                                           UserId = user.UserId,
@@ -175,59 +175,59 @@ namespace CollegeWeb.Controllers
         /// Save updates in database.
         /// </summary>
         [HttpPost]
-        public ActionResult EditStudentDetails(ViewModel objViewModel)
+        public ActionResult EditStudentDetails(EditViewModel objEditViewModel)
         {
             try
             {
                 //Update User table.
 
                 var userRecord = (from user in db.Users
-                                  where user.UserId == objViewModel.UserId
+                                  where user.UserId == objEditViewModel.UserId
                                   select user).FirstOrDefault();
                 if (userRecord != null)
 
                 {
                     userRecord.DateCreated = DateTime.Now;
                     userRecord.DateModified = DateTime.Now;
-                    userRecord.UserId = objViewModel.UserId;
-                    userRecord.FirstName = objViewModel.FirstName;
-                    userRecord.LastName = objViewModel.LastName;
-                    userRecord.Gender = objViewModel.Gender;
-                    userRecord.DateOfBirth = objViewModel.DateOfBirth;
-                    userRecord.Hobbies = objViewModel.Hobbies;
-                    userRecord.Email = objViewModel.Email;
-                    userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
-                    userRecord.Password = objViewModel.Password;
-                    userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
-                    userRecord.IsActive = objViewModel.IsActive;
-                    userRecord.CourseId = objViewModel.CourseId;
+                    userRecord.UserId = objEditViewModel.UserId;
+                    userRecord.FirstName = objEditViewModel.FirstName;
+                    userRecord.LastName = objEditViewModel.LastName;
+                    userRecord.Gender = objEditViewModel.Gender;
+                    userRecord.DateOfBirth = objEditViewModel.DateOfBirth;
+                    userRecord.Hobbies = objEditViewModel.Hobbies;
+                    userRecord.Email = objEditViewModel.Email;
+                    userRecord.IsEmailVerified = objEditViewModel.IsEmailVerified;
+                    userRecord.Password = objEditViewModel.Password;
+                    userRecord.ConfirmPassword = objEditViewModel.ConfirmPassword;
+                    userRecord.IsActive = objEditViewModel.IsActive;
+                    userRecord.CourseId = objEditViewModel.CourseId;
                 }
 
                 //Update Address table.
                 var addressRecord = (from address in db.Addresses
-                                     where address.AddressId == objViewModel.AddressId
+                                     where address.AddressId == objEditViewModel.AddressId
                                      select address
                               ).FirstOrDefault();
                 if (addressRecord != null)
                 {
 
-                    addressRecord.AddressLine = objViewModel.AddressLine;
-                    addressRecord.CityId = objViewModel.CityId;
-                    addressRecord.CountryId = objViewModel.CountryId;
-                    addressRecord.Pincode = objViewModel.Pincode;
-                    addressRecord.StateId = objViewModel.StateId;
+                    addressRecord.AddressLine = objEditViewModel.AddressLine;
+                    addressRecord.CityId = objEditViewModel.CityId;
+                    addressRecord.CountryId = objEditViewModel.CountryId;
+                    addressRecord.Pincode = objEditViewModel.Pincode;
+                    addressRecord.StateId = objEditViewModel.StateId;
                 }
 
                 //Update UserInRole Table.
                 var userInRoleRecord = (from userInRole in db.UserInRoles
-                                        where userInRole.UserId == objViewModel.UserId
+                                        where userInRole.UserId == objEditViewModel.UserId
                                         select userInRole
                                       ).FirstOrDefault();
 
                 if (userInRoleRecord != null)
                 {
-                    userInRoleRecord.RoleId = objViewModel.RoleId;
-                    userInRoleRecord.UserId = objViewModel.UserId;
+                    userInRoleRecord.RoleId = objEditViewModel.RoleId;
+                    userInRoleRecord.UserId = objEditViewModel.UserId;
                 }
 
                 //Save to database.
@@ -235,7 +235,7 @@ namespace CollegeWeb.Controllers
                 
 
 
-                return RedirectToAction("StudentHomePage", new { id = objViewModel.UserId });
+                return RedirectToAction("StudentHomePage", new { id = objEditViewModel.UserId });
             }
 
             catch (Exception er)
@@ -259,7 +259,7 @@ namespace CollegeWeb.Controllers
                 var courseDetails =
                     (from
                      user in db.Users
-                     join subjectInCourse in db.SubjectInCourses on user.CourseId equals subjectInCourse.CourseId
+                      join subjectInCourse in db.SubjectInCourses on user.CourseId equals subjectInCourse.CourseId
                      join subject in db.Subjects on subjectInCourse.SubjectId equals subject.SubjectId
                      join teacherInSubject in db.TeacherInSubjects on subjectInCourse.SubjectId equals teacherInSubject.SubjectId
                      where user.UserId==id 
@@ -273,7 +273,7 @@ namespace CollegeWeb.Controllers
                          CourseId = user.CourseId,
                          CourseName = user.Course.CourseName
 
-                     }).ToList();
+                     }).DefaultIfEmpty().ToList();
             
                 return View(courseDetails);
             }

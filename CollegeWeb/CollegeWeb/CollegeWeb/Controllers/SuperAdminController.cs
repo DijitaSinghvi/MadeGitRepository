@@ -306,7 +306,7 @@ namespace CollegeWeb.Controllers
                 var model = (from user in db.Users
                              where user.UserId == id
 
-                             select new ViewModel
+                             select new EditViewModel
                              {
                                  UserId = user.UserId,
                                  FirstName = user.FirstName,
@@ -356,36 +356,36 @@ namespace CollegeWeb.Controllers
         /// Save updates in database.
         /// </summary>
         [HttpPost]
-        public ActionResult EditStudent(ViewModel objViewModel)
+        public ActionResult EditStudent(EditViewModel objEditViewModel)
         {
             try
             {
                 //Raw data sent to address table.
 
                 var userRecord = (from user in db.Users
-                                  where user.UserId == objViewModel.UserId
+                                  where user.UserId == objEditViewModel.UserId
                                   select user).FirstOrDefault();
                 if (userRecord != null)
                 {
                     userRecord.DateCreated = DateTime.Now;
                     userRecord.DateModified = DateTime.Now;
-                    userRecord.UserId = objViewModel.UserId;
-                    userRecord.FirstName = objViewModel.FirstName;
-                    userRecord.LastName = objViewModel.LastName;
-                    userRecord.Gender = objViewModel.Gender;
-                    userRecord.DateOfBirth = objViewModel.DateOfBirth;
-                    userRecord.Hobbies = objViewModel.Hobbies;
-                    userRecord.Email = objViewModel.Email;
-                    userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
-                    userRecord.Password = objViewModel.Password;
-                    userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
-                    userRecord.IsActive = objViewModel.IsActive;
-                    userRecord.CourseId = objViewModel.CourseId;
-                    userRecord.Address.AddressLine = objViewModel.AddressLine;
-                    userRecord.Address.CityId = objViewModel.CityId;
-                    userRecord.Address.CountryId = objViewModel.CountryId;
-                    userRecord.Address.Pincode = objViewModel.Pincode;
-                    userRecord.Address.StateId = objViewModel.StateId;
+                    userRecord.UserId = objEditViewModel.UserId;
+                    userRecord.FirstName = objEditViewModel.FirstName;
+                    userRecord.LastName = objEditViewModel.LastName;
+                    userRecord.Gender = objEditViewModel.Gender;
+                    userRecord.DateOfBirth = objEditViewModel.DateOfBirth;
+                    userRecord.Hobbies = objEditViewModel.Hobbies;
+                    userRecord.Email = objEditViewModel.Email;
+                    userRecord.IsEmailVerified = objEditViewModel.IsEmailVerified;
+                    userRecord.Password = objEditViewModel.Password;
+                    userRecord.ConfirmPassword = objEditViewModel.ConfirmPassword;
+                    userRecord.IsActive = objEditViewModel.IsActive;
+                    userRecord.CourseId = objEditViewModel.CourseId;
+                    userRecord.Address.AddressLine = objEditViewModel.AddressLine;
+                    userRecord.Address.CityId = objEditViewModel.CityId;
+                    userRecord.Address.CountryId = objEditViewModel.CountryId;
+                    userRecord.Address.Pincode = objEditViewModel.Pincode;
+                    userRecord.Address.StateId = objEditViewModel.StateId;
                   
 
 
@@ -1134,7 +1134,7 @@ namespace CollegeWeb.Controllers
                 //Subject added in database.
                 Course objCourse = new Course
                 {
-                    CourseId = objViewModel.CourseId,
+                    CourseId = Convert.ToInt32(objViewModel.CourseId),
                     CourseName = objViewModel.CourseName,
 
 
@@ -1203,7 +1203,7 @@ namespace CollegeWeb.Controllers
                                     select course).FirstOrDefault();
                 if (courseRecord != null)
                 {
-                    courseRecord.CourseId = objViewModel.CourseId;
+                    courseRecord.CourseId = Convert.ToInt32(objViewModel.CourseId);
                     courseRecord.CourseName = objViewModel.CourseName;
 
                     db.SaveChanges();

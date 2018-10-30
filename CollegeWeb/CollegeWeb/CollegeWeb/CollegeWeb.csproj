@@ -176,6 +176,10 @@
     <Compile Include="Migrations\201810051100332_changeinuser.Designer.cs">
       <DependentUpon>201810051100332_changeinuser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810300854285_nullcourse.cs" />
+    <Compile Include="Migrations\201810300854285_nullcourse.Designer.cs">
+      <DependentUpon>201810300854285_nullcourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\City.cs" />
@@ -315,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810051100332_changeinuser.resx">
       <DependentUpon>201810051100332_changeinuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810300854285_nullcourse.resx">
+      <DependentUpon>201810300854285_nullcourse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

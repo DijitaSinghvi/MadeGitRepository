@@ -93,6 +93,10 @@ D:\Dijita Singhvi\TASKS\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.cs
 D:\Dijita Singhvi\TASKS\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.dll
 D:\Dijita Singhvi\TASKS\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.pdb
 D:\Dijita Singhvi\TASKS\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csprojAssemblyReference.cache
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.IO.Pipes.dll
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\VBCSCompiler.exe
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\ApplicationInsights.config
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\CollegeWeb.dll.config
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\CollegeWeb.dll
@@ -122,8 +126,6 @@ D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Di
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.IO.Compression.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.IO.FileSystem.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.IO.FileSystem.Primitives.dll
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.IO.Pipes.AccessControl.dll
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.IO.Pipes.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Reflection.Metadata.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Security.AccessControl.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Security.Claims.dll
@@ -137,11 +139,9 @@ D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Va
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Xml.ReaderWriter.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Xml.XmlDocument.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Xml.XPath.dll
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\System.Xml.XPath.XDocument.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\vbc.exe
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\vbc.exe.config
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\vbc.rsp
-D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\VBCSCompiler.exe
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\roslyn\VBCSCompiler.exe.config
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\Antlr3.Runtime.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\bin\EntityFramework.dll
@@ -192,3 +192,4 @@ D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.dll
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.pdb
 D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.csprojAssemblyReference.cache
+D:\Dijita Singhvi\MadeRepo\CollegeWeb\CollegeWeb\CollegeWeb\obj\Debug\CollegeWeb.Migrations.nullcourse.resources

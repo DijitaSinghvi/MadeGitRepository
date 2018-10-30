@@ -1,4 +1,4 @@
-﻿@model CollegeWeb.Models.ViewModel
+﻿@model CollegeWeb.Models.EditViewModel
 @{
     ViewBag.Title = "ViewStudentDetails";
 }
@@ -105,32 +105,53 @@
     @*get country dropdown*@
     <div class="form-group row">
         <div class="col-md-2">
-            @Html.LabelFor(model => model.CountryName, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CountryId, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.CountryId, Model.Countries.Select(item => new SelectListItem
+       {
+           Value = item.CountryId.ToString(),
+           Text = item.CountryName.ToString()
+
+       }), new { @class = "control-label col-md-2" })
             @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+
+
         </div>
     </div>
-
     @*get state dropdown*@
     <div class="form-group row">
         <div class="col-md-2">
-            @Html.LabelFor(model => model.StateName, "State", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StateId, "State", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.StateId, Model.States.Select(item => new SelectListItem
+       {
+           Value = item.StateId.ToString(),
+           Text = item.StateName.ToString()
+
+       }), new { @class = "control-label col-md-2" })
             @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
+
+
         </div>
     </div>
     @*get city dropdown*@
     <div class="form-group row">
         <div class="col-md-2">
-            @Html.LabelFor(model => model.CityName, "City", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CityId, "City", htmlAttributes: new { @class = "control-label col-md-2" })
+
         </div>
-        <div class="col-md-10 pull-right">
-            @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CityId, Model.Cities.Select(item => new SelectListItem
+       {
+           Value = item.CityId.ToString(),
+           Text = item.CityName.ToString()
+
+       }), new { @class = "control-label col-md-2"})
             @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+
+
         </div>
     </div>
 
