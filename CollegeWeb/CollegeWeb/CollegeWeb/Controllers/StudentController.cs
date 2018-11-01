@@ -273,7 +273,7 @@ namespace CollegeWeb.Controllers
                          CourseId = user.CourseId,
                          CourseName = user.Course.CourseName
 
-                     }).DefaultIfEmpty().ToList();
+                     }).ToList();
             
                 return View(courseDetails);
             }

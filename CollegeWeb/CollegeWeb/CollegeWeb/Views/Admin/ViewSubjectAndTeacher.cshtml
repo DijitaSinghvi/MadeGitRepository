@@ -6,12 +6,13 @@
 <h2>View Subject And Teacher</h2>
 <table class="table">
     <tr>
-        <th>
+        <th>@Html.Label("Teacher")
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
+            @Html.Label("Teacher")
             @Html.DisplayNameFor(model => model.LastName)
-        </th>
+            </th>
         <th>
             @Html.DisplayNameFor(model => model.SubjectName)
         </th>
@@ -34,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.SubjectName)
         </td>
 
-
+        Model
         <td>
             @Html.ActionLink("Assign Subject To Teacher", "AssignTeacherToSubject", new { id = item.UserId }) 
 

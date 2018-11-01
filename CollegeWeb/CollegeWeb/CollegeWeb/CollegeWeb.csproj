@@ -293,6 +293,9 @@
     <Content Include="Views\Teacher\EditTeacherDetails.cshtml" />
     <Content Include="Views\Login\Logout.cshtml" />
     <Content Include="Views\Shared\_FilteredUserListPartial.cshtml" />
+    <Content Include="Views\SuperAdmin\GetFilters.cshtml" />
+    <Content Include="Views\Admin\GetFilters.cshtml" />
+    <Content Include="Views\Teacher\GetFilters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

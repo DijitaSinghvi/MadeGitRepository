@@ -13,10 +13,10 @@ namespace CollegeWeb.Controllers
         CollegeContext db = new CollegeContext();
 
         // GET: SuperAdmin
-       /// <summary>
-       /// Show home page to Super Admin.
-       /// </summary>
-       /// <returns></returns>
+        /// <summary>
+        /// Show home page to Super Admin.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult HomePage(int? id)
         {
             Session["SuperAdminId"] = id;
@@ -272,7 +272,7 @@ namespace CollegeWeb.Controllers
                     RoleName = x.RoleName,
                     RoleId = x.RoleId
                 }).ToList();
-                
+
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -281,7 +281,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-               
+
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -291,7 +291,7 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-            
+
 
 
                 //To get city dropdown from database.
@@ -386,7 +386,7 @@ namespace CollegeWeb.Controllers
                     userRecord.Address.CountryId = objEditViewModel.CountryId;
                     userRecord.Address.Pincode = objEditViewModel.Pincode;
                     userRecord.Address.StateId = objEditViewModel.StateId;
-                  
+
 
 
                     db.SaveChanges();
@@ -683,7 +683,7 @@ namespace CollegeWeb.Controllers
                     RoleId = x.RoleId
                 }).ToList();
 
-               
+
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -692,7 +692,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-           
+
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -702,7 +702,7 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-                
+
 
 
                 //To get city dropdown from database.
@@ -712,13 +712,13 @@ namespace CollegeWeb.Controllers
                     CityId = x.CityId
                 }).ToList();
 
-          
+
 
 
                 var model = (from user in db.Users
                              where user.UserId == id
 
-                             select new ViewModel
+                             select new EditViewModel
                              {
                                  UserId = user.UserId,
                                  FirstName = user.FirstName,
@@ -768,39 +768,39 @@ namespace CollegeWeb.Controllers
         /// Save updates in database.
         /// </summary>
         [HttpPost]
-        public ActionResult EditTeacher(ViewModel objViewModel)
+        public ActionResult EditTeacher(EditViewModel objEditViewModel)
         {
             try
             {
                 //Raw data sent to address table.
 
                 var userRecord = (from user in db.Users
-                                  where user.UserId == objViewModel.UserId
+                                  where user.UserId == objEditViewModel.UserId
                                   select user).FirstOrDefault();
                 if (userRecord != null)
                 {
                     userRecord.DateCreated = DateTime.Now;
                     userRecord.DateModified = DateTime.Now;
-                    userRecord.UserId = objViewModel.UserId;
-                    userRecord.FirstName = objViewModel.FirstName;
-                    userRecord.LastName = objViewModel.LastName;
-                    userRecord.Gender = objViewModel.Gender;
-                    userRecord.DateOfBirth = objViewModel.DateOfBirth;
-                    userRecord.Hobbies = objViewModel.Hobbies;
-                    userRecord.Email = objViewModel.Email;
-                    userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
-                    userRecord.Password = objViewModel.Password;
-                    userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
-                    userRecord.IsActive = objViewModel.IsActive;
-                    userRecord.CourseId = objViewModel.CourseId;
-                    userRecord.Address.AddressLine = objViewModel.AddressLine;
-                    userRecord.Address.CityId = objViewModel.CityId;
-                    userRecord.Address.CountryId = objViewModel.CountryId;
-                    userRecord.Address.Pincode = objViewModel.Pincode;
-                    userRecord.Address.StateId = objViewModel.StateId;
-                    userRecord.IsEmailVerified = objViewModel.IsEmailVerified;
-                    userRecord.IsActive = objViewModel.IsActive;
-                    userRecord.ConfirmPassword = objViewModel.ConfirmPassword;
+                    userRecord.UserId = objEditViewModel.UserId;
+                    userRecord.FirstName = objEditViewModel.FirstName;
+                    userRecord.LastName = objEditViewModel.LastName;
+                    userRecord.Gender = objEditViewModel.Gender;
+                    userRecord.DateOfBirth = objEditViewModel.DateOfBirth;
+                    userRecord.Hobbies = objEditViewModel.Hobbies;
+                    userRecord.Email = objEditViewModel.Email;
+                    userRecord.IsEmailVerified = objEditViewModel.IsEmailVerified;
+                    userRecord.Password = objEditViewModel.Password;
+                    userRecord.ConfirmPassword = objEditViewModel.ConfirmPassword;
+                    userRecord.IsActive = objEditViewModel.IsActive;
+                    userRecord.CourseId = objEditViewModel.CourseId;
+                    userRecord.Address.AddressLine = objEditViewModel.AddressLine;
+                    userRecord.Address.CityId = objEditViewModel.CityId;
+                    userRecord.Address.CountryId = objEditViewModel.CountryId;
+                    userRecord.Address.Pincode = objEditViewModel.Pincode;
+                    userRecord.Address.StateId = objEditViewModel.StateId;
+                    userRecord.IsEmailVerified = objEditViewModel.IsEmailVerified;
+                    userRecord.IsActive = objEditViewModel.IsActive;
+                    userRecord.ConfirmPassword = objEditViewModel.ConfirmPassword;
 
 
                     db.SaveChanges();
@@ -917,7 +917,7 @@ namespace CollegeWeb.Controllers
         [HttpGet]
         public ActionResult AddSubject()
         {
-           
+
             return View();
 
         }
@@ -1066,18 +1066,39 @@ namespace CollegeWeb.Controllers
 
 
                 //Delete selected record from database.
-                var deleteRecord = (from
+                var subjectRecord = (from
                                     subject in db.Subjects
-                                    where subject.SubjectId == id
-                                    select subject).FirstOrDefault();
+                                     where subject.SubjectId == id
+                                     select subject).FirstOrDefault();
+                var subjectInCourseRecord =
+                              (from subjectInCourse in db.SubjectInCourses
+                               where subjectInCourse.SubjectId == subjectRecord.SubjectId
+                               select subjectInCourse).ToList();
 
-
-                if (deleteRecord != null)
+                if (subjectInCourseRecord != null)
                 {
-                    db.Subjects.Remove(deleteRecord);
+                    db.SubjectInCourses.RemoveRange(subjectInCourseRecord);
                     db.SaveChanges();
                 }
-                return RedirectToAction("ViewSubjects", "Admin");
+                var teacherInSubjectRecord =
+                      (from
+                     teacherInSubject in db.TeacherInSubjects
+                       where teacherInSubject.SubjectId == subjectRecord.SubjectId
+                       select teacherInSubject).ToList();
+
+
+                if (teacherInSubjectRecord != null)
+                {
+                    db.TeacherInSubjects.RemoveRange(teacherInSubjectRecord);
+                    db.SaveChanges();
+                }
+
+                if (subjectRecord != null)
+                {
+                    db.Subjects.Remove(subjectRecord);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ViewSubjects", "SuperAdmin");
             }
             catch (Exception er)
             {
@@ -1258,21 +1279,74 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-
-
-                //Delete selected record from database.
-                var deleteRecord = (from
-                                    course in db.Courses
+                var courseRecord = (from
+                                   course in db.Courses
                                     where course.CourseId == id
+
                                     select course).FirstOrDefault();
+                var subjectInCourseRecord =
+                               (from subjectInCourse in db.SubjectInCourses
+                                where subjectInCourse.CourseId == courseRecord.CourseId
+                                select subjectInCourse).ToList();
 
-
-                if (deleteRecord != null)
+                if (subjectInCourseRecord != null)
                 {
-                    db.Courses.Remove(deleteRecord);
+                    db.SubjectInCourses.RemoveRange(subjectInCourseRecord);
                     db.SaveChanges();
                 }
-                return RedirectToAction("ViewCourses", "Admin");
+                var userRecord = (from
+               user in db.Users
+                                  where user.CourseId == courseRecord.CourseId
+                                  select user).ToList();
+
+                if (userRecord != null || userRecord.Count > 0)
+                {
+                    foreach (var item in userRecord)
+                    {
+                        var teacherInSubjectRecord =
+                       (from
+                      teacherInSubject in db.TeacherInSubjects
+                        where teacherInSubject.UserId == item.UserId
+                        select teacherInSubject).ToList();
+
+
+                        if (teacherInSubjectRecord != null)
+                        {
+                            db.TeacherInSubjects.RemoveRange(teacherInSubjectRecord);
+                            db.SaveChanges();
+                        }
+
+                        var userInRoleRecord = (from
+                        userInRole in db.UserInRoles
+                                                where userInRole.UserId == item.UserId
+                                                select userInRole).ToList();
+
+
+
+
+                        if (userInRoleRecord != null)
+                        {
+                            db.UserInRoles.RemoveRange(userInRoleRecord);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+                if (userRecord != null)
+                {
+                    db.Users.RemoveRange(userRecord);
+                    db.SaveChanges();
+                }
+
+
+
+                if (courseRecord != null)
+                {
+                    db.Courses.Remove(courseRecord);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("ViewCourses", "SuperAdmin");
             }
             catch (Exception er)
             {
@@ -1329,7 +1403,7 @@ namespace CollegeWeb.Controllers
         {
             try
             {
-               
+
                 //Query to get the course dropdown from database.
                 var courseList = db.Courses.Select(x => new CourseModel
                 {
@@ -1338,13 +1412,13 @@ namespace CollegeWeb.Controllers
                 }).ToList();
 
                 //Query to get the role dropdown from database.
-                var roleList = db.Roles.Where(x=>x.RoleId==2||x.RoleId==3||x.RoleId==4).Select(x => new RoleModel
+                var roleList = db.Roles.Where(x => x.RoleId == 2 || x.RoleId == 3 || x.RoleId == 4).Select(x => new RoleModel
                 {
                     RoleName = x.RoleName,
                     RoleId = x.RoleId
                 }).ToList();
 
-              
+
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -1353,7 +1427,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-             
+
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -1363,7 +1437,7 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-               
+
 
                 //To get city dropdown from database.
                 var cityList = db.Cities.Select(x => new CityModel
@@ -1372,7 +1446,7 @@ namespace CollegeWeb.Controllers
                     CityId = x.CityId
                 }).ToList();
 
-                
+
 
                 var model = (from user in db.Users
                              join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
@@ -1565,7 +1639,7 @@ namespace CollegeWeb.Controllers
                     RoleId = x.RoleId
                 }).ToList();
 
-               
+
 
                 //To get country dropdown from database.
                 var countryList = db.Countries.Select(x => new CountryModel
@@ -1574,7 +1648,7 @@ namespace CollegeWeb.Controllers
                     CountryId = x.CountryId
                 }).ToList();
 
-             
+
 
                 //To get state dropdown from database.
                 var stateList = db.States.Select(x => new StateModel
@@ -1584,7 +1658,7 @@ namespace CollegeWeb.Controllers
                 }
                 ).ToList();
 
-               
+
 
 
                 //To get city dropdown from database.
@@ -1594,7 +1668,7 @@ namespace CollegeWeb.Controllers
                     CityId = x.CityId
                 }).ToList();
 
-             
+
 
 
                 var model = (from user in db.Users
@@ -1733,6 +1807,108 @@ namespace CollegeWeb.Controllers
 
         }
 
+        /// <summary>
+        /// Get the filters section on the search page.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetFilters(SearchModel model)
+        {
+            try
+            {
+
+                //get list of courses from database.
+                var courseList = db.Courses.Select(x => new CourseClass
+                {
+                    CourseId = x.CourseId,
+                    CourseName = x.CourseName
+                }).ToList();
+                //send list of courses to model's property courses.
+                model.Courses = courseList;
+                //get list ofcountries from database.
+                var countryList = db.Countries.Select(x => new CountryClass
+                {
+                    CountryId = x.CountryId,
+                    CountryName = x.CountryName
+                }).ToList();
+                //send countryList to Countries property of model.
+                model.Countries = countryList;
+                //get state list from database.
+                var stateList = db.States.Select(x => new StateClass
+                {
+                    StateId = x.StateId,
+                    StateName = x.StateName
+                }).ToList();
+                //send state list to States property of model. 
+                model.States = stateList;
+                //get city list from database.
+                var cityList = db.Cities.Select(x => new CityClass
+                {
+                    CityId = x.CityId,
+                    CityName = x.CityName
+                }).ToList();
+                //send city list to Cities property of model.
+                model.Cities = cityList;
+                //get role list from database.
+                var roleList = db.Roles.Select(x => new RoleClass
+                {
+                    RoleId = x.RoleId,
+                    RoleName = x.RoleName
+                }).ToList();
+                //send role list to Roles property of model.
+                model.Roles = roleList;
+
+                //to filter data according to the data entered in the filters.
+                var searchList = (from
+                                  user in db.Users
+                                  join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
+                                  where user.FirstName == model.FirstName || string.IsNullOrEmpty(model.FirstName)
+                                  where user.LastName == model.LastName || string.IsNullOrEmpty(model.LastName)
+                                  where user.Gender == model.Gender || string.IsNullOrEmpty(model.Gender)
+                                  where user.DateOfBirth == model.DateOfBirth || model.DateOfBirth == null
+                                  where user.Hobbies == model.Hobbies || string.IsNullOrEmpty(model.Hobbies)
+                                  where user.Email == model.Email || string.IsNullOrEmpty(model.Email)
+                                  where user.IsEmailVerified == model.IsEmailVerified || string.IsNullOrEmpty(model.IsEmailVerified)
+                                  where user.IsActive == model.IsActive || model.IsActive == false
+                                  where user.Course.CourseName == model.CourseName || string.IsNullOrEmpty(model.CourseName)
+                                  where user.Address.AddressLine == model.AddressLine || string.IsNullOrEmpty(model.AddressLine)
+                                  where user.Address.Country.CountryName == model.CountryName || string.IsNullOrEmpty(model.CountryName)
+                                  where user.Address.State.StateName == model.StateName || string.IsNullOrEmpty(model.StateName)
+                                  where user.Address.City.CityName == model.CityName || string.IsNullOrEmpty(model.CityName)
+                                  where user.Address.Pincode == model.Pincode || model.Pincode == null
+                                  where user.DateCreated == model.DateCreated || model.DateCreated == null
+                                  where user.DateModified == model.DateModified || model.DateModified == null
+                                  where userInRole.Role.RoleName == model.RoleName || string.IsNullOrEmpty(model.RoleName)
+                                  select new ShowList
+                                  {
+                                      FirstName = user.FirstName,
+                                      LastName = user.LastName,
+                                      Gender = user.Gender,
+                                      DateOfBirth = user.DateOfBirth,
+                                      Hobbies = user.Hobbies,
+                                      Email = user.Email,
+                                      IsEmailVerified = user.IsEmailVerified,
+                                      IsActive = user.IsActive,
+                                      CourseName = user.Course.CourseName,
+                                      AddressLine = user.Address.AddressLine,
+                                      CountryName = user.Address.Country.CountryName,
+                                      StateName = user.Address.State.StateName,
+                                      CityName = user.Address.City.CityName,
+                                      Pincode = user.Address.Pincode,
+                                      DateCreated = user.DateCreated,
+                                      DateModified = user.DateModified,
+                                      RoleName = userInRole.Role.RoleName
+                                  }).ToList();
+
+
+                model.ShowLists = searchList;
+
+                return View(model);
+            }
+            catch (Exception er)
+            {
+                Console.Write(er.Message);
+                return View();
+            }
 
 
 
@@ -1745,5 +1921,6 @@ namespace CollegeWeb.Controllers
 
 
 
+        }
     }
 }

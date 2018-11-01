@@ -63,7 +63,7 @@ namespace CollegeWeb.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Email or password is wrong.");
+                    ViewBag.Message= "Email or password is wrong.";
                 }
                 return View(objViewModel);
             }

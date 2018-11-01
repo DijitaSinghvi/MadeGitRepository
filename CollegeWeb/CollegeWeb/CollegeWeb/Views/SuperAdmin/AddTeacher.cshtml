@@ -1,10 +1,10 @@
-﻿
+﻿@model CollegeWeb.Models.EditViewModel
 @{
     ViewBag.Title = "AddTeacher";
 }
 
 <h2>AddTeacher</h2>
-@model CollegeWeb.Models.ViewModel
+
 
 
 @using (Html.BeginForm())
@@ -152,26 +152,26 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
 
 
 
-                @Html.DropDownListFor(model => model.CourseId, Model.Courses.Select(item => new SelectListItem
-           {
-               Value = item.CourseId.ToString(),
-               Text = item.CourseName.ToString()
+                    @Html.DropDownListFor(model => model.CourseId, Model.Courses.Select(item => new SelectListItem
+               {
+                   Value = item.CourseId.ToString(),
+                   Text = item.CourseName.ToString()
 
-           }))
-
-
-
-                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+               }))
 
 
-            </div>
-        </div>
+
+                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>*@
 
 
 
