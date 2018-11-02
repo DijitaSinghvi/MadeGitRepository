@@ -38,7 +38,7 @@ namespace CollegeWeb.Controllers
             }).ToList();
            
             //To get the role dropdown from database.
-            var roleList = db.Roles.Select(x => new RoleModel
+            var roleList = db.Roles.Where(x=>x.RoleId==3||x.RoleId==4).Select(x => new RoleModel
             {
                 RoleName = x.RoleName,
                 RoleId = x.RoleId

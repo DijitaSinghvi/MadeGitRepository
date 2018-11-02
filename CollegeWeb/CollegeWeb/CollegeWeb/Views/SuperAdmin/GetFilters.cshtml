@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseId,"Course", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6">
                 @Html.DropDownListFor(model => model.CourseId, Model.Courses.Select(x => new SelectListItem
            {
@@ -118,7 +118,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CountryId,"Country", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class-="col-sm-6">
                 @Html.DropDownListFor(model => model.CountryId, Model.Countries.Select(x => new SelectListItem
            {
@@ -132,7 +132,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StateId,"State", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6">
                 @Html.DropDownListFor(model => model.StateId, Model.States.Select(x => new SelectListItem
            {
@@ -143,7 +143,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            @Html.LabelFor(model => model.CityId)
+            @Html.LabelFor(model => model.CityId, "City", htmlAttributes: new { @class = "control-label col-md-2" })
             @Html.DropDownListFor(model => model.CityId, Model.Cities.Select(x => new SelectListItem
        {
            Text = x.CityName,
@@ -180,7 +180,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RoleId,"Role", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6">
                 @Html.DropDownListFor(model => model.RoleId, Model.Roles.Select(x => new SelectListItem
            {

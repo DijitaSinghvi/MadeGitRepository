@@ -156,6 +156,7 @@
     <Compile Include="CollegeContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -296,6 +297,8 @@
     <Content Include="Views\SuperAdmin\GetFilters.cshtml" />
     <Content Include="Views\Admin\GetFilters.cshtml" />
     <Content Include="Views\Teacher\GetFilters.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_SuperAdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

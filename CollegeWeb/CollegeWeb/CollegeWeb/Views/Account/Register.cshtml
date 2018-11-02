@@ -160,7 +160,7 @@
         </div>
 
         <div class="form-group" >
-            @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RoleId,"Role", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
                 @Html.DropDownListFor(model => model.RoleId,Model.Roles.Select(item => new SelectListItem
@@ -176,7 +176,7 @@
 
 
         <div class="form-group" id="hideCourse">
-            @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseId,"Course", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
 
@@ -202,7 +202,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="submit" value="Register" class="btn btn-success" />
             </div>
         </div>
     </div>

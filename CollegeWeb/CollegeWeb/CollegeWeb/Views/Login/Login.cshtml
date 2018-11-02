@@ -1,10 +1,14 @@
 ﻿@model CollegeWeb.Models.ViewModel
 @{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@{
 
 
     ViewBag.Title = "Login";
 }
 <h3>@ViewBag.Message</h3>
+
 
 <div class="form-group row col-md-12 text-center">
     <h1><b>COLLEGE WEBSITE</b></h1>
@@ -12,11 +16,7 @@
 
 <h2>Login</h2>
 
-<div class="form-group row">
-    <div class="col-md-3">
-        <a type="button" class="btn btn-primary btn" href="@Url.Action("Register","Account")"<span>Register</span></a>
-    </div>
-</div>
+
 
 
 @using (Html.BeginForm())
@@ -25,7 +25,7 @@
 
 
 
-    <h4>Login Form</h4>
+   
     <hr />
 
     @Html.HiddenFor(model => model.UserId)
@@ -51,8 +51,16 @@
 
 
     <div class="form-group row">
-        <div class="col-md-3 pull-left">
+        <div class="col-sm-3">
+
+
+
+        </div>
+
+
+        <div class="col-sm-3 text-left">
             <input type="submit" value="Login" class="btn btn-success" />
+            <a type="button" class="btn btn-primary btn" href="@Url.Action("Register","Account")"><span>Register</span></a>
         </div>
     </div>
 }

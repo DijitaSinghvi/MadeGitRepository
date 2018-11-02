@@ -1,77 +1,78 @@
 ﻿@model IEnumerable<CollegeWeb.Models.ViewModel>
-   
 
- @{
-        ViewBag.Title = "ViewStudents";
-    }
 
-    <h2>ViewStudents</h2>
-    <a type="button" class="btn btn-primary btn" href="@Url.Action("AddStudent","Admin")"
+@{
+    ViewBag.Title = "ViewStudents";
+}
+
+<h2>ViewStudents</h2>
+<a type="button" class="btn btn-primary btn" href="@Url.Action("AddStudent","Admin")"
 
     <span>Add New Student</span>
 </a>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfBirth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hobbies)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsEmailVerified)
-            </th>
-            <th>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hobbies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsEmailVerified)
+        </th>*@
+        @*<th>
                 @Html.DisplayNameFor(model => model.Password)
-            </th>
+            </th>*@
 
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>*@
 
-            <th>
+        @*<th>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateModified)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseName)
-            </th>
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.AddressLine)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CityName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StateName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CountryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pincode)
-            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pincode)
+        </th>
 
-            <th></th>
-        </tr>
+        <th></th>
+    </tr>
 
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -91,21 +92,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IsEmailVerified)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.DateCreated)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateModified)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CourseName)
             </td>
@@ -127,18 +128,18 @@
             <td>
                 @Html.ActionLink("Edit", "EditStudent", new { id = item.UserId }) |
 
-                @Html.ActionLink("Delete", "DeleteStudent", new { id = item.UserId }) 
-             
+                @Html.ActionLink("Delete", "DeleteStudent", new { id = item.UserId })
+
             </td>
         </tr>
-        }
+    }
 
-    </table>
-    <div class=" form-group row col-md-12">
-        <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","Admin",new { id =Session["AdminId"]})"
+</table>
+<div class=" form-group row col-md-12">
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","Admin",new { id =Session["AdminId"]})"
 
     <span>Back To HomePage</span>
 </a>
-    </div>
-    
+</div>
+
 

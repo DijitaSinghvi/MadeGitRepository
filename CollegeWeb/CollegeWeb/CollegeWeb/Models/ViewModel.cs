@@ -12,7 +12,7 @@ namespace CollegeWeb.Models
         
        
         public int UserId { get; set; }
-        [Required(ErrorMessage = "Enter your firstname.")]
+        [Required(ErrorMessage = "Enter your first name.")]
         [MaxLength(50)]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Enter your last name.")]
@@ -42,6 +42,7 @@ namespace CollegeWeb.Models
         public string Password { get; set; }
         [Required(ErrorMessage = "Confirm your password.")]
         [DataType(DataType.Password)]
+        [System.ComponentModel.DataAnnotations.Compare("Password",ErrorMessage ="Password and ConfirmPassword do not match.")]
         public string ConfirmPassword { get; set; }
 
 
