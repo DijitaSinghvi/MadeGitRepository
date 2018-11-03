@@ -10,6 +10,7 @@ namespace CollegeWeb.Controllers
     public class TeacherController : Controller
     {
         CollegeContext db = new CollegeContext();
+      
         // GET: Teacher
         /// <summary>
         /// To get teacher homepage.
@@ -20,6 +21,7 @@ namespace CollegeWeb.Controllers
         public ActionResult TeacherHomePage(int? id)
         {
             Session["tId"] = id;
+        
             try
             {
                 var teacherDetails = (from
@@ -68,6 +70,7 @@ namespace CollegeWeb.Controllers
             }
 
         }
+     
         public ActionResult ShowStudentsList(int? id)
         {
             List<ViewModel> results = new List<ViewModel>();
@@ -116,6 +119,7 @@ namespace CollegeWeb.Controllers
                 return View();
             }
         }
+      
         public ActionResult ViewStudentProfile(int? id)
         {
             try
@@ -220,6 +224,7 @@ namespace CollegeWeb.Controllers
                 return View();
             }
         }
+       
 
         /// <summary>
         /// Teacher view his profile.
@@ -322,6 +327,7 @@ namespace CollegeWeb.Controllers
                 return View();
             }
         }
+     
 
 
         /// <summary>
@@ -398,6 +404,7 @@ namespace CollegeWeb.Controllers
             }
 
         }
+       
 
         public ActionResult GetFilters(SearchModel model)
         {

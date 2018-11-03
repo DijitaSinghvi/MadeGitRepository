@@ -11,7 +11,7 @@ namespace CollegeWeb.Controllers
     public class AdminController : Controller
     {
         CollegeContext db = new CollegeContext();
-
+     
         /// <summary>
         /// GET: Admin
         /// Showing homepage to admin.
@@ -256,6 +256,8 @@ namespace CollegeWeb.Controllers
                     ViewBag.ResultMessage = "Error occurred in the registration process.Please register again.";
                 }
             }
+            
+            TempData["add"] = objViewModel.FirstName+" "+objViewModel.LastName+" "+"is successfully added.";
             return RedirectToAction("ViewStudents");
         }
 
@@ -449,6 +451,7 @@ namespace CollegeWeb.Controllers
 
 
                 }
+                TempData["edit"] = objEditViewModel.FirstName+" "+ objEditViewModel.LastName+" "+"is successfully edited.";
                 return RedirectToAction("ViewStudents");
             }
 

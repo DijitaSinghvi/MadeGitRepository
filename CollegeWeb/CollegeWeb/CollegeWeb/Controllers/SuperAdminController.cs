@@ -11,7 +11,7 @@ namespace CollegeWeb.Controllers
     public class SuperAdminController : Controller
     {
         CollegeContext db = new CollegeContext();
-
+      
         // GET: SuperAdmin
         /// <summary>
         /// Show home page to Super Admin.
@@ -22,6 +22,7 @@ namespace CollegeWeb.Controllers
             Session["SuperAdminId"] = id;
             return View();
         }
+        
 
         /// <summary>
         /// Admin can manage student list.      
@@ -59,6 +60,7 @@ namespace CollegeWeb.Controllers
 
             return View(studentList);
         }
+       
 
         /// <summary>
         /// Add new student record in website.
@@ -124,7 +126,7 @@ namespace CollegeWeb.Controllers
             return View(model);
 
         }
-
+       
         /// <summary>
         ///To post form details to database. 
         /// </summary>

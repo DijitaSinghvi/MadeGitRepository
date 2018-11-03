@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "StudentHomePage";
 }
+@{ 
+    var userId = Session["UserId"];
+}
+
+@if (userId != null)
+{
 
 
-
-
-<h2>Welcome to HomePage of Student</h2>
 
 
 
@@ -17,7 +20,7 @@
 
 </div>
 
-@using (Html.BeginForm())
+  using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -53,23 +56,18 @@
 
 
 <div class=" form-group row col=md-12">
-    <a type="button" class="btn btn-primary btn" href="@Url.Action("EditStudentDetails", "Student", new { id = Model.UserId })"
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("EditStudentDetails", "Student", new { id = Model.UserId })">
 
     <span>View & Edit Your Profile</span>
     </a>
 </div>
 <div class=" form-group row col=md-12">
-    <a type="button" class="btn btn-primary btn" href="@Url.Action("CourseDetails", "Student", new { id = Model.UserId })"
+    <a type="button" class="btn btn-primary btn" href="@Url.Action("CourseDetails", "Student", new { id = Model.UserId })">
 
     <span>View Your Course Details</span>
 </a>
 </div>
-@*<div class=" form-group row col=md-12">
-    <a type="button" class="btn btn-primary btn" href="@Url.Action("GetFilters", "Search")"
-
-    <span>Search user's details</span>
-</a>
-</div>*@
 
 
+}
 

@@ -97,13 +97,13 @@
             </div>
         </div>
         <div class="col-sm-6">
-            @Html.LabelFor(model => model.CourseId,"Course", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseId, "Course", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-6">
                 @Html.DropDownListFor(model => model.CourseId, Model.Courses.Select(x => new SelectListItem
            {
                Text = x.CourseName.ToString(),
                Value = x.CourseId.ToString()
-           }),"...select...")
+           }), "...select...")
                 @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -118,14 +118,14 @@
             </div>
         </div>
         <div class="col-sm-6">
-            @Html.LabelFor(model => model.CountryId,"Country", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CountryId, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class-="col-sm-6">
                 @Html.DropDownListFor(model => model.CountryId, Model.Countries.Select(x => new SelectListItem
            {
                Text = x.CountryName,
                Value = x.CountryId.ToString()
 
-           }),"...select...")
+           }), "...select...", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -138,7 +138,7 @@
            {
                Text = x.StateName,
                Value = x.StateId.ToString()
-           }),"...select...")
+           }),"...select...", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -148,7 +148,7 @@
        {
            Text = x.CityName,
            Value = x.CityId.ToString()
-       }),"...select...")
+       }),"...select...", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
 
 
@@ -197,12 +197,7 @@
         </div>
 
     </div>
-    <div class=" form-group row col-md-12 text-right">
-        <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","Admin",new { id =Session["AdminId"] })">
-
-            <span>Back To HomePage</span>
-        </a>
-    </div>
+  
 
 
 

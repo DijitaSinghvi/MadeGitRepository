@@ -11,53 +11,59 @@ namespace CollegeWeb.Controllers
     {
         CollegeContext db = new CollegeContext();
         // GET: Student
-
+     
+      
         /// <summary>
         /// Student homepage.
         /// </summary>
         /// <returns></returns>
+        
         public ActionResult StudentHomePage(int? id)
         {
             try
             {
-                var studentDetails = (from
-                                  user in db.Users
-                                      join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
+                if (Session["UserID"] == null)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                    var studentDetails = (from
+                                      user in db.Users
+                                          join userInRole in db.UserInRoles on user.UserId equals userInRole.UserId
 
-                                      where user.UserId == id
+                                          where user.UserId == id
 
-                                      select new ViewModel
-                                      {
-                                          UserId = user.UserId,
-                                          CountryId = user.Address.CountryId,
-                                          AddressId = user.AddressId,
-                                          StateId = user.Address.StateId,
-                                          CityId = user.Address.CityId,
-                                          CourseId = user.CourseId,
-                                          RoleId = userInRole.RoleId,
-                                          RoleName = userInRole.Role.RoleName,
+                                          select new ViewModel
+                                          {
+                                              UserId = user.UserId,
+                                              CountryId = user.Address.CountryId,
+                                              AddressId = user.AddressId,
+                                              StateId = user.Address.StateId,
+                                              CityId = user.Address.CityId,
+                                              CourseId = user.CourseId,
+                                              RoleId = userInRole.RoleId,
+                                              RoleName = userInRole.Role.RoleName,
 
 
-                                          FirstName = user.FirstName,
-                                          LastName = user.LastName,
-                                          Gender = user.Gender,
-                                          DateOfBirth = user.DateOfBirth,
-                                          Hobbies = user.Hobbies,
-                                          Email = user.Email,
-                                          IsEmailVerified = user.IsEmailVerified,
-                                          Password = user.Password,
-                                          IsActive = user.IsActive,
-                                          DateCreated = user.DateCreated,
-                                          DateModified = user.DateModified,
-                                          CourseName = user.Course.CourseName,
-                                          AddressLine = user.Address.AddressLine,
-                                          CityName = user.Address.City.CityName,
-                                          StateName = user.Address.State.StateName,
-                                          CountryName = user.Address.Country.CountryName,
-                                          Pincode = user.Address.Pincode
-                                      }).FirstOrDefault();
+                                              FirstName = user.FirstName,
+                                              LastName = user.LastName,
+                                              Gender = user.Gender,
+                                              DateOfBirth = user.DateOfBirth,
+                                              Hobbies = user.Hobbies,
+                                              Email = user.Email,
+                                              IsEmailVerified = user.IsEmailVerified,
+                                              Password = user.Password,
+                                              IsActive = user.IsActive,
+                                              DateCreated = user.DateCreated,
+                                              DateModified = user.DateModified,
+                                              CourseName = user.Course.CourseName,
+                                              AddressLine = user.Address.AddressLine,
+                                              CityName = user.Address.City.CityName,
+                                              StateName = user.Address.State.StateName,
+                                              CountryName = user.Address.Country.CountryName,
+                                              Pincode = user.Address.Pincode
+                                          }).FirstOrDefault();
 
-                return View(studentDetails);
+                    return View(studentDetails);
                
             }
             catch(Exception er)
@@ -66,8 +72,9 @@ namespace CollegeWeb.Controllers
                 return View();
             }
         }
-            
         
+
+
         /// <summary>
         /// Student view his profile.
         /// </summary>
@@ -171,6 +178,7 @@ namespace CollegeWeb.Controllers
         }
        
 
+
         /// <summary>
         /// Save updates in database.
         /// </summary>
@@ -245,7 +253,7 @@ namespace CollegeWeb.Controllers
             }
 
         }
-
+       
         /// <summary>
         /// Student can see all the subjects and teachers of his course.
         /// </summary>

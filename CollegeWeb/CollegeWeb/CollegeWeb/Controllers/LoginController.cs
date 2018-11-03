@@ -11,6 +11,7 @@ namespace CollegeWeb.Controllers
     {
         CollegeContext db=new CollegeContext();
         // GET: Login
+       
      /// <summary>
      /// Generate login form.
      /// </summary>
@@ -26,13 +27,14 @@ namespace CollegeWeb.Controllers
         /// <param name="objViewModel"></param>
         /// <returns></returns>
         [HttpPost]
+       
         
         public ActionResult Login(ViewModel objViewModel)
         {
             //to authenticate email and password from database.
             try
             {
-                var temp = db.Users.Where(x => x.Email == objViewModel.Email && x.Password == objViewModel.Password).FirstOrDefault();
+                var temp = db.Users.Where(x => x.Email == objViewModel.Email && x.Password == objViewModel.Password && x.IsActive==true).FirstOrDefault();
                 if (temp != null)
                 {
                     Session["UserID"] = temp.UserId.ToString();
@@ -63,7 +65,8 @@ namespace CollegeWeb.Controllers
                 }
                 else
                 {
-                    ViewBag.Message= "Email or password is wrong.";
+                    Session["UserID"] = null;
+                      ViewBag.Message= "Email or password is wrong.";
                 }
                 return View(objViewModel);
             }
@@ -73,8 +76,11 @@ namespace CollegeWeb.Controllers
                 return View();
             }
         }
+      
        public ActionResult Logout()
         {
+            Session.Abandon();
+            Session["UserID"] = null;
             return RedirectToAction("Login","Login");
         }
 

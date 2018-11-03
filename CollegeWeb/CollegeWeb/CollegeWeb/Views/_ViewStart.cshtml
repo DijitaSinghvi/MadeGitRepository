@@ -4,8 +4,13 @@
     string cLayout = "";
     if (controller == "SuperAdmin")
     {
-        cLayout = "~/Views/Shared/_WebmasterLayout.cshtml";
+        cLayout = "~/Views/Shared/_SuperAdminLayout.cshtml";
     }
+    else if(controller=="Admin")
+    {
+        cLayout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+  
     else
     {
         cLayout = "~/Views/Shared/_Layout.cshtml";
