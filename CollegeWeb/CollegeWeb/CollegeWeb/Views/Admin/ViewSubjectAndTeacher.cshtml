@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "ViewSubjectAndTeacher";
 }
-
+@if(TempData["assign"]!=null)
+{
+    <h3><p>@TempData["assign"]</p></h3>
+}
 <h2>View Subject And Teacher</h2>
 <table class="table">
     <tr>
@@ -35,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.SubjectName)
         </td>
 
-        Model
+        
         <td>
             @Html.ActionLink("Assign Subject To Teacher", "AssignTeacherToSubject", new { id = item.UserId }) 
 

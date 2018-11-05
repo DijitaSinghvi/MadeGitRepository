@@ -24,6 +24,7 @@
     @Html.HiddenFor(model => model.CourseId)
     @Html.HiddenFor(model => model.RoleId)
     @Html.HiddenFor(model => model.RoleName)
+    @Html.HiddenFor(model=>model.SubjectName)
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">

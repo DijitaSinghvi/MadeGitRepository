@@ -1,5 +1,16 @@
 ﻿@model IEnumerable<CollegeWeb.Models.ViewModel>
-
+@if( TempData["add"]!=null)
+{
+    <h3><p>@TempData["add"]</p></h3>
+}
+@if(TempData["edit"]!=null)
+{
+    <h3><p>@TempData["edit"]</p></h3>
+}
+@if(TempData["delete"]!=null)
+{
+    <h3><p>@TempData["delete"]</p></h3>
+}
 
 <h2>ViewSubjects</h2>
 

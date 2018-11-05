@@ -245,7 +245,7 @@ namespace CollegeWeb.Controllers
                     //Everything looks fine,so save the data permanently.
                     transaction.Commit();
 
-                    ViewBag.ResultMessage = objViewModel.FirstName + "" + objViewModel.LastName + "" + "is successfully registered.";
+                    TempData["add"] = objViewModel.FirstName + " " + objViewModel.LastName + " " + "is successfully added.";
                     ModelState.Clear();
                 }
                 catch (Exception ex)
@@ -257,7 +257,7 @@ namespace CollegeWeb.Controllers
                 }
             }
             
-            TempData["add"] = objViewModel.FirstName+" "+objViewModel.LastName+" "+"is successfully added.";
+            
             return RedirectToAction("ViewStudents");
         }
 
@@ -448,10 +448,10 @@ namespace CollegeWeb.Controllers
 
 
                     db.SaveChanges();
-
+                    TempData["edit"] = objEditViewModel.FirstName + " " + objEditViewModel.LastName + " " + "is successfully edited.";
 
                 }
-                TempData["edit"] = objEditViewModel.FirstName+" "+ objEditViewModel.LastName+" "+"is successfully edited.";
+              
                 return RedirectToAction("ViewStudents");
             }
 
@@ -523,9 +523,10 @@ namespace CollegeWeb.Controllers
                 {
                     db.Users.Remove(deleteRecord);
                     db.SaveChanges();
+                    TempData["delete"] = deleteRecord.FirstName + " " + deleteRecord.LastName + " " + "is successfully deleted. ";
                 }
 
-
+                
                 return RedirectToAction("ViewStudents", "Admin");
             }
             catch (Exception er)
@@ -707,7 +708,7 @@ namespace CollegeWeb.Controllers
                     //Everything looks fine,so save the data permanently.
                     transaction.Commit();
 
-                    ViewBag.ResultMessage = objViewModel.FirstName + "" + objViewModel.LastName + "" + "is successfully registered.";
+                    TempData["add"] = objViewModel.FirstName + " " + objViewModel.LastName + " " + "is successfully added.";
                     ModelState.Clear();
                 }
                 catch (Exception ex)
@@ -865,7 +866,7 @@ namespace CollegeWeb.Controllers
 
 
                     db.SaveChanges();
-
+                    TempData["edit"] = objEditViewModel.FirstName + " " + objEditViewModel.LastName + " " + "is successfully edited.";
 
                 }
                 return RedirectToAction("ViewTeachers");
@@ -930,6 +931,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.UserInRoles.Remove(userInRoleRecord);
                     db.SaveChanges();
+                    TempData["delete"] = deleteRecord.FirstName + " " + deleteRecord.LastName + " " + "is successfully deleted.";
                 }
 
 
@@ -1007,7 +1009,7 @@ namespace CollegeWeb.Controllers
                 };
                 db.Subjects.Add(objSubject);
                 db.SaveChanges();
-
+                TempData["add"] = objViewModel.SubjectName + " " + "is successfully added.";
 
 
 
@@ -1073,7 +1075,7 @@ namespace CollegeWeb.Controllers
                     subjectRecord.SubjectName = objViewModel.SubjectName;
 
                     db.SaveChanges();
-
+                    TempData["edit"] = objViewModel.SubjectName+" "+"is successfully edited.";
 
                 }
                 return RedirectToAction("ViewSubjects");
@@ -1153,6 +1155,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.Subjects.Remove(subjectRecord);
                     db.SaveChanges();
+                    TempData["delete"] = subjectRecord.SubjectName + " " + "is successfully deleted.";
                 }
                 return RedirectToAction("ViewSubjects", "Admin");
             }
@@ -1218,7 +1221,7 @@ namespace CollegeWeb.Controllers
                 };
                 db.Courses.Add(objCourse);
                 db.SaveChanges();
-
+                TempData["add"] = objViewModel.CourseName + " " + "is successfully added.";
 
 
 
@@ -1284,7 +1287,7 @@ namespace CollegeWeb.Controllers
                     courseRecord.CourseName = objViewModel.CourseName;
 
                     db.SaveChanges();
-
+                    TempData["edit"] = objViewModel.CourseName + " " + "is successfully edited.";
 
                 }
                 return RedirectToAction("ViewCourses");
@@ -1401,6 +1404,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.Courses.Remove(courseRecord);
                     db.SaveChanges();
+                    TempData["delete"] = courseRecord.CourseName + " " + "is successfully deleted.";
                 }
 
 
@@ -1922,6 +1926,8 @@ namespace CollegeWeb.Controllers
                 {
                     teacherInSubjectRecord.SubjectId = objViewModel.SubjectId;
                     teacherInSubjectRecord.UserId = objViewModel.UserId;
+                    db.SaveChanges();
+                    TempData["assign"] = "Successfully assigned" + " " + objViewModel.FirstName + " " + objViewModel.LastName + " " + "to " + teacherInSubjectRecord.Subject.SubjectName;
                 }
                 else
                 {
@@ -1932,14 +1938,16 @@ namespace CollegeWeb.Controllers
 
 
                     };
+                    
                     db.TeacherInSubjects.Add(objTeacherInSubject);
                     db.SaveChanges();
-
+                    TempData["assign"] = "Successfully assigned" + " " + objViewModel.FirstName + " " + objViewModel.LastName + " " + "to " + objTeacherInSubject.Subject.SubjectName;
                 }
 
 
                 //Save updates in database.
                 db.SaveChanges();
+               
                 return RedirectToAction("ViewSubjectAndTeacher");
 
             }
