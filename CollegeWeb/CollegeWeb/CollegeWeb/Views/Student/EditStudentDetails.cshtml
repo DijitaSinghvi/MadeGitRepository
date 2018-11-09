@@ -113,7 +113,7 @@
            Value = item.CountryId.ToString(),
            Text = item.CountryName.ToString()
 
-       }), new { @class = "control-label col-md-2" })
+       }), new { @class = "control-label col-md-2", @Id = "ddlCountry" })
             @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
 
 
@@ -130,7 +130,7 @@
            Value = item.StateId.ToString(),
            Text = item.StateName.ToString()
 
-       }), new { @class = "control-label col-md-2" })
+       }), new { @class = "control-label col-md-2", @id = "ddlStateData" })
             @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
 
 
@@ -148,7 +148,7 @@
            Value = item.CityId.ToString(),
            Text = item.CityName.ToString()
 
-       }), new { @class = "control-label col-md-2"})
+       }), new { @class = "control-label col-md-2", @id = "ddlCity" })
             @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
 
 
@@ -198,4 +198,79 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+@*Jquery code for dropdown calling*@
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    @*$(document).ready(function () {
+        jQuery("#ddlStateData").empty();
+        $("#ddlCity").empty();
+
+        var id = $("#ddlCountry").val();
+            $.ajax({
+                type: 'Post',
+                url: '@Url.Action("getState")',
+                dataType: 'json',
+                data: { Id: id },
+                success: function (states) {
+
+                    $.each(states, function (i, state) {
+                        $("#ddlStateData").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+
+    });*@
+
+        $("#ddlCountry").change(function () {
+
+            jQuery("#ddlStateData").empty();
+            $("#ddlCity").empty();
+            var id = $("#ddlCountry").val();
+            $.ajax({
+                type: 'Post',
+                url: '@Url.Action("getState")',
+                dataType: 'json',
+                data: { Id: id },
+                success: function (states) {
+
+                    $.each(states, function (i, state) {
+                        $("#ddlStateData").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        });
+
+          $("#ddlStateData").change(function () {
+                $("#ddlCity").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("getcity")',
+                    dataType: 'json',
+                    data: { id: $("#ddlStateData").val() },
+                    success: function (city) {
+
+                        $.each(city, function (i, city) {
+                            $("#ddlCity").append('<option value="'
+                                + city.Value + '">'
+                                + city.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+                });
+                return false;
+            });
+      //  });
+</script>
+
 

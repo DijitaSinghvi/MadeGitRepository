@@ -3,7 +3,10 @@
     ViewBag.Title = "StudentHomePage";
 }
 
-
+@if (TempData["edit"]!=null)
+{
+    <h3><p>@TempData["edit"]</p></h3>
+}
 
 
 

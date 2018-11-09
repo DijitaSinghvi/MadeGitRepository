@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "ViewSubjectAndTeacher";
 }
+@if (TempData["assign"] != null)
+{
+    <h3><p>@TempData["assign"]</p></h3>
+}
 
 <h2>View Subject And Teacher</h2>
 <table class="table">
@@ -46,11 +50,11 @@
 
 </table>
 @*<div class=" form-group row col-md-12 text-right">
-    <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","SuperAdmin",new { id =Session["SuperAdminId"] })"
+        <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","SuperAdmin",new { id =Session["SuperAdminId"] })"
 
-    <span>Back To HomePage</span>
-</a>
-</div>*@
+        <span>Back To HomePage</span>
+    </a>
+    </div>*@
 
 
 

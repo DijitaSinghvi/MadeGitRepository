@@ -232,10 +232,10 @@ namespace CollegeWeb.Controllers
                     };
                     db.Users.Add(objUser);
                     db.SaveChanges();
-
+                    objViewModel.RoleId = 4;
                     //RoleId for the respective UserId gets saved in database.
                     UserInRole objUserInRole = new UserInRole
-                    {
+                    {   
                         RoleId = objViewModel.RoleId,
                         UserId = objUser.UserId
                     };
@@ -697,6 +697,7 @@ namespace CollegeWeb.Controllers
                     db.SaveChanges();
 
                     //RoleId for the respective UserId gets saved in database.
+                    objViewModel.RoleId = 3;
                     UserInRole objUserInRole = new UserInRole
                     {
                         RoleId = objViewModel.RoleId,
@@ -931,7 +932,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.UserInRoles.Remove(userInRoleRecord);
                     db.SaveChanges();
-                    TempData["delete"] = deleteRecord.FirstName + " " + deleteRecord.LastName + " " + "is successfully deleted.";
+                   
                 }
 
 
@@ -940,6 +941,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.Users.Remove(deleteRecord);
                     db.SaveChanges();
+                    TempData["delete"] = deleteRecord.FirstName + " " + deleteRecord.LastName + " " + "is successfully deleted.";
                 }
 
 
@@ -1938,18 +1940,24 @@ namespace CollegeWeb.Controllers
 
 
                     };
-                    
+
                     db.TeacherInSubjects.Add(objTeacherInSubject);
+
                     db.SaveChanges();
-                    TempData["assign"] = "Successfully assigned" + " " + objViewModel.FirstName + " " + objViewModel.LastName + " " + "to " + objTeacherInSubject.Subject.SubjectName;
+                   
+
+                    var objSubjectName = db.Subjects.Where(x => x.SubjectId == objTeacherInSubject.SubjectId).Select(x => x.SubjectName).FirstOrDefault();
+                    TempData["assign"] = "Successfully assigned" + " " + objViewModel.FirstName + " " + objViewModel.LastName + " " + "to " + objSubjectName;
+
+
+
+                    //Save updates in database.
+                    db.SaveChanges();
+
+                  
+
                 }
-
-
-                //Save updates in database.
-                db.SaveChanges();
-               
                 return RedirectToAction("ViewSubjectAndTeacher");
-
             }
 
 
@@ -2018,16 +2026,17 @@ namespace CollegeWeb.Controllers
                                   where user.Hobbies == model.Hobbies || string.IsNullOrEmpty(model.Hobbies)
                                   where user.Email == model.Email || string.IsNullOrEmpty(model.Email)
                                   where user.IsEmailVerified == model.IsEmailVerified || string.IsNullOrEmpty(model.IsEmailVerified)
-                                  where user.IsActive == model.IsActive || model.IsActive == false
-                                  where user.Course.CourseName == model.CourseName || string.IsNullOrEmpty(model.CourseName)
+                                  where user.IsActive == model.IsActive 
+                                
+                                  where user.Course.CourseId == model.CourseId || model.CourseId==null
                                   where user.Address.AddressLine == model.AddressLine || string.IsNullOrEmpty(model.AddressLine)
-                                  where user.Address.Country.CountryName == model.CountryName || string.IsNullOrEmpty(model.CountryName)
-                                  where user.Address.State.StateName == model.StateName || string.IsNullOrEmpty(model.StateName)
-                                  where user.Address.City.CityName == model.CityName || string.IsNullOrEmpty(model.CityName)
+                                  where user.Address.Country.CountryId == model.CountryId || model.CountryId==null
+                                  where user.Address.State.StateId == model.StateId || model.StateId==null
+                                  where user.Address.City.CityId == model.CityId || model.CityId==null
                                   where user.Address.Pincode == model.Pincode || model.Pincode == null
                                   where user.DateCreated == model.DateCreated || model.DateCreated == null
                                   where user.DateModified == model.DateModified || model.DateModified == null
-                                  where userInRole.Role.RoleName == model.RoleName || string.IsNullOrEmpty(model.RoleName)
+                                  where userInRole.Role.RoleId == model.RoleId || model.RoleId==null
                                   select new ShowList
                                   {
                                       FirstName = user.FirstName,

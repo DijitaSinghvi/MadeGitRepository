@@ -391,7 +391,7 @@ namespace CollegeWeb.Controllers
 
                 //Save to database.
                 db.SaveChanges();
-
+                TempData["edit"] = "Successfully edited"+" "+objEditViewModel.FirstName+" "+objEditViewModel.LastName+" "+"profile.";
 
 
                 return RedirectToAction("TeacherHomePage", new { id = objEditViewModel.UserId });
@@ -504,6 +504,47 @@ namespace CollegeWeb.Controllers
                 Console.Write(er.Message);
                 return View();
             }
+        }
+        /// <summary>
+        /// Get states according to selected country. 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public JsonResult getState(int Id)
+        {
+            var states = db.States.Where(x => x.CountryId == Id).ToList();
+            List<SelectListItem> stateList = new List<SelectListItem>();
+
+            stateList.Add(new SelectListItem { Text = "", Value = "0" });
+            if (states != null)
+            {
+                foreach (var x in states)
+                {
+                    stateList.Add(new SelectListItem { Text = x.StateName, Value = x.StateId.ToString() });
+
+                }
+            }
+            return Json(new SelectList(stateList, "Value", "Text", JsonRequestBehavior.AllowGet));
+        }
+
+        /// <summary>
+        /// Get cities according to selected state.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult getCity(int id)
+        {
+            var cities = db.Cities.Where(x => x.StateId == id).ToList();
+            List<SelectListItem> cityList = new List<SelectListItem>();
+            cityList.Add(new SelectListItem { Text = "", Value = "0" });
+            if (cities != null)
+            {
+                foreach (var x in cities)
+                {
+                    cityList.Add(new SelectListItem { Text = x.CityName, Value = x.CityId.ToString() });
+                }
+            }
+            return Json(new SelectList(cityList, "Value", "Text", JsonRequestBehavior.AllowGet));
         }
     }
 }

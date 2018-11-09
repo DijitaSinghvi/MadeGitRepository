@@ -104,76 +104,76 @@
     </div>
 
     @*get country dropdown*@
-    
+
     <div class="form-group row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.CountryId, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
-           </div>
-        <div class="col-md-10 pull-right">
-                @Html.DropDownListFor(model => model.CountryId, Model.Countries.Select(item => new SelectListItem
-           {
-               Value = item.CountryId.ToString(),
-               Text = item.CountryName.ToString()
-
-           }), new { @class = "control-label col-md-2" })
-                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
-
-
-            </div>
         </div>
+        <div class="col-md-10 pull-right">
+            @Html.DropDownListFor(model => model.CountryId, Model.Countries.Select(item => new SelectListItem
+       {
+           Value = item.CountryId.ToString(),
+           Text = item.CountryName.ToString()
 
-        @*get state dropdown*@
-       
+       }), new { @class = "control-label col-md-2", @Id = "ddlCountry" })
+            @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+
+
+        </div>
+    </div>
+
+    @*get state dropdown*@
+
 
     <div class="form-group row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.StateId, "State", htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-    <div class="col-md-10 pull-right">
-                @Html.DropDownListFor(model => model.StateId, Model.States.Select(item => new SelectListItem
-           {
-               Value = item.StateId.ToString(),
-               Text = item.StateName.ToString()
-
-           }), new { @class = "control-label col-md-2" })
-                @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
-
-
-            </div>
         </div>
-        @*get city dropdown*@
-       
+        <div class="col-md-10 pull-right">
+            @Html.DropDownListFor(model => model.StateId, Model.States.Select(item => new SelectListItem
+       {
+           Value = item.StateId.ToString(),
+           Text = item.StateName.ToString()
+
+       }), new { @class = "control-label col-md-2", @id = "ddlStateData" })
+            @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
+
+
+        </div>
+    </div>
+    @*get city dropdown*@
+
     <div class="form-group row">
         <div class="col-md-2">
             @Html.LabelFor(model => model.CityId, "City", htmlAttributes: new { @class = "control-label col-md-2" })
-            
-            </div>
+
+        </div>
         <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CityId, Model.Cities.Select(item => new SelectListItem
-           {
-               Value = item.CityId.ToString(),
-               Text = item.CityName.ToString()
+            @Html.DropDownListFor(model => model.CityId, Model.Cities.Select(item => new SelectListItem
+       {
+           Value = item.CityId.ToString(),
+           Text = item.CityName.ToString()
 
-           }), new { @class = "control-label col-md-2"})
-                @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+       }), new { @class = "control-label col-md-2", @id = "ddlCity" })
+            @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
 
 
-            </div>
         </div>
+    </div>
 
-        <div class="form-group row">
-            <div class="col-md-2">
-                @Html.LabelFor(model => model.Pincode, "Pincode", htmlAttributes: new { @class = "control-label col-md-2" })
-            </div>
-            <div class="col-md-10 pull-right">
-                @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group row">
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Pincode, "Pincode", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
+        <div class="col-md-10 pull-right">
+            @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
 
 
-        @*<div class="form-group row">
+    @*<div class="form-group row">
             <div class="col-md-2">
                 @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
             </div>
@@ -182,29 +182,102 @@
                 @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
             </div>
         </div>*@
-        <div class="form-group row">
-            <div class="col-md-3">
+    <div class="form-group row">
+        <div class="col-md-3">
 
-                <input type="submit" value="Edit" class="btn btn-success" />
+            <input type="submit" value="Edit" class="btn btn-success" />
 
-            </div>
-            <div class="col-md-9">
-                <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("TeacherHomePage","Teacher",new { id = Model.UserId })">
-                    <span class="glyphicon glyphicon-list"></span>
-                    <span>Back To Home Page</span>
-                </a>
-            </div>
         </div>
+        <div class="col-md-9">
+            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("TeacherHomePage","Teacher",new { id = Model.UserId })">
+                <span class="glyphicon glyphicon-list"></span>
+                <span>Back To Home Page</span>
+            </a>
+        </div>
+    </div>
 
 
 
 
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+@*Jquery code for dropdown calling*@
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    @*$(document).ready(function () {
+        jQuery("#ddlStateData").empty();
+        $("#ddlCity").empty();
+
+        var id = $("#ddlCountry").val();
+            $.ajax({
+                type: 'Post',
+                url: '@Url.Action("getState")',
+                dataType: 'json',
+                data: { Id: id },
+                success: function (states) {
+
+                    $.each(states, function (i, state) {
+                        $("#ddlStateData").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+
+    });*@
+
+        $("#ddlCountry").change(function () {
+
+            jQuery("#ddlStateData").empty();
+            $("#ddlCity").empty();
+            var id = $("#ddlCountry").val();
+            $.ajax({
+                type: 'Post',
+                url: '@Url.Action("getState")',
+                dataType: 'json',
+                data: { Id: id },
+                success: function (states) {
+
+                    $.each(states, function (i, state) {
+                        $("#ddlStateData").append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        });
+
+          $("#ddlStateData").change(function () {
+                $("#ddlCity").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("getcity")',
+                    dataType: 'json',
+                    data: { id: $("#ddlStateData").val() },
+                    success: function (city) {
+
+                        $.each(city, function (i, city) {
+                            $("#ddlCity").append('<option value="'
+                                + city.Value + '">'
+                                + city.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+                });
+                return false;
+            });
+      //  });
+</script>
 
 
 

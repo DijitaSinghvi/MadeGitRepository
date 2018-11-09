@@ -185,6 +185,7 @@ namespace CollegeWeb.Controllers
                     db.SaveChanges();
 
                     //RoleId for the respective UserId gets saved in database.
+                    objViewModel.RoleId = 4;
                     UserInRole objUserInRole = new UserInRole
                     {
                         RoleId = objViewModel.RoleId,
@@ -195,7 +196,7 @@ namespace CollegeWeb.Controllers
 
                     //Everything looks fine,so save the data permanently.
                     transaction.Commit();
-
+                    TempData["add"] = objViewModel.FirstName + " " + objViewModel.LastName + " " + "is successfully added.";
                     ViewBag.ResultMessage = objViewModel.FirstName + "" + objViewModel.LastName + "" + "is successfully registered.";
                     ModelState.Clear();
                 }
@@ -392,6 +393,7 @@ namespace CollegeWeb.Controllers
 
 
                     db.SaveChanges();
+                    TempData["edit"] = objEditViewModel.FirstName + " " + objEditViewModel.LastName + " " + "is successfully edited.";
 
 
                 }
@@ -465,6 +467,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.Users.Remove(deleteRecord);
                     db.SaveChanges();
+                    TempData["delete"] = deleteRecord.FirstName + " " + deleteRecord.LastName + " " + "is successfully deleted. ";
                 }
 
 
@@ -637,6 +640,7 @@ namespace CollegeWeb.Controllers
                     db.SaveChanges();
 
                     //RoleId for the respective UserId gets saved in database.
+                    objViewModel.RoleId = 3;
                     UserInRole objUserInRole = new UserInRole
                     {
                         RoleId = objViewModel.RoleId,
@@ -647,7 +651,7 @@ namespace CollegeWeb.Controllers
 
                     //Everything looks fine,so save the data permanently.
                     transaction.Commit();
-
+                    TempData["add"] = objViewModel.FirstName + " " + objViewModel.LastName + " " + "is successfully added.";
                     ViewBag.ResultMessage = objViewModel.FirstName + "" + objViewModel.LastName + "" + "is successfully registered.";
                     ModelState.Clear();
                 }
@@ -806,7 +810,7 @@ namespace CollegeWeb.Controllers
 
 
                     db.SaveChanges();
-
+                    TempData["edit"] = objEditViewModel.FirstName + " " + objEditViewModel.LastName + " " + "is successfully edited.";
 
                 }
                 return RedirectToAction("ViewTeachers");
@@ -879,6 +883,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.Users.Remove(deleteRecord);
                     db.SaveChanges();
+                    TempData["delete"] = deleteRecord.FirstName + " " + deleteRecord.LastName + " " + "is successfully deleted.";
                 }
 
 
@@ -946,6 +951,7 @@ namespace CollegeWeb.Controllers
                 };
                 db.Subjects.Add(objSubject);
                 db.SaveChanges();
+                TempData["add"] = objViewModel.SubjectName + " " + "is successfully added.";
 
 
 
@@ -1013,7 +1019,7 @@ namespace CollegeWeb.Controllers
                     subjectRecord.SubjectName = objViewModel.SubjectName;
 
                     db.SaveChanges();
-
+                    TempData["edit"] = objViewModel.SubjectName + " " + "is successfully edited.";
 
                 }
                 return RedirectToAction("ViewSubjects");
@@ -1099,6 +1105,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.Subjects.Remove(subjectRecord);
                     db.SaveChanges();
+                    TempData["delete"] = subjectRecord.SubjectName + " " + "is successfully deleted.";
                 }
                 return RedirectToAction("ViewSubjects", "SuperAdmin");
             }
@@ -1164,7 +1171,7 @@ namespace CollegeWeb.Controllers
                 };
                 db.Courses.Add(objCourse);
                 db.SaveChanges();
-
+                TempData["add"] = objViewModel.CourseName + " " + "is successfully added.";
 
 
 
@@ -1230,7 +1237,7 @@ namespace CollegeWeb.Controllers
                     courseRecord.CourseName = objViewModel.CourseName;
 
                     db.SaveChanges();
-
+                    TempData["edit"] = objViewModel.CourseName + " " + "is successfully edited.";
 
                 }
                 return RedirectToAction("ViewCourses");
@@ -1346,6 +1353,7 @@ namespace CollegeWeb.Controllers
                 {
                     db.Courses.Remove(courseRecord);
                     db.SaveChanges();
+                    TempData["delete"] = courseRecord.CourseName + " " + "is successfully deleted.";
                 }
 
                 return RedirectToAction("ViewCourses", "SuperAdmin");
@@ -1790,8 +1798,28 @@ namespace CollegeWeb.Controllers
                                               where teacherInSubject.UserId == objViewModel.UserId
                                               select teacherInSubject
                                     ).FirstOrDefault();
-                teacherInSubjectRecord.SubjectId = objViewModel.SubjectId;
-                teacherInSubjectRecord.UserId = objViewModel.UserId;
+                if(teacherInSubjectRecord!=null)
+                {
+                    teacherInSubjectRecord.SubjectId = objViewModel.SubjectId;
+                    teacherInSubjectRecord.UserId = objViewModel.UserId;
+                    db.SaveChanges();
+                    TempData["assign"] = "Successfully assigned" + " " + objViewModel.FirstName + " " + objViewModel.LastName + " " + "to " + teacherInSubjectRecord.Subject.SubjectName;
+
+                }
+                else
+                {
+                    TeacherInSubject objTeacherInSubject = new TeacherInSubject
+                    {
+                        SubjectId = objViewModel.SubjectId,
+                        UserId = objViewModel.UserId
+                    };
+                    db.TeacherInSubjects.Add(objTeacherInSubject);
+                    db.SaveChanges();
+
+                    var objSubjectName = db.Subjects.Where(x => x.SubjectId == objTeacherInSubject.SubjectId).Select(x => x.SubjectName).FirstOrDefault();
+                    TempData["assign"] = "Successfully assigned" + " " + objViewModel.FirstName + " " + objViewModel.LastName + " " + "to " + objSubjectName;
+                }
+           
 
 
                 //Save updates in database.

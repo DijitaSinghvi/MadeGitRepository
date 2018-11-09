@@ -3,6 +3,18 @@
 @{
     ViewBag.Title = "ViewCourses";
 }
+@if (TempData["add"] != null)
+{
+    <h3><p>@TempData["add"]</p></h3>
+}
+@if (TempData["edit"] != null)
+{
+    <h3><p>@TempData["edit"]</p></h3>
+}
+@if (TempData["delete"] != null)
+{
+    <h3><p>@TempData["delete"]</p></h3>
+}
 
 <h2>ViewCourses</h2>
 <a type="button" class="btn btn-primary btn" href="@Url.Action("AddCourse","Admin")"
@@ -39,11 +51,11 @@
 
 </table>
 @*<div class=" form-group row col-md-12 text-right">
-    <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","SuperAdmin",new { id =Session["SuperAdminId"] })"
+        <a type="button" class="btn btn-primary btn" href="@Url.Action("HomePage","SuperAdmin",new { id =Session["SuperAdminId"] })"
 
-    <span>Back To HomePage</span>
-</a>
-</div>*@
+        <span>Back To HomePage</span>
+    </a>
+    </div>*@
 
 
 
