@@ -1,12 +1,23 @@
-﻿
+﻿@model CollegeWeb.Models.ViewModel
 @{
     ViewBag.Title = "DeleteTeacher";
 }
 
 <h2>DeleteTeacher</h2>
 <h3>Are you sure you want to delete ?</h3>
+<h4>Teacher Record</h4>
 <div>
-    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Name")
+        </dt>
+        <dd>
+            @Html.Label(Model.FirstName)
+            @Html.Label(Model.LastName)
+           
+
+        </dd>
+    </dl>
 
 
 

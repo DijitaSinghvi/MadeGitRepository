@@ -1,4 +1,4 @@
-﻿
+﻿@model CollegeWeb.Models.ViewModel
 @{
     ViewBag.Title = "DeleteStudent";
 }
@@ -6,6 +6,17 @@
 <h2>DeleteStudent</h2>
 <h3>Are you sure you want to delete ?</h3>
 <div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Name")
+        </dt>
+        <dd>
+            @Html.Label(Model.FirstName)
+            @Html.Label(Model.LastName)
+        </dd>
+
+    </dl>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()

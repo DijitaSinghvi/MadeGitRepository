@@ -7,11 +7,12 @@
 
 
 
-
-<div class="form-group row col-md-12">
+@if(Session["Email"]!=null)
+    { <div class="form-group row col-md-12">
     <h3> Welcome @Session["Email"].ToString() </h3>
 
-</div>
+</div>}
+
 
 
 

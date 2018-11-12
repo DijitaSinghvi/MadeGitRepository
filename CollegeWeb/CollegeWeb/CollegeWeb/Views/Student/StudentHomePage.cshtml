@@ -12,6 +12,14 @@
 @{
     var userId = Session["UserId"];
 }
+@if (Session["Email"] != null)
+{<div class="form-group row col-md-12">
+        <h3> Welcome @Session["Email"].ToString() </h3>
+
+    </div>
+}
+
+
 
 @if (userId != null)
 {
@@ -21,10 +29,7 @@
 
 
 
-    <div class="form-group row col-md-12">
-        <h3> Welcome @Session["Email"].ToString() </h3>
 
-    </div>
 
     using (Html.BeginForm())
     {

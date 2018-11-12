@@ -26,6 +26,7 @@ namespace CollegeWeb.Controllers
             //    RoleId = x.RoleId
             //}).ToList();
             //model.Roles = roleList;
+            var email = (string)Session["Email"];
             Session["AdminId"] = id;
             return View();
         }
@@ -477,7 +478,14 @@ namespace CollegeWeb.Controllers
             var deleteRecord = (from
                                     user in db.Users
                                 where user.UserId == id
-                                select user).FirstOrDefault();
+                                select new ViewModel()
+                                {
+                                    UserId =user.UserId,
+                                FirstName=user.FirstName,
+                                LastName=user.LastName
+                                }
+                               
+                                ).FirstOrDefault();
             var userInRoleRecord = (from
                                       userInRole in db.UserInRoles
                                     where userInRole.UserId == deleteRecord.UserId
@@ -485,7 +493,7 @@ namespace CollegeWeb.Controllers
 
 
 
-            return View();
+            return View(deleteRecord);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -894,7 +902,12 @@ namespace CollegeWeb.Controllers
             var deleteRecord = (from
                                     user in db.Users
                                 where user.UserId == id
-                                select user).FirstOrDefault();
+                                select new ViewModel()
+                                {
+                                    UserId = user.UserId,
+                                    FirstName = user.FirstName,
+                                    LastName = user.LastName
+                                }).FirstOrDefault();
             var userInRoleRecord = (from
                                       userInRole in db.UserInRoles
                                     where userInRole.UserId == deleteRecord.UserId
@@ -902,7 +915,7 @@ namespace CollegeWeb.Controllers
 
 
 
-            return View();
+            return View(deleteRecord);
         }
         [HttpPost, ActionName("DeleteTeacher")]
         [ValidateAntiForgeryToken]

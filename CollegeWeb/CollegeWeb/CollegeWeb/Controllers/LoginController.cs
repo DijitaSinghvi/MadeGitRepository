@@ -38,7 +38,7 @@ namespace CollegeWeb.Controllers
                 if (temp != null)
                 {
                     Session["UserID"] = temp.UserId.ToString();
-                    Session["Email"] = temp.Email.ToString();
+                    Session["Email"] = temp.Email;
 
 
 
@@ -66,7 +66,9 @@ namespace CollegeWeb.Controllers
                 else
                 {
                     Session["UserID"] = null;
-                      ViewBag.Message= "Email or password is wrong.";
+                    Session["Email"] = null;
+
+                    ViewBag.Message= "Email or password is wrong.";
                 }
                 return View(objViewModel);
             }

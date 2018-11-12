@@ -17,7 +17,7 @@
                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
 
                 <div class="col-sm-6">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
                     @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -79,7 +79,12 @@
             <div class="col-sm-6">
                 @Html.LabelFor(model => model.IsEmailVerified, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-sm-6">
-                    @Html.EditorFor(model => model.IsEmailVerified, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.IsEmailVerified, new List<SelectListItem >
+               {new SelectListItem{Text="Yes",Value="Yes"},
+               new SelectListItem{Text="No",Value="No"},
+               new SelectListItem{Text="Not Verified",Value="Null"}
+                    },"....select...."
+               )
                     @Html.ValidationMessageFor(model => model.IsEmailVerified, "", new { @class = "text-danger" })
 
 
@@ -94,7 +99,7 @@
                 <div class="col-sm-6">
                     @Html.DropDownListFor(model => model.IsActive, new List<SelectListItem>
                 {
-                 
+
                 new SelectListItem{ Text="True", Value = "True" },
                 new SelectListItem{ Text="False", Value = "False" }
                 })
